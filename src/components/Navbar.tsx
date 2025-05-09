@@ -17,15 +17,15 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <NavigationMenu className="bg-green-700 text-white p-3 shadow-md min-w-full justify-center">
+    <NavigationMenu className="bg-zinc-100/20 text-green-800 p-3 shadow-sm border-b border-green-100 min-w-full justify-center backdrop-blur-md sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
         <a 
           href="/" 
-          className="text-xl font-bold hover:text-green-200 transition-colors duration-150 mr-auto flex items-center"
+          className="text-xl font-bold hover:text-green-600 transition-colors duration-150 mr-auto flex items-center"
         >
           <svg
             viewBox="0 0 446.975 446.975"
-            className="h-5 w-6 mr-2 fill-white opacity-75 transition-opacity duration-150 hover:opacity-100"
+            className="h-5 w-6 mr-2 fill-green-800 opacity-80 transition-opacity duration-150 hover:opacity-100"
           >
             <g>
               <g>
@@ -50,12 +50,12 @@ const Navbar: React.FC = () => {
               </g>
             </g>
           </svg>
-          Rodriguez<span className="hidden sm:inline"> Lawn Service</span>
+          <span className="font-serif tracking-wide">Rodriguez </span><span className="hidden sm:inline font-serif tracking-wide ml-1.5"> Lawn Service</span>
         </a>
 
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden text-white focus:outline-none"
+          className="md:hidden text-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-transparent rounded-md p-1"
           onClick={toggleMobileMenu}
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
         >
@@ -63,19 +63,19 @@ const Navbar: React.FC = () => {
         </button>
 
         {/* Desktop Navigation */}
-        <NavigationMenuList className="hidden md:flex">
+        <NavigationMenuList className="hidden md:flex space-x-1">
           <NavigationMenuItem>
-            <NavigationMenuLink href="/" className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-green-600 hover:text-white focus:bg-green-600 focus:text-white data-[active]:bg-green-800 data-[state=open]:bg-green-800")}>
+            <NavigationMenuLink href="/" className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-green-50 hover:text-green-700 focus:bg-green-50 focus:text-green-700 data-[active]:bg-green-100 data-[state=open]:bg-green-100 data-[active]:text-green-700")}>
               Home
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuLink href="/services" className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-green-600 hover:text-white focus:bg-green-600 focus:text-white data-[active]:bg-green-800 data-[state=open]:bg-green-800")}>
+            <NavigationMenuLink href="/services" className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-green-50 hover:text-green-700 focus:bg-green-50 focus:text-green-700 data-[active]:bg-green-100 data-[state=open]:bg-green-100 data-[active]:text-green-700")}>
               Services
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuLink href="/contact" className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-green-600 hover:text-white focus:bg-green-600 focus:text-white data-[active]:bg-green-800 data-[state=open]:bg-green-800")}>
+            <NavigationMenuLink href="/contact" className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-green-50 hover:text-green-700 focus:bg-green-50 focus:text-green-700 data-[active]:bg-green-100 data-[state=open]:bg-green-100 data-[active]:text-green-700")}>
               Contact
             </NavigationMenuLink>
           </NavigationMenuItem>
@@ -85,10 +85,19 @@ const Navbar: React.FC = () => {
               href="/contact#estimate" 
               className={cn(
                 navigationMenuTriggerStyle(), 
-                "bg-white text-green-700 hover:bg-green-100 hover:scale-105 focus:bg-green-100 font-semibold transition-all"
+                "relative bg-gradient-to-tr from-green-800 via-green-600 to-green-800 text-white hover:text-white hover:scale-103",
+                "shadow-[0_4px_8px_rgba(0,0,0,0.2),inset_0_1px_2px_rgba(255,255,255,0.3)]",
+                "before:absolute before:inset-[2px] before:rounded-[0.45rem]",
+                "before:bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_var(--tw-gradient-to)_100%)]",
+                "before:from-green-500/90 before:to-green-700",
+                "before:opacity-90 before:-z-10",
+                "hover:before:brightness-110 hover:shadow-[0_6px_12px_rgba(0,0,0,0.3),inset_0_1px_2px_rgba(255,255,255,0.4)]",
+                "active:shadow-[0_2px_4px_rgba(0,0,0,0.2)]",
+                "active:translate-y-[1px] transition-all duration-200",
+                "border-none overflow-hidden"
               )}
             >
-              Get a Free Estimate
+              <span className="relative z-10">Get a Free Estimate</span>
             </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
@@ -96,25 +105,37 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu - with smooth transitions */}
       <div 
-        className={`md:hidden absolute top-full left-0 right-0 bg-green-700 shadow-md z-50 overflow-hidden transition-all duration-300 ease-in-out ${
+        className={`md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md shadow-md z-50 overflow-hidden transition-all duration-300 ease-in-out ${
           mobileMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="flex flex-col p-4 space-y-3">
-          <a href="/" className="text-white hover:text-green-200 py-2 px-4 rounded hover:bg-green-600 transition-colors duration-200">
+          <a href="/" className="text-green-800 hover:text-green-600 py-2 px-4 rounded hover:bg-green-50 transition-colors duration-200 font-medium">
             Home
           </a>
-          <a href="/services" className="text-white hover:text-green-200 py-2 px-4 rounded hover:bg-green-600 transition-colors duration-200">
+          <a href="/services" className="text-green-800 hover:text-green-600 py-2 px-4 rounded hover:bg-green-50 transition-colors duration-200 font-medium">
             Services
           </a>
-          <a href="/contact" className="text-white hover:text-green-200 py-2 px-4 rounded hover:bg-green-600 transition-colors duration-200">
+          <a href="/contact" className="text-green-800 hover:text-green-600 py-2 px-4 rounded hover:bg-green-50 transition-colors duration-200 font-medium">
             Contact
           </a>
           <a 
             href="/contact#estimate" 
-            className="bg-white text-green-700 hover:bg-green-100 py-2 px-4 rounded font-semibold text-center transition-colors duration-200"
+            className={cn(
+              "relative overflow-hidden py-2 px-4 rounded font-semibold text-center",
+              "bg-gradient-to-tr from-green-800 via-green-600 to-green-800 text-white hover:scale-103",
+              "shadow-[0_4px_8px_rgba(0,0,0,0.2),inset_0_1px_2px_rgba(255,255,255,0.3)]",
+              "before:absolute before:inset-[2px] before:rounded-[0.45rem]",
+              "before:bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_var(--tw-gradient-to)_100%)]",
+              "before:from-green-500/90 before:to-green-700",
+              "before:opacity-90 before:-z-10",
+              "hover:before:brightness-110 hover:shadow-[0_6px_12px_rgba(0,0,0,0.3),inset_0_1px_2px_rgba(255,255,255,0.4)]",
+              "active:shadow-[0_2px_4px_rgba(0,0,0,0.2)]",
+              "active:translate-y-[1px] transition-all duration-200",
+              "border-none"
+            )}
           >
-            Get a Free Estimate
+            <span className="relative z-10">Get a Free Estimate</span>
           </a>
         </div>
       </div>

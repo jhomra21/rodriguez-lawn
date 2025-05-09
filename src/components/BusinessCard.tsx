@@ -5,8 +5,8 @@ const BusinessCard: React.FC = () => {
   return (
     <motion.div 
       className="max-w-full w-full xs:max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto overflow-hidden shadow-xl border border-gray-200 rounded-sm"
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: -50 }}
+      initial={{ opacity: 0, x: 100 }}
+      animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       style={{ filter: 'drop-shadow(0 10px 8px rgb(0 0 0 / 0.1))' }}
     >

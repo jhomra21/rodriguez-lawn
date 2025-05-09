@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar.tsx';
 import Footer from '../components/Footer.tsx';
 import Hero from '../components/Hero.tsx'; // Import the new Hero component
 import ServicesOverview from '../components/ServicesOverview.tsx'; // Import the new ServicesOverview component
+import BeforeAndAfter from '../components/BeforeAndAfter.tsx'; // Import the new BeforeAndAfter component
 import PageTransition from '../components/PageTransition.tsx';
 import ScrollAnimationWrapper from '../components/ScrollAnimationWrapper.tsx';
 // import { Button } from "../components/ui/button"; // No longer needed directly on this page for now
@@ -23,13 +24,15 @@ const someProps = {
 	<PageTransition client:load>
 		<Hero client:load />
 		<ServicesOverview client:load />
-
-		<section class="container mx-auto py-12 px-4 text-center bg-gray-50">
-			<ScrollAnimationWrapper client:load>
-				<h2 class="text-3xl font-bold mb-4">Why Choose Us?</h2>
-				<p>More details coming soon!</p>
-			</ScrollAnimationWrapper>
-		</section>
+		<BeforeAndAfter
+			client:load
+			beforeImage="https://picsum.photos/seed/before/800/450"
+			afterImage="https://picsum.photos/seed/after/800/450"
+			beforeLabel="Before Our Service"
+			afterLabel="After Our Magic"
+			title="Transform Your Property"
+			description="See the remarkable difference our professional lawn care makes. Our expert team can revitalize your outdoor space with our comprehensive services."
+		/>
 	</PageTransition>
 
 	<Footer client:load slot="footer" />
