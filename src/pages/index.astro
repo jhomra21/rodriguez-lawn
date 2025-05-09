@@ -1,6 +1,14 @@
 ---
 // Component Imports
-import Counter from '../components/Counter';
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.tsx';
+import Footer from '../components/Footer.tsx';
+import Hero from '../components/Hero.tsx'; // Import the new Hero component
+import ServicesOverview from '../components/ServicesOverview.tsx'; // Import the new ServicesOverview component
+import PageTransition from '../components/PageTransition.tsx';
+import ScrollAnimationWrapper from '../components/ScrollAnimationWrapper.tsx';
+// import { Button } from "../components/ui/button"; // No longer needed directly on this page for now
+
 const someProps = {
 	count: 0,
 };
@@ -9,28 +17,20 @@ const someProps = {
 // https://docs.astro.build/basics/astro-components/
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<style>
-			html,
-			body {
-				font-family: system-ui;
-				margin: 0;
-			}
-			body {
-				padding: 2rem;
-			}
-		</style>
-	</head>
-	<body>
-		<main>
-			<Counter {...someProps} client:visible>
-				<h1>Hello, React!</h1>
-			</Counter>
-		</main>
-	</body>
-</html>
+<Layout title="Rodriguez Lawn Service - Expert Lawn Care & Tree Services">
+	<Navbar client:load slot="navbar" />
+
+	<PageTransition client:load>
+		<Hero client:load />
+		<ServicesOverview client:load />
+
+		<section class="container mx-auto py-12 px-4 text-center bg-gray-50">
+			<ScrollAnimationWrapper client:load>
+				<h2 class="text-3xl font-bold mb-4">Why Choose Us?</h2>
+				<p>More details coming soon!</p>
+			</ScrollAnimationWrapper>
+		</section>
+	</PageTransition>
+
+	<Footer client:load slot="footer" />
+</Layout>

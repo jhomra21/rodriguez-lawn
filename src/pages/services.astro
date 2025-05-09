@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.tsx';
+import Footer from '../components/Footer.tsx';
+import PageTransition from '../components/PageTransition.tsx';
+import ScrollAnimationWrapper from '../components/ScrollAnimationWrapper.tsx';
+// We will add specific service listing components here later
+---
+
+<Layout title="Our Services - Rodriguez Lawn Service">
+  <Navbar client:load slot="navbar" />
+
+  <PageTransition client:load>
+    <section class="py-12 md:py-20 bg-green-50">
+      <div class="container mx-auto px-4">
+        <ScrollAnimationWrapper client:load>
+          <h1 class="text-4xl font-bold text-green-800 text-center mb-12">Our Services</h1>
+        </ScrollAnimationWrapper>
+        {/* Placeholder for detailed service descriptions */}
+        <div class="grid md:grid-cols-2 gap-8">
+          <ScrollAnimationWrapper delay={0.2} client:load>
+            <div class="bg-white p-6 rounded-lg shadow-md h-full">
+              <h2 class="text-2xl font-semibold text-green-700 mb-3">Tree & Palm Trimming</h2>
+              <p class="text-gray-600 mb-4">Detailed description of tree and palm trimming services, benefits, process, etc.</p>
+              <p class="text-gray-500 text-sm"><em>More details coming soon...</em></p>
+            </div>
+          </ScrollAnimationWrapper>
+          <ScrollAnimationWrapper delay={0.4} client:load>
+            <div class="bg-white p-6 rounded-lg shadow-md h-full">
+              <h2 class="text-2xl font-semibold text-green-700 mb-3">Lawn Maintenance</h2>
+              <p class="text-gray-600 mb-4">Detailed description of lawn maintenance services (mowing, edging, fertilization, weed control).</p>
+              <p class="text-gray-500 text-sm"><em>More details coming soon...</em></p>
+            </div>
+          </ScrollAnimationWrapper>
+          <ScrollAnimationWrapper delay={0.6} client:load>
+            <div class="bg-white p-6 rounded-lg shadow-md h-full">
+              <h2 class="text-2xl font-semibold text-green-700 mb-3">Yard Cleanup</h2>
+              <p class="text-gray-600 mb-4">Details about seasonal cleanup, debris removal, leaf collection, etc.</p>
+              <p class="text-gray-500 text-sm"><em>More details coming soon...</em></p>
+            </div>
+          </ScrollAnimationWrapper>
+          <ScrollAnimationWrapper delay={0.8} client:load>
+            <div class="bg-white p-6 rounded-lg shadow-md h-full">
+              <h2 class="text-2xl font-semibold text-green-700 mb-3">Planting & Mulching</h2>
+              <p class="text-gray-600 mb-4">Information on planting services for flowers, shrubs, small trees, and mulching.</p>
+              <p class="text-gray-500 text-sm"><em>More details coming soon...</em></p>
+            </div>
+          </ScrollAnimationWrapper>
+        </div>
+      </div>
+    </section>
+  </PageTransition>
+
+  <Footer client:load slot="footer" />
+</Layout> 

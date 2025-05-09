@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.tsx';
+import Footer from '../components/Footer.tsx';
+import { Button } from '../components/ui/button'; // For potential form submit or other CTAs
+import { Phone, Mail, MapPin, MessageCircle } from 'lucide-react'; // Icons
+import PageTransition from '../components/PageTransition.tsx';
+import ScrollAnimationWrapper from '../components/ScrollAnimationWrapper.tsx';
+---
+
+<Layout title="Contact Us - Rodriguez Lawn Service">
+  <Navbar client:load slot="navbar" />
+
+  <PageTransition client:load>
+    <section class="py-12 md:py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <ScrollAnimationWrapper client:load>
+          <h1 class="text-4xl font-bold text-green-800 text-center mb-12">Contact Us</h1>
+        </ScrollAnimationWrapper>
+        
+        <div class="max-w-3xl mx-auto grid md:grid-cols-2 gap-10 items-start">
+          
+          <ScrollAnimationWrapper delay={0.2} client:load>
+            <div class="bg-green-50 p-8 rounded-lg shadow-md h-full">
+              <h2 class="text-2xl font-semibold text-green-700 mb-6">Get in Touch Directly</h2>
+              
+              <div class="mb-6">
+                <h3 class="text-lg font-medium text-gray-700 mb-2 flex items-center">
+                  <Phone className="h-5 w-5 mr-2 text-green-600" /> Emilio (Español)
+                </h3>
+                <a href="tel:+19563788069" class="text-xl text-green-600 hover:text-green-700 font-semibold">(956) 378-8069</a>
+                <a href="https://wa.me/19563788069" target="_blank" class="flex items-center text-sm text-green-500 hover:text-green-600 mt-1">
+                  <MessageCircle className="h-4 w-4 mr-1" /> WhatsApp Emilio
+                </a>
+              </div>
+
+              <div class="mb-6">
+                <h3 class="text-lg font-medium text-gray-700 mb-2 flex items-center">
+                  <Phone className="h-5 w-5 mr-2 text-green-600" /> Ever (English)
+                </h3>
+                <a href="tel:+19569297845" class="text-xl text-green-600 hover:text-green-700 font-semibold">(956) 929-7845</a>
+              </div>
+
+              <div class="mt-8 border-t pt-6">
+                <h3 class="text-lg font-medium text-gray-700 mb-2 flex items-center">
+                  <MapPin className="h-5 w-5 mr-2 text-green-600" /> Service Area
+                </h3>
+                <p class="text-gray-600">Edinburg, TX & The Entire Rio Grande Valley</p>
+              </div>
+            </div>
+          </ScrollAnimationWrapper>
+          
+          <ScrollAnimationWrapper delay={0.4} client:load>
+            <div id="estimate" class="bg-gray-50 p-8 rounded-lg shadow-md h-full">
+              <h2 class="text-2xl font-semibold text-green-700 mb-6">Request a Free Estimate</h2>
+              <p class="text-gray-600 mb-4">
+                Ready to transform your lawn or need expert tree care? Contact us today for a free, no-obligation estimate. 
+                We typically respond fastest by phone, but you can also leave your details below if you prefer.
+              </p>
+              {/* Placeholder for a contact form */}
+              <form>
+                <div class="mb-4">
+                  <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                  <input type="text" id="name" name="name" class="w-full p-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500" placeholder="Your Name">
+                </div>
+                <div class="mb-4">
+                  <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                  <input type="tel" id="phone" name="phone" class="w-full p-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500" placeholder="(555) 123-4567">
+                </div>
+                <div class="mb-4">
+                  <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Services Needed / Message</label>
+                  <textarea id="message" name="message" rows="4" class="w-full p-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500" placeholder="Tell us about your project..."></textarea>
+                </div>
+                <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white">
+                  Send Request
+                </Button>
+                <p class="text-xs text-gray-500 mt-3 text-center">We'll get back to you as soon as possible!</p>
+              </form>
+            </div>
+          </ScrollAnimationWrapper>
+
+        </div>
+      </div>
+    </section>
+  </PageTransition>
+
+  <Footer client:load slot="footer" />
+</Layout> 
