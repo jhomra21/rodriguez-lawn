@@ -62,7 +62,7 @@ const Hero: React.FC = () => {
                 "border-none overflow-hidden"
               )}
             >
-              <a href="/contact#estimate" className="z-10 flex items-center justify-center">
+              <a href="#estimate" className="z-10 flex items-center justify-center">
                 Request Free Estimate
               </a>
             </Button>
@@ -82,7 +82,7 @@ const Hero: React.FC = () => {
                 "overflow-hidden"
               )}
             >
-              <a href="/services" className="z-10 flex items-center justify-center">
+              <a href="#services" className="z-10 flex items-center justify-center">
                 Our Services <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
               </a>
             </Button>

@@ -3,25 +3,26 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { TreeDeciduous, Home, Sprout, Sparkles } from 'lucide-react'; // Icons for services
 import { motion } from 'motion/react';
+import { ArrowRight } from 'lucide-react';
 
 const services = [
   {
-    icon: <TreeDeciduous className="h-8 w-8 md:h-10 md:w-10 text-green-600 mb-3 md:mb-4" />,
+    icon: <TreeDeciduous className="h-7 w-7 text-green-600" />,
     title: 'Tree & Palm Trimming',
     description: 'Expert trimming for all types of trees and palms to enhance health and aesthetics.',
   },
   {
-    icon: <Home className="h-8 w-8 md:h-10 md:w-10 text-green-600 mb-3 md:mb-4" />,
+    icon: <Home className="h-7 w-7 text-green-600" />,
     title: 'Lawn Maintenance',
     description: 'Comprehensive lawn care including mowing, edging, and fertilization for a lush, green yard.',
   },
   {
-    icon: <Sparkles className="h-8 w-8 md:h-10 md:w-10 text-green-600 mb-3 md:mb-4" />,
+    icon: <Sparkles className="h-7 w-7 text-green-600" />,
     title: 'Yard Cleanup',
     description: 'Seasonal and general yard cleanup services to keep your property neat and tidy.',
   },
   {
-    icon: <Sprout className="h-8 w-8 md:h-10 md:w-10 text-green-600 mb-3 md:mb-4" />,
+    icon: <Sprout className="h-7 w-7 text-green-600" />,
     title: 'Planting & Mulching',
     description: 'Beautify your landscape with new plantings and fresh mulch for a vibrant look.',
   },
@@ -32,19 +33,19 @@ const container = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.3,
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
     }
   }
 };
 
 const item = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 15 },
   show: { 
     opacity: 1, 
     y: 0,
     transition: { 
-      duration: 0.3,
+      duration: 0.5,
       ease: "easeOut" 
     }
   }
@@ -52,60 +53,44 @@ const item = {
 
 const ServicesOverview: React.FC = () => {
   return (
-    <section className="py-10 md:py-16 lg:py-24 bg-white">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-green-800 text-center mb-3 md:mb-4">
-            Our Lawn & Tree Services
-          </h2>
-          <p className="text-base md:text-lg text-gray-600 text-center mb-8 md:mb-12 max-w-xl mx-auto">
-            From routine maintenance to specialized tree care, we offer a range of services to keep your outdoor spaces beautiful.
-          </p>
-        </motion.div>
-        
-        <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8"
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {services.map((service) => (
-            <motion.div 
-              key={service.title} 
-              variants={item}
-            >
-              <Card className="text-center shadow-lg hover:shadow-xl transition-shadow duration-200 flex flex-col h-full">
-                <CardHeader className="items-center pb-3 md:pb-6">
+    <div className="container mx-auto px-4">
+      {/* Services Grid */}
+      <motion.div 
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.1 }}
+      >
+        {services.map((service) => (
+          <motion.div 
+            key={service.title} 
+            variants={item}
+            className="h-full"
+          >
+            <Card className="group text-center flex flex-col h-full bg-white border-0 rounded-xl overflow-hidden hover:shadow-sm transition-all duration-300">
+              <div className="flex justify-center pt-8 pb-5">
+                <div className="h-14 w-14 bg-green-50 rounded-full flex items-center justify-center">
                   {service.icon}
-                  <CardTitle className="text-lg md:text-xl font-semibold text-green-700">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="flex-grow pt-0">
-                  <p className="text-sm md:text-base text-gray-600">{service.description}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
-        
-        <motion.div 
-          className="text-center mt-8 md:mt-12 lg:mt-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          <Button asChild size="lg" className="bg-green-700 hover:bg-green-800 transition-colors duration-150 text-white">
-            <a href="/services">View All Services</a>
-          </Button>
-        </motion.div>
-      </div>
-    </section>
+                </div>
+              </div>
+              
+              <CardHeader className="pt-0 pb-2 px-6">
+                <CardTitle className="text-lg font-medium text-gray-800">{service.title}</CardTitle>
+              </CardHeader>
+              
+              <CardContent className="flex-grow pb-8 px-6">
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {service.description}
+                </p>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </motion.div>
+      
+
+    </div>
   );
 };
 

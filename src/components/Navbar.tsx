@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
     <NavigationMenu className="bg-zinc-100/20 text-green-800 p-3 shadow-sm border-b border-green-100 min-w-full justify-center backdrop-blur-md sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
         <a 
-          href="/" 
+          href="#top" 
           className="text-xl font-bold hover:text-green-600 transition-colors duration-150 mr-auto flex items-center"
         >
           <svg
@@ -53,36 +53,13 @@ const Navbar: React.FC = () => {
           <span className="font-serif tracking-wide">Rodriguez </span><span className="hidden sm:inline font-serif tracking-wide ml-1.5"> Lawn Service</span>
         </a>
 
-        {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden text-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-transparent rounded-md p-1"
-          onClick={toggleMobileMenu}
-          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-        >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-
         {/* Desktop Navigation */}
-        <NavigationMenuList className="hidden md:flex space-x-1">
-          <NavigationMenuItem>
-            <NavigationMenuLink href="/" className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-green-50 hover:text-green-700 focus:bg-green-50 focus:text-green-700 data-[active]:bg-green-100 data-[state=open]:bg-green-100 data-[active]:text-green-700")}>
-              Home
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink href="/services" className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-green-50 hover:text-green-700 focus:bg-green-50 focus:text-green-700 data-[active]:bg-green-100 data-[state=open]:bg-green-100 data-[active]:text-green-700")}>
-              Services
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink href="/contact" className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-green-50 hover:text-green-700 focus:bg-green-50 focus:text-green-700 data-[active]:bg-green-100 data-[state=open]:bg-green-100 data-[active]:text-green-700")}>
-              Contact
-            </NavigationMenuLink>
-          </NavigationMenuItem>
+        <NavigationMenuList className="flex space-x-1">
+          
           {/* CTA Button - styled as a prominent link */}
           <NavigationMenuItem className="ml-2">
             <NavigationMenuLink 
-              href="/contact#estimate" 
+              href="#estimate" 
               className={cn(
                 navigationMenuTriggerStyle(), 
                 "relative bg-gradient-to-tr from-green-800 via-green-600 to-green-800 text-white hover:text-white hover:scale-103",
@@ -103,42 +80,7 @@ const Navbar: React.FC = () => {
         </NavigationMenuList>
       </div>
 
-      {/* Mobile Menu - with smooth transitions */}
-      <div 
-        className={`md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md shadow-md z-50 overflow-hidden transition-all duration-300 ease-in-out ${
-          mobileMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="flex flex-col p-4 space-y-3">
-          <a href="/" className="text-green-800 hover:text-green-600 py-2 px-4 rounded hover:bg-green-50 transition-colors duration-200 font-medium">
-            Home
-          </a>
-          <a href="/services" className="text-green-800 hover:text-green-600 py-2 px-4 rounded hover:bg-green-50 transition-colors duration-200 font-medium">
-            Services
-          </a>
-          <a href="/contact" className="text-green-800 hover:text-green-600 py-2 px-4 rounded hover:bg-green-50 transition-colors duration-200 font-medium">
-            Contact
-          </a>
-          <a 
-            href="/contact#estimate" 
-            className={cn(
-              "relative overflow-hidden py-2 px-4 rounded font-semibold text-center",
-              "bg-gradient-to-tr from-green-800 via-green-600 to-green-800 text-white hover:scale-103",
-              "shadow-[0_4px_8px_rgba(0,0,0,0.2),inset_0_1px_2px_rgba(255,255,255,0.3)]",
-              "before:absolute before:inset-[2px] before:rounded-[0.45rem]",
-              "before:bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_var(--tw-gradient-to)_100%)]",
-              "before:from-green-500/90 before:to-green-700",
-              "before:opacity-90 before:-z-10",
-              "hover:before:brightness-110 hover:shadow-[0_6px_12px_rgba(0,0,0,0.3),inset_0_1px_2px_rgba(255,255,255,0.4)]",
-              "active:shadow-[0_2px_4px_rgba(0,0,0,0.2)]",
-              "active:translate-y-[1px] transition-all duration-200",
-              "border-none"
-            )}
-          >
-            <span className="relative z-10">Get a Free Estimate</span>
-          </a>
-        </div>
-      </div>
+  
     </NavigationMenu>
   );
 };

@@ -1,43 +1,137 @@
 import React from 'react';
-import { Phone } from 'lucide-react';
+import { Phone, MapPin } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
+
+// WhatsApp Icon Component 
+const WhatsAppIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg viewBox="0 0 256 259" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" className={className}>
+    <path d="m67.663 221.823 4.185 2.093c17.44 10.463 36.971 15.346 56.503 15.346 61.385 0 111.609-50.224 111.609-111.609 0-29.297-11.859-57.897-32.785-78.824-20.927-20.927-48.83-32.785-78.824-32.785-61.385 0-111.61 50.224-110.912 112.307 0 20.926 6.278 41.156 16.741 58.594l2.79 4.186-11.16 41.156 41.853-10.464Z" fill="#00E676"/>
+    <path d="M219.033 37.668C195.316 13.254 162.531 0 129.048 0 57.898 0 .698 57.897 1.395 128.35c0 22.322 6.278 43.947 16.742 63.478L0 258.096l67.663-17.439c18.834 10.464 39.76 15.347 60.688 15.347 70.453 0 127.653-57.898 127.653-128.35 0-34.181-13.254-66.269-36.97-89.986ZM129.048 234.38c-18.834 0-37.668-4.882-53.712-14.648l-4.185-2.093-40.458 10.463 10.463-39.76-2.79-4.186C7.673 134.63 22.322 69.058 72.546 38.365c50.224-30.692 115.097-16.043 145.79 34.181 30.692 50.224 16.043 115.097-34.18 145.79-16.045 10.463-35.576 16.043-55.108 16.043Zm61.385-77.428-7.673-3.488s-11.16-4.883-18.136-8.371c-.698 0-1.395-.698-2.093-.698-2.093 0-3.488.698-4.883 1.396 0 0-.697.697-10.463 11.858-.698 1.395-2.093 2.093-3.488 2.093h-.698c-.697 0-2.092-.698-2.79-1.395l-3.488-1.395c-7.673-3.488-14.648-7.674-20.229-13.254-1.395-1.395-3.488-2.79-4.883-4.185-4.883-4.883-9.766-10.464-13.253-16.742l-.698-1.395c-.697-.698-.697-1.395-1.395-2.79 0-1.395 0-2.79.698-3.488 0 0 2.79-3.488 4.882-5.58 1.396-1.396 2.093-3.488 3.488-4.883 1.395-2.093 2.79-4.883 1.395-6.976-.697-3.488-9.068-22.322-11.16-26.507-1.396-2.093-2.79-2.79-4.883-3.488H83.01c-1.396 0-2.79.698-4.186.698l-.698.697c-1.395.698-2.79 2.093-4.185 2.79-1.395 1.396-2.093 2.79-3.488 4.186-4.883 6.278-7.673 13.951-7.673 21.624 0 5.58 1.395 11.161 3.488 16.044l.698 2.093c6.278 13.253 14.648 25.112 25.81 35.575l2.79 2.79c2.092 2.093 4.185 3.488 5.58 5.58 14.649 12.557 31.39 21.625 50.224 26.508 2.093.697 4.883.697 6.976 1.395h6.975c3.488 0 7.673-1.395 10.464-2.79 2.092-1.395 3.487-1.395 4.882-2.79l1.396-1.396c1.395-1.395 2.79-2.092 4.185-3.487 1.395-1.395 2.79-2.79 3.488-4.186 1.395-2.79 2.092-6.278 2.79-9.765v-4.883s-.698-.698-2.093-1.395Z" fill="#FFF"/>
+  </svg>
+);
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  
   return (
-    <footer className="bg-gray-800 text-white py-6 md:py-8 px-4 text-center">
-      <div className="container mx-auto">
-        <p className="mb-3 text-lg font-semibold">
-          Rodriguez Lawn Service &copy; {currentYear}
-        </p>
-        <p className="mb-3 text-sm md:text-base">
-          Serving Edinburg, TX &amp; Valley Wide
-        </p>
-        
-        <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 mb-2">
-          <a href="tel:+19563788069" className="flex items-center gap-2 hover:text-green-300 transition-colors">
-            <Phone size={16} className="text-green-400" />
-            <span>Emilio (Spanish): (956) 378-8069</span>
-          </a>
-          <span className="hidden md:inline">|</span>
-          <a href="tel:+19569297845" className="flex items-center gap-2 hover:text-green-300 transition-colors">
-            <Phone size={16} className="text-green-400" />
-            <span>Ever (English): (956) 929-7845</span>
-          </a>
+    <footer className="bg-white border-t border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="py-10 md:py-14 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+          {/* Company Info */}
+          <div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">
+              Rodriguez Lawn Service
+            </h3>
+            
+            <p className="text-gray-600 text-sm leading-relaxed max-w-md mb-6">
+              Providing professional lawn care and tree services with 24 years of experience. 
+              We take pride in transforming and maintaining the beauty of your outdoor spaces.
+            </p>
+            
+            {/* Service Area */}
+            <div className="flex items-start gap-2.5">
+              <MapPin className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-gray-800 font-medium text-sm">Service Areas</p>
+                <p className="text-gray-500 text-sm mt-1">
+                  Serving Edinburg, TX & Valley Wide - Including McAllen, Mission, Pharr, and surrounding areas
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Contact Us */}
+          <div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">
+              Contact Us
+            </h3>
+            
+            <TooltipProvider>
+              {/* Contact Links */}
+              <div className="space-y-4 mb-8">
+                {/* Emilio (Spanish) */}
+                <div className="flex items-center gap-3 group">
+                  <div className="h-8 w-8 rounded-full bg-green-50 border border-green-100 flex items-center justify-center flex-shrink-0 group-hover:bg-green-100 transition-colors">
+                    <Phone className="h-3.5 w-3.5 text-green-600 group-hover:scale-110 transition-transform duration-200" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500">Spanish</p>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <a 
+                          href="tel:+19563788069" 
+                          className="text-gray-800 group-hover:text-green-600 transition-colors"
+                        >
+                          Emilio: (956) 378-8069
+                        </a>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Call or text Emilio</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                </div>
+                
+                {/* Ever (English) */}
+                <div className="flex items-center gap-3 group">
+                  <div className="h-8 w-8 rounded-full bg-green-50 border border-green-100 flex items-center justify-center flex-shrink-0 group-hover:bg-green-100 transition-colors">
+                    <Phone className="h-3.5 w-3.5 text-green-600 group-hover:scale-110 transition-transform duration-200" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500">English</p>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <a 
+                          href="tel:+19569297845" 
+                          className="text-gray-800 group-hover:text-green-600 transition-colors"
+                        >
+                          Ever: (956) 929-7845
+                        </a>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Call or text Ever</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                </div>
+              </div>
+              
+              {/* WhatsApp Button */}
+              <div className="flex justify-center md:justify-start">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <a
+                      href="https://wa.me/19563788069"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-3 px-5 py-3 bg-green-600 hover:bg-green-700 rounded-md transition-all duration-200"
+                    >
+                      <WhatsAppIcon className="h-5 w-5 group-hover:scale-110 transition-transform duration-200" />
+                      <span className="font-medium text-white">Contact us on WhatsApp</span>
+                    </a>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Message us on WhatsApp</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+            </TooltipProvider>
+          </div>
         </div>
         
-        <div className="mt-4 flex justify-center">
-          <a 
-            href="https://wa.me/19563788069" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-green-600 text-white py-2 px-4 rounded-full hover:bg-green-700 transition-colors"
-          >
-            <svg viewBox="0 0 32 32" width="20" height="20" fill="white" xmlns="http://www.w3.org/2000/svg">
-              <path d="M16.008 0h-.016C7.178 0 0 7.178 0 16c0 3.498 1.128 6.74 3.046 9.374L1.05 30.85l5.644-1.824c2.518 1.66 5.52 2.624 8.754 2.624 8.814 0 15.992-7.178 15.992-16S24.822 0 16.008 0z" fill="#25D366"/>
-              <path d="M25.233 22.386c-.388 1.098-1.929 2.01-3.16 2.275-0.842.18-1.942.324-5.644-1.21-4.735-1.968-7.784-6.785-8.02-7.1-.228-.314-1.914-2.54-1.914-4.842 0-2.3 1.21-3.432 1.637-3.9.388-.422 1.026-.614 1.638-.614.198 0 .378.028.539.05.47.02.705.048 1.016.79.388.94.388 2.517.52 3.01.276.992.276 1.19.18 1.362-.18.326-.304.422-.559.674-.255.252-.498.446-.753.72-.228.228-.486.478-.198.908.29.422 1.279 1.82 2.743 2.945 1.889 1.45 3.478 1.902 3.975 2.113.328.14.73.106 1.026-.152.388-.326.866-.866 1.353-1.396.344-.39.78-.54 1.24-.346.47.16 2.97 1.396 3.478 1.65.52.253.866.38 1.006.582.132.228.132 1.31-.254 2.573z" fill="#FFF"/>
-            </svg>
-            <span className="text-sm">Contact us on WhatsApp</span>
-          </a>
+        {/* Bottom Bar */}
+        <div className="border-t border-gray-200 py-4 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-500 text-sm order-2 md:order-1 mt-3 md:mt-0">
+            &copy; {currentYear} Rodriguez Lawn Service. All rights reserved.
+          </p>
+          
+          <div className="flex items-center gap-2 order-1 md:order-2">
+            <div className="flex text-xs text-gray-500">
+              <span className="hidden md:block mr-1">Designed with</span>
+              <span className="mr-1">❤️</span>
+              <span>in the RGV</span>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
