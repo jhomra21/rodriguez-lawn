@@ -2,25 +2,26 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { TreeDeciduous, Home, Sprout, Sparkles } from 'lucide-react'; // Icons for services
 import { motion } from 'motion/react';
+import { cn } from '../lib/utils';
 
 const services = [
   {
-    icon: <TreeDeciduous className="h-7 w-7 text-green-600" />,
+    icon: <TreeDeciduous className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
     title: 'Tree & Palm Trimming',
     description: 'Expert trimming for all types of trees and palms to enhance health and aesthetics.',
   },
   {
-    icon: <Home className="h-7 w-7 text-green-600" />,
+    icon: <Home className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
     title: 'Lawn Maintenance',
     description: 'Comprehensive lawn care including mowing, edging, and fertilization for a lush, green yard.',
   },
   {
-    icon: <Sparkles className="h-7 w-7 text-green-600" />,
+    icon: <Sparkles className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
     title: 'Yard Cleanup',
     description: 'Seasonal and general yard cleanup services to keep your property neat and tidy.',
   },
   {
-    icon: <Sprout className="h-7 w-7 text-green-600" />,
+    icon: <Sprout className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
     title: 'Planting & Mulching',
     description: 'Beautify your landscape with new plantings and fresh mulch for a vibrant look.',
   },
@@ -66,15 +67,15 @@ const ServicesOverview: React.FC = () => {
             variants={item}
             className="h-full"
           >
-            <Card className="group text-center flex flex-col h-full bg-white border-0 rounded-xl overflow-hidden hover:shadow-sm transition-all duration-300">
+            <Card className="group text-center flex flex-col h-full bg-white border-0 rounded-xl overflow-hidden hover:shadow-md transition-all duration-300">
               <div className="flex justify-center pt-8 pb-5">
-                <div className="h-14 w-14 bg-green-50 rounded-full flex items-center justify-center">
+                <div className="h-14 w-14 bg-gradient-to-br from-transparent to-green-100/40 rounded-md flex items-center justify-center shadow-sm group-hover:shadow transition-all duration-200">
                   {service.icon}
                 </div>
               </div>
               
               <CardHeader className="pt-0 pb-2 px-6">
-                <CardTitle className="text-lg font-medium text-gray-800">{service.title}</CardTitle>
+                <CardTitle className="text-lg font-medium text-gray-800 group-hover:text-green-700 transition-colors duration-300">{service.title}</CardTitle>
               </CardHeader>
               
               <CardContent className="flex-grow pb-8 px-6">
@@ -86,8 +87,6 @@ const ServicesOverview: React.FC = () => {
           </motion.div>
         ))}
       </motion.div>
-      
-
     </div>
   );
 };

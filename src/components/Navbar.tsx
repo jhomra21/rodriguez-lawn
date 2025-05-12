@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -6,21 +6,46 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
+import { Button } from "./ui/button";
 import { cn } from "../lib/utils";
+import { Menu, X } from "lucide-react";
 
 const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [scrolled]);
+
   return (
-    <NavigationMenu className="bg-zinc-100/20 text-green-800 p-3 shadow-sm border-b border-green-100 min-w-full justify-center backdrop-blur-md sticky top-0 z-50">
-      <div className="container mx-auto flex justify-between items-center">
+    <div
+      className={cn(
+        "w-full py-4 px-4 backdrop-blur-md sticky top-0 z-50 transition-all duration-200",
+        scrolled 
+          ? "bg-white/90 dark:bg-zinc-900/90 shadow-sm border-b border-zinc-200 dark:border-zinc-800" 
+          : "bg-transparent"
+      )}
+    >
+      <div className="container mx-auto flex items-center justify-between">
+        {/* Logo */}
         <a 
           href="#top" 
-          className="text-xl font-bold hover:text-green-600 transition-colors duration-150 mr-auto flex items-center"
+          className="text-xl font-bold text-green-800 hover:text-green-600 transition-colors duration-150 flex items-center"
         >
           <svg
             viewBox="0 0 446.975 446.975"
@@ -49,19 +74,86 @@ const Navbar: React.FC = () => {
               </g>
             </g>
           </svg>
-          <span className="font-serif tracking-wide">Rodriguez </span><span className="hidden sm:inline font-serif tracking-wide ml-1.5"> Lawn Service</span>
+          <span className="font-serif tracking-wide">Rodriguez</span>
+          <span className="hidden sm:inline font-serif tracking-wide ml-1.5">Lawn Service</span>
         </a>
 
+        {/* Mobile Menu Toggle */}
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          className="md:hidden"
+          onClick={toggleMobileMenu}
+          aria-label="Toggle Menu"
+        >
+          {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </Button>
+
         {/* Desktop Navigation */}
-        <NavigationMenuList className="flex space-x-1">
-          
-          {/* CTA Button - styled as a prominent link */}
-          <NavigationMenuItem className="ml-2">
-            <NavigationMenuLink 
-              href="#estimate" 
+        <nav className="hidden md:flex items-center gap-5 transition-all duration-200">
+          <a 
+            href="#services" 
+            className="text-sm font-medium text-zinc-700 hover:shadow-sm hover:text-green-700 hover:bg-green-50 hover:border-green-300/80 border border-transparent rounded-md px-4 py-2 transition-colors"
+          >
+            Services
+          </a>
+          <a 
+            href="#contact" 
+            className="text-sm font-medium text-zinc-700 hover:shadow-sm hover:text-green-700 hover:bg-green-50 hover:border-green-300/80 border border-transparent rounded-md px-4 py-2 transition-colors"
+          >
+            Contact
+          </a>
+          <Button 
+            asChild 
+            className={cn(
+              "relative bg-gradient-to-tr from-green-800 via-green-600 to-green-800 text-white hover:scale-103",
+              "shadow-[0_4px_8px_rgba(0,0,0,0.2),inset_0_1px_2px_rgba(255,255,255,0.3)]",
+              "before:absolute before:inset-[2px] before:rounded-[0.45rem]",
+              "before:bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_var(--tw-gradient-to)_100%)]",
+              "before:from-green-500/90 before:to-green-700",
+              "before:opacity-90 before:-z-10",
+              "hover:before:brightness-110 hover:shadow-[0_6px_12px_rgba(0,0,0,0.3),inset_0_1px_2px_rgba(255,255,255,0.4)]",
+              "active:shadow-[0_2px_4px_rgba(0,0,0,0.2)]",
+              "active:translate-y-[1px] transition-all duration-200",
+              "border-none overflow-hidden"
+            )}
+          >
+            <a href="#contact" className="z-10">
+              Get a Free Estimate
+            </a>
+          </Button>
+        </nav>
+      </div>
+
+      {/* Mobile Menu - Using CSS transitions for animation */}
+      <div 
+        className={cn(
+          "md:hidden absolute inset-x-0 bg-white/95 dark:bg-zinc-900/95 shadow-lg border-b border-zinc-200 dark:border-zinc-800 backdrop-blur-md overflow-hidden transition-all duration-200 ease-in",
+          mobileMenuOpen 
+            ? "max-h-96 opacity-100 translate-y-0" 
+            : "max-h-0 opacity-0 -translate-y-2"
+        )}
+      >
+        <nav className="flex flex-col space-y-3 py-4 px-6">
+          <a 
+            href="#services" 
+            className="text-sm font-medium text-zinc-700 hover:text-green-700 py-2 px-3 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-md transition-colors"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Services
+          </a>
+          <a 
+            href="#contact" 
+            className="text-sm font-medium text-zinc-700 hover:text-green-700 py-2 px-3 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-md transition-colors"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Contact
+          </a>
+          <div className="pt-2">
+            <Button 
+              asChild 
               className={cn(
-                navigationMenuTriggerStyle(), 
-                "relative bg-gradient-to-tr from-green-800 via-green-600 to-green-800 text-white hover:text-white hover:scale-103",
+                "w-full relative bg-gradient-to-tr from-green-800 via-green-600 to-green-800 text-white hover:scale-103",
                 "shadow-[0_4px_8px_rgba(0,0,0,0.2),inset_0_1px_2px_rgba(255,255,255,0.3)]",
                 "before:absolute before:inset-[2px] before:rounded-[0.45rem]",
                 "before:bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_var(--tw-gradient-to)_100%)]",
@@ -73,14 +165,18 @@ const Navbar: React.FC = () => {
                 "border-none overflow-hidden"
               )}
             >
-              <span className="relative z-10">Get a Free Estimate</span>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-        </NavigationMenuList>
+              <a 
+                href="#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="z-10"
+              >
+                Get a Free Estimate
+              </a>
+            </Button>
+          </div>
+        </nav>
       </div>
-
-  
-    </NavigationMenu>
+    </div>
   );
 };
 

@@ -22,7 +22,7 @@ const ContactSection: React.FC = () => {
       <div className="container mx-auto px-4">
         <ScrollAnimationWrapper>
           <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Contact Us</h1>
+            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-b from-zinc-400 to-gray-900 text-transparent bg-clip-text mb-4">Contact Us</h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               We're here to help with all your lawn care and tree service needs. Reach out today!
             </p>
@@ -36,7 +36,7 @@ const ContactSection: React.FC = () => {
               <CardHeader className="border-b bg-white pb-6">
                 <CardTitle className="text-lg font-medium text-green-600 flex items-center">
                   <Phone className="h-5 w-5 mr-2.5" /> 
-                  Get in Touch Directly
+                  <p className="text-zinc-700/80">Get in Touch </p> <p className="bg-gradient-to-br from-green-400 to-green-900 text-transparent bg-clip-text ml-1.5"> Directly</p>
                 </CardTitle>
                 <CardDescription className="text-sm text-gray-500">
                   Call or message us for a quick response.
@@ -47,7 +47,7 @@ const ContactSection: React.FC = () => {
                   <div className="space-y-6">
                     {/* Contact Item - Emilio */}
                     <div className="flex items-start">
-                      <div className="h-10 w-10 rounded-full bg-green-50 flex items-center justify-center mr-4 flex-shrink-0">
+                      <div className="h-10 w-10 rounded-md bg-zinc-50 shadow-sm flex items-center justify-center mr-4 flex-shrink-0">
                         <User className="h-5 w-5 text-green-600" />
                       </div>
                       <div>
@@ -85,7 +85,7 @@ const ContactSection: React.FC = () => {
                     
                     {/* Contact Item - Ever */}
                     <div className="flex items-start">
-                      <div className="h-10 w-10 rounded-full bg-green-50 flex items-center justify-center mr-4 flex-shrink-0">
+                      <div className="h-10 w-10 rounded-md bg-zinc-50 shadow-sm flex items-center justify-center mr-4 flex-shrink-0">
                         <User className="h-5 w-5 text-green-600" />
                       </div>
                       <div>
@@ -123,16 +123,16 @@ const ContactSection: React.FC = () => {
 
                     {/* Contact Item - Service Area */}
                     <div className="flex items-start">
-                      <div className="h-10 w-10 rounded-full bg-green-50 flex items-center justify-center mr-4 flex-shrink-0">
+                      <div className="h-10 w-10 rounded-md bg-zinc-50 shadow-sm flex items-center justify-center mr-4 flex-shrink-0">
                         <MapPin className="h-5 w-5 text-green-600" />
                       </div>
                       <div>
                         <h4 className="text-sm font-medium text-gray-600 mb-1">Service Area</h4>
                         <p className="text-base text-gray-600">
-                          Serving the entire Rio Grande Valley
+                          Serving the Rio Grande Valley
                         </p>
-                        <p className="text-sm text-gray-500 mt-1">
-                          Including Edinburg, McAllen, Mission, Pharr, San Juan, and all surrounding areas
+                        <p className="text-sm text-gray-400 mt-1 italic">
+                          Including Edinburg, McAllen, Mission, Pharr, San Juan, and surrounding areas
                         </p>
                       </div>
                     </div>
@@ -147,7 +147,7 @@ const ContactSection: React.FC = () => {
               <CardHeader className="border-b bg-white pb-6">
                 <CardTitle className="text-lg font-medium text-green-600 flex items-center">
                   <Info className="h-5 w-5 mr-2.5" />
-                  Request a Free Estimate
+                  <p className="text-zinc-700/80">Request a </p> <p className="bg-gradient-to-br from-green-400 to-green-900 text-transparent bg-clip-text mx-1.5"> Free </p> <p className="text-zinc-700/80"> Estimate</p>
                 </CardTitle>
                 <CardDescription className="text-sm text-gray-500">
                   Fill out the form below and we'll get back to you.

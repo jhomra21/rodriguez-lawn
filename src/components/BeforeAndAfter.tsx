@@ -97,8 +97,8 @@ const BeforeAndAfter: React.FC<BeforeAndAfterProps> = ({
       <section className="py-16 px-4 bg-gradient-to-b from-white to-green-50">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-green-800 mb-4">{title}</h2>
-            <p className="text-green-700/80 max-w-2xl mx-auto">{description}</p>
+            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-b from-green-400 to-green-900 text-transparent bg-clip-text pb-4">{title}</h2>
+            <p className="text-zinc-600/90 max-w-2xl mx-auto">{description}</p>
           </div>
           
           <div 

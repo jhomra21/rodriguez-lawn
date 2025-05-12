@@ -17,14 +17,14 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <motion.h1 
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-green-800 leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-b from-green-500 to-green-950 text-transparent bg-clip-text"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.4 }}
           >
             Professional <br />
             <motion.span 
-              className="text-green-600"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight font-bold bg-gradient-to-b from-green-400 to-green-900 text-transparent bg-clip-text"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.4 }}
@@ -38,7 +38,7 @@ const Hero: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.4 }}
           >
-            Specializing in expert tree trimming, palm care, and comprehensive lawn services with over 24 years of experience. Serving Edinburg, TX and Valley Wide.
+            Specializing in expert tree trimming, palm care, and comprehensive lawn services with over 24 years of experience. Serving the Rio Grande Valley in Texas.
           </motion.p>
           <motion.div 
             className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
@@ -62,7 +62,7 @@ const Hero: React.FC = () => {
                 "border-none overflow-hidden"
               )}
             >
-              <a href="#estimate" className="z-10 flex items-center justify-center">
+              <a href="#contact" className="z-10 flex items-center justify-center">
                 Request Free Estimate
               </a>
             </Button>
