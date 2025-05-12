@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar.tsx';
 import Footer from '../components/Footer.tsx';
 import Hero from '../components/Hero.tsx';
 import ServicesOverview from '../components/ServicesOverview.tsx';
-import BeforeAndAfter from '../components/BeforeAndAfter.tsx';
+import BeforeAndAfter from '../components/BeforeAndAfter.astro';
 import ContactSection from '../components/ContactSection.tsx';
 import PageTransition from '../components/PageTransition.tsx';
 import ScrollAnimationWrapper from '../components/ScrollAnimationWrapper.tsx';
@@ -39,13 +39,10 @@ import BusinessCard from '../components/BusinessCard.tsx';
 		<!-- Before and After Section -->
 		<section class=" bg-white">
 			<BeforeAndAfter
-				client:load
-				beforeImage="https://picsum.photos/seed/before/800/450"
-				afterImage="https://picsum.photos/seed/after/800/450"
 				beforeLabel="Before Our Service"
 				afterLabel="After Our Magic"
 				title="Transform Your Property"
-				description="See the remarkable difference our professional lawn care makes. Our expert team can revitalize your outdoor space with our comprehensive services."
+				description="See the difference our professional lawn care makes. Our expert team can revitalize your outdoor space with our services."
 			/>
 		</section>
 

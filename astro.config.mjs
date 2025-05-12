@@ -9,5 +9,5 @@ export default defineConfig({
 		plugins: [tailwindcss()],
 	  },
 	// Enable React to support React JSX components.
-	integrations: [react()],
+	integrations: [react()]
 });

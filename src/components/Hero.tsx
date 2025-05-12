@@ -38,7 +38,7 @@ const Hero: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.4 }}
           >
-            Specializing in expert tree trimming, palm care, and comprehensive lawn services with over 24 years of experience. Serving the Rio Grande Valley in Texas.
+            Specializing in expert tree trimming, palm care, and comprehensive lawn services with over <span className="italic bg-gradient-to-r from-green-600 to-green-800 text-transparent bg-clip-text">24 years of experience</span>. Serving the Rio Grande Valley in Texas.
           </motion.p>
           <motion.div 
             className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"

@@ -1,0 +1,183 @@
+---
+import { Image } from 'astro:assets';
+
+// Import images directly
+import before01 from '../assets/before01.jpg';
+import before02 from '../assets/before02.jpg';
+import after01 from '../assets/after01.jpg';
+import after02 from '../assets/after02.jpg';
+
+// Props interface
+interface Props {
+  beforeLabel?: string;
+  afterLabel?: string;
+  title?: string;
+  description?: string;
+  className?: string;
+}
+
+// Default props
+const { 
+  beforeLabel = "Before",
+  afterLabel = "After",
+  title = "See the Transformation",
+  description = "Drag the slider to see the difference our professional lawn care services can make.",
+  className = ""
+} = Astro.props;
+
+// Define the before/after images
+const beforeImageList = [before01, before02];
+const afterImageList = [after01, after02];
+---
+
+<section class="py-16 px-4 bg-gradient-to-b from-white to-green-50">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl md:text-4xl font-bold bg-gradient-to-b from-green-400 to-green-900 text-transparent bg-clip-text pb-4">{title}</h2>
+      <p class="text-zinc-600/90 max-w-2xl mx-auto">{description}</p>
+    </div>
+    
+    <div id="before-after-container" class:list={["relative w-full overflow-hidden rounded-xl shadow-xl border-2 border-white cursor-grab", className]}>
+      <div class="relative w-full">
+        <!-- After Images (Bottom Layer) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 aspect-video">
+          {afterImageList.map((afterImage, i) => (
+            <div class="relative overflow-hidden">
+              <Image 
+                src={afterImage} 
+                alt={`${afterLabel} ${i + 1}`}
+                class="w-full h-full object-cover"
+                width={afterImage.width} 
+                height={afterImage.height}
+                loading="eager"
+              />
+            </div>
+          ))}
+        </div>
+
+        <!-- Before Images (Top Layer, clipped) -->
+        <div id="before-images" class="absolute inset-0 overflow-hidden">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2 h-full">
+            {beforeImageList.map((beforeImage, i) => (
+              <div class="relative overflow-hidden">
+                <Image 
+                  src={beforeImage} 
+                  alt={`${beforeLabel} ${i + 1}`}
+                  class="w-full h-full object-cover"
+                  width={beforeImage.width} 
+                  height={beforeImage.height}
+                  loading="eager"
+                  quality={'mid'}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Labels - more prominent with smooth transitions -->
+        <div id="before-label" class="absolute top-4 left-4 bg-black/90 text-white px-4 py-2 rounded-lg text-sm font-semibold select-none pointer-events-none shadow-lg transition-opacity duration-300 ease-in-out">
+          {beforeLabel}
+        </div>
+        <div id="after-label" class="absolute top-4 right-4 bg-black/90 text-white px-4 py-2 rounded-lg text-sm font-semibold select-none pointer-events-none shadow-lg transition-opacity duration-300 ease-in-out">
+          {afterLabel}
+        </div>
+
+        <!-- Custom Handle Line with circle grip -->
+        <div id="slider-handle" class="absolute top-0 bottom-0 bg-white w-1 pointer-events-none shadow-lg" style="left: 50%; transform: translateX(-50%)">
+          <!-- Add handle circle -->
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full shadow-md flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-700">
+              <path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="text-center mt-6 text-gray-600 text-sm italic">
+      Actual results may vary based on your property's specific conditions and chosen services.
+    </div>
+  </div>
+</section>
+
+<script>
+  // Client-side JavaScript for the slider functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('before-after-container');
+    const beforeImages = document.getElementById('before-images');
+    const beforeLabel = document.getElementById('before-label');
+    const afterLabel = document.getElementById('after-label');
+    const sliderHandle = document.getElementById('slider-handle');
+    
+    if (!container || !beforeImages || !beforeLabel || !afterLabel || !sliderHandle) return;
+    
+    let isDragging = false;
+    let sliderValue = 50; // Initial position (50%)
+    
+    // Update the slider position and clipping
+    const updateSliderPosition = (clientX: number) => {
+      if (!container) return;
+      
+      const rect = container.getBoundingClientRect();
+      const position = ((clientX - rect.left) / rect.width) * 100;
+      sliderValue = Math.max(0, Math.min(100, position));
+      
+      // Update the UI
+      if (beforeImages) {
+        beforeImages.style.clipPath = `inset(0 ${100 - sliderValue}% 0 0)`;
+      }
+      
+      if (sliderHandle) {
+        sliderHandle.style.left = `${sliderValue}%`;
+      }
+      
+      // Update label visibility
+      if (beforeLabel) {
+        beforeLabel.style.opacity = sliderValue > 15 ? '1' : '0';
+      }
+      
+      if (afterLabel) {
+        afterLabel.style.opacity = sliderValue < 85 ? '1' : '0';
+      }
+    };
+    
+    // Mouse events
+    container.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      updateSliderPosition(e.clientX);
+      e.preventDefault();
+    });
+    
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      updateSliderPosition(e.clientX);
+    });
+    
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+    
+    // Touch events
+    container.addEventListener('touchstart', (e) => {
+      if (e.touches.length > 0) {
+        isDragging = true;
+        updateSliderPosition(e.touches[0].clientX);
+      }
+      e.preventDefault();
+    });
+    
+    document.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      if (e.touches.length > 0) {
+        updateSliderPosition(e.touches[0].clientX);
+      }
+    });
+    
+    document.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+    
+    // Initialize the UI
+    updateSliderPosition(container.getBoundingClientRect().width * 0.5 + container.getBoundingClientRect().left);
+  });
+</script> 
