@@ -1,9 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
 import { TreeDeciduous, Home, Sprout, Sparkles } from 'lucide-react'; // Icons for services
 import { motion } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
 
 const services = [
   {

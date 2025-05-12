@@ -1,13 +1,12 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Phone, MessageCircle } from 'lucide-react';
+import { Phone } from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Card, CardHeader, CardTitle } from './ui/card';
 
 // WhatsApp Icon Component 
 const WhatsAppIcon: React.FC<{ className?: string }> = ({ className }) => (
