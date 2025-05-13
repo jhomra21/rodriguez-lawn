@@ -67,7 +67,7 @@ const ServicesOverview: React.FC = () => {
             variants={item}
             className="h-full"
           >
-            <Card className="group text-center flex flex-col h-full bg-white border-0 rounded-xl overflow-hidden hover:shadow-md transition-all duration-300">
+            <Card className="group text-center flex flex-col h-full bg-zinc-50 border-t border-t-zinc-200 rounded-xl overflow-hidden hover:shadow-md transition-all duration-300">
               <div className="flex justify-center pt-8 pb-5">
                 <div className="h-14 w-14 bg-gradient-to-br from-transparent to-green-100/40 rounded-md flex items-center justify-center shadow-sm group-hover:shadow transition-all duration-200">
                   {service.icon}

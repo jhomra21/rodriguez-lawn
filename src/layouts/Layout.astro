@@ -3,21 +3,45 @@ import '../styles/global.css'; // Use the comprehensive global.css
 
 interface Props {
 	title: string;
+	description?: string;
 }
 
-const { title } = Astro.props;
+const { 
+	title,
+	description = "Rodriguez Lawn Service - Expert Tree Trimming and Lawn Care Services in Rio Grande Valley, TX" 
+} = Astro.props;
+
+// Get the site URL for absolute paths
+const siteUrl = Astro.site || 'https://rodriguez-lawn.com';
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Rodriguez Lawn Service - Expert Tree Trimming and Lawn Care" />
+		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
         <!-- <link rel="stylesheet" href="/src/styles/global.css"> -->
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#15803d" />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={new URL(Astro.url.pathname, siteUrl).toString()} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL('/og-image.png', siteUrl).toString()} />
+		<meta property="og:image:alt" content="Rodriguez Lawn Service - Professional Tree & Lawn Care" />
+		<meta property="og:site_name" content="Rodriguez Lawn Service" />
+		
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={new URL(Astro.url.pathname, siteUrl).toString()} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={new URL('/og-image.png', siteUrl).toString()} />
+		
 		<title>{title}</title>
 	</head>
 	<body class="bg-white text-gray-800 antialiased min-h-screen flex flex-col transition-all duration-150 ease-in">
