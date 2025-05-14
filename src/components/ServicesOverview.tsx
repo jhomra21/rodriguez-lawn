@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { TreeDeciduous, Home, Sprout, Sparkles } from 'lucide-react'; // Icons for services
+import { TreeDeciduous, Home, Sprout, GitBranchPlus } from 'lucide-react'; // Icons for services
 import { motion } from 'motion/react';
 import { cn } from '../lib/utils';
 
@@ -16,9 +16,9 @@ const services = [
     description: 'Comprehensive lawn care including mowing, edging, and fertilization for a lush, green yard.',
   },
   {
-    icon: <Sparkles className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
-    title: 'Yard Cleanup',
-    description: 'Seasonal and general yard cleanup services to keep your property neat and tidy.',
+    icon: <GitBranchPlus className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
+    title: 'Tree & Shrub Propagation',
+    description: 'Expert propagation services, including grafting and rooting, to cultivate new trees and shrubs from existing stock.',
   },
   {
     icon: <Sprout className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,

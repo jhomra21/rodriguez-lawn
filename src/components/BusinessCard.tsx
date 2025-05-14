@@ -52,13 +52,13 @@ const BusinessCard: React.FC = () => {
       
 
         {/* Lawn Service immediately under Rodriguez - card style container */}
-        <div className="relative overflow-hidden flex flex-col items-center justify-center py-3 px-6 mb-8 mx-auto rounded-lg 
-                        bg-gradient-to-b from-gray-50 via-white to-gray-100 shadow-[0_2px_5px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.7)] 
-                        before:absolute before:inset-0 before:rounded-lg before:bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.4)_0%,rgba(255,255,255,0)_65%)] 
-                        before:pointer-events-none border border-zinc-300/50">
+        <div className="relative overflow-hidden flex flex-col items-center justify-center py-6 px-6 mb-8 -mx-6 -mt-8 rounded-t-xl rounded-b-xl 
+                        bg-gradient-to-br from-zinc-100 via-white to-zinc-300/80 shadow-[0_2px_5px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.7)] 
+                        before:absolute before:inset-0 before:rounded-t-xl before:bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.4)_0%,rgba(255,255,255,0)_65%)] 
+                        before:pointer-events-none border-b border-zinc-300/70">
           {/* Top section with RODRIGUEZ */}
           <div className="mb-3 relative z-10 text-center">
-            <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-b from-zinc-600 to-zinc-900 text-transparent bg-clip-text tracking-tight uppercase font-serif">Rodriguez</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-b from-zinc-500 to-zinc-900 text-transparent bg-clip-text tracking-tight uppercase font-serif">Rodriguez</h1>
           </div>
           
           {/* Lawn Service section */}

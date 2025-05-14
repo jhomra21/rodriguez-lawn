@@ -4,9 +4,10 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
-import { Phone, MapPin, User, Info } from 'lucide-react';
+import { Phone, MapPin, User, Info, ArrowRight } from 'lucide-react';
 import { Label } from "./ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
+import { cn } from "../lib/utils";
 
 // WhatsApp Icon Component (from BusinessCard.tsx)
 const WhatsAppIcon: React.FC<{ className?: string }> = ({ className }) => (
@@ -29,109 +30,107 @@ const ContactSection: React.FC = () => {
           </div>
         </ScrollAnimationWrapper>
         
-        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+        <div className="max-w-2xl mx-auto">
           
           <ScrollAnimationWrapper delay={0.1}>
-            <Card className="h-full shadow-sm border-0 overflow-hidden">
-              <CardHeader className="border-b bg-white pb-6">
-                <CardTitle className="text-lg font-medium text-green-600 flex items-center">
-                  <Phone className="h-5 w-5 mr-2.5" /> 
-                  <p className="text-zinc-700/80">Get in Touch </p> <p className="bg-gradient-to-br from-green-400 to-green-900 text-transparent bg-clip-text ml-1.5"> Directly</p>
+            <Card className="shadow-lg border border-zinc-200/80 rounded-xl overflow-hidden bg-gradient-to-br from-zinc-100 via-white to-zinc-100">
+              <CardHeader className=" py-6 border-b-0">
+                <CardTitle className="text-xl font-medium text-zinc-800 flex items-center justify-center gap-2">
+                  <Phone className="h-5 w-5 text-green-600" /> 
+                  <span>Get in Touch <span className="text-green-600">Directly</span></span>
                 </CardTitle>
-                <CardDescription className="text-sm text-gray-500">
+                <CardDescription className="text-center text-base text-gray-500 mt-2">
                   Call or message us for a quick response.
                 </CardDescription>
               </CardHeader>
-              <CardContent className="pt-6 pb-8 px-6 bg-white">
+
+              <CardContent className="pt-6 pb-8 px-8">
                 <TooltipProvider delayDuration={100}>
-                  <div className="space-y-6">
-                    {/* Contact Item - Emilio */}
-                    <div className="flex items-start">
-                      <div className="h-10 w-10 rounded-md bg-zinc-50 shadow-sm flex items-center justify-center mr-4 flex-shrink-0">
-                        <User className="h-5 w-5 text-green-600" />
+                  <div className="space-y-8">
+                    {/* Contact Items - Side by side on desktop */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Contact Item - Emilio */}
+                      <div className="flex items-start bg-gray-50 p-4 rounded-xl shadow-sm">
+                        <div className="h-10 w-10 rounded-xl bg-white shadow-sm flex items-center justify-center mr-3 flex-shrink-0">
+                          <User className="h-5 w-5 text-green-600" />
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-medium text-gray-700 mb-1">Emilio (Español)</h4>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <a href="tel:+19563788069" className="text-base font-medium text-green-600 hover:text-green-700 transition-colors duration-200 block">
+                                (956) 378-8069
+                              </a>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Tap to call Emilio</p>
+                            </TooltipContent>
+                          </Tooltip>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <a 
+                                href="https://wa.me/19563788069" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="inline-flex items-center text-sm text-gray-600 hover:text-green-600 mt-1 transition-colors duration-200"
+                              >
+                                <WhatsAppIcon className="h-5 w-5 mr-1.5" /> WhatsApp Emilio
+                              </a>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Message Emilio on WhatsApp</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="text-sm font-medium text-gray-600 mb-1">Emilio (Español)</h4>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <a href="tel:+19563788069" className="text-base font-medium text-green-600 hover:text-green-700 transition-colors duration-200 block">
-                              (956) 378-8069
-                            </a>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>Tap to call Emilio</p>
-                          </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <a 
-                              href="https://wa.me/19563788069" 
-                              target="_blank" 
-                              rel="noopener noreferrer" 
-                              className="inline-flex items-center text-sm text-gray-500 hover:text-green-600 mt-1 transition-colors duration-200"
-                            >
-                              <WhatsAppIcon className="h-5 w-5 mr-1.5 bg-zinc-100 rounded-md p-0.5" /> WhatsApp Emilio
-                            </a>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>Message Emilio on WhatsApp</p>
-                          </TooltipContent>
-                        </Tooltip>
+                      
+                      {/* Contact Item - Ever */}
+                      <div className="flex items-start bg-gray-50 p-4 rounded-xl shadow-sm">
+                        <div className="h-10 w-10 rounded-xl bg-white shadow-sm flex items-center justify-center mr-3 flex-shrink-0">
+                          <User className="h-5 w-5 text-green-600" />
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-medium text-gray-700 mb-1">Ever (English)</h4>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <a href="tel:+19569297845" className="text-base font-medium text-green-600 hover:text-green-700 transition-colors duration-200 block">
+                                (956) 929-7845
+                              </a>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Tap to call Ever</p>
+                            </TooltipContent>
+                          </Tooltip>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <a 
+                                href="https://wa.me/19569297845" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="inline-flex items-center text-sm text-gray-600 hover:text-green-600 mt-1 transition-colors duration-200"
+                              >
+                                <WhatsAppIcon className="h-5 w-5 mr-1.5" /> WhatsApp Ever
+                              </a>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Message Ever on WhatsApp</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Divider */}
-                    <div className="h-px bg-gray-100 w-full"></div>
-                    
-                    {/* Contact Item - Ever */}
-                    <div className="flex items-start">
-                      <div className="h-10 w-10 rounded-md bg-zinc-50 shadow-sm flex items-center justify-center mr-4 flex-shrink-0">
-                        <User className="h-5 w-5 text-green-600" />
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-medium text-gray-600 mb-1">Ever (English)</h4>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <a href="tel:+19569297845" className="text-base font-medium text-green-600 hover:text-green-700 transition-colors duration-200 block">
-                              (956) 929-7845
-                            </a>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>Tap to call Ever</p>
-                          </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <a 
-                              href="https://wa.me/19569297845" 
-                              target="_blank" 
-                              rel="noopener noreferrer" 
-                              className="inline-flex items-center text-sm text-gray-500 hover:text-green-600 mt-1 transition-colors duration-200"
-                            >
-                              <WhatsAppIcon className="h-5 w-5 mr-1.5 bg-zinc-100 rounded-md p-0.5" /> WhatsApp Ever
-                            </a>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>Message Ever on WhatsApp</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </div>
-                    </div>
-
-                    {/* Divider */}
-                    <div className="h-px bg-gray-100 w-full"></div>
-
-                    {/* Contact Item - Service Area */}
-                    <div className="flex items-start">
-                      <div className="h-10 w-10 rounded-md bg-zinc-50 shadow-sm flex items-center justify-center mr-4 flex-shrink-0">
+                    {/* Contact Item - Service Area (Full Width) */}
+                    <div className="flex items-start bg-gray-50 p-4 rounded-xl shadow-sm">
+                      <div className="h-10 w-10 rounded-xl bg-white shadow-sm flex items-center justify-center mr-3 flex-shrink-0">
                         <MapPin className="h-5 w-5 text-green-600" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-medium text-gray-600 mb-1">Service Area</h4>
-                        <p className="text-base text-gray-600">
+                        <h4 className="text-sm font-medium text-gray-700 mb-1">Service Area</h4>
+                        <p className="text-base text-gray-700">
                           Serving the Rio Grande Valley
                         </p>
-                        <p className="text-sm text-gray-400 mt-1 italic">
+                        <p className="text-sm text-gray-500 mt-1 italic">
                           Including Edinburg, McAllen, Mission, Pharr, San Juan, and surrounding areas
                         </p>
                       </div>
@@ -142,62 +141,6 @@ const ContactSection: React.FC = () => {
             </Card>
           </ScrollAnimationWrapper>
           
-          <ScrollAnimationWrapper delay={0.2}>
-            <Card className="h-full shadow-sm border-0 overflow-hidden">
-              <CardHeader className="border-b bg-white pb-6">
-                <CardTitle className="text-lg font-medium text-green-600 flex items-center">
-                  <Info className="h-5 w-5 mr-2.5" />
-                  <p className="text-zinc-700/80">Request a </p> <p className="bg-gradient-to-br from-green-400 to-green-900 text-transparent bg-clip-text mx-1.5"> Free </p> <p className="text-zinc-700/80"> Estimate</p>
-                </CardTitle>
-                <CardDescription className="text-sm text-gray-500">
-                  Fill out the form below and we'll get back to you.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-6 pb-8 px-6 bg-white">
-                <form className="space-y-5">
-                  <div>
-                    <Label htmlFor="name" className="text-sm font-medium text-gray-700">Full Name</Label>
-                    <Input 
-                      type="text" 
-                      id="name" 
-                      name="name" 
-                      placeholder="Your Name" 
-                      className="mt-1 bg-gray-50 border-gray-200 focus:border-green-500 focus:ring-green-500"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="phone" className="text-sm font-medium text-gray-700">Phone Number</Label>
-                    <Input 
-                      type="tel" 
-                      id="phone" 
-                      name="phone" 
-                      placeholder="(555) 123-4567" 
-                      className="mt-1 bg-gray-50 border-gray-200 focus:border-green-500 focus:ring-green-500"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="message" className="text-sm font-medium text-gray-700">Services Needed / Message</Label>
-                    <Textarea 
-                      id="message" 
-                      name="message" 
-                      rows={4} 
-                      placeholder="Tell us about your project..." 
-                      className="mt-1 bg-gray-50 border-gray-200 focus:border-green-500 focus:ring-green-500"
-                    />
-                  </div>
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2.5"
-                  >
-                    Send Request
-                  </Button>
-                  <p className="text-xs text-gray-500 text-center">
-                    We typically respond within 24 hours. For urgent requests, please call.
-                  </p>
-                </form>
-              </CardContent>
-            </Card>
-          </ScrollAnimationWrapper>
         </div>
       </div>
     </section>
