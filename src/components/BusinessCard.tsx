@@ -45,7 +45,7 @@ const BusinessCard: React.FC = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       {/* Main Card Content Area -- Do not touch this div PLEASE */}
-      <div className="px-6 pt-8 pb-5 relative overflow-hidden bg-gradient-to-b from-zinc-50 via-white to-zinc-100 border border-gray-200 shadow-[0_3px_8px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,0.75)] rounded-t-xl -mb-5 before:absolute before:inset-0 before:rounded-t-xl before:bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.35)_0%,rgba(255,255,255,0)_65%)] before:pointer-events-none">
+      <div className="px-6 pt-8 pb-5 relative overflow-hidden bg-gradient-to-b from-zinc-50 via-white to-zinc-100 border-b border-e border-zinc-300 shadow-[0_3px_8px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,0.75)] rounded-t-xl -mb-5 before:absolute before:inset-0 before:rounded-t-xl before:bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.35)_0%,rgba(255,255,255,0)_65%)] before:pointer-events-none">
         {/* Subtle noise texture overlay */}
         <div style={noiseStyle}></div>
 
