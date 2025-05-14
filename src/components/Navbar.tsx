@@ -36,20 +36,20 @@ const Navbar: React.FC = () => {
     <div
       className={cn(
         "w-full py-4 px-4 backdrop-blur-md sticky top-0 z-50 transition-all duration-200",
-        scrolled 
-          ? "bg-white/90 dark:bg-zinc-900/90 shadow-sm border-b border-zinc-200 dark:border-zinc-800" 
-          : "bg-transparent"
+        scrolled
+          ? "bg-white/80 dark:bg-zinc-900/90 shadow-sm border-b border-zinc-200 dark:border-zinc-800"
+          : "bg-white/80 dark:bg-zinc-900/80"
       )}
     >
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
         <a 
           href="#top" 
-          className="text-xl font-bold text-green-800 hover:text-green-600 transition-colors duration-150 flex items-center"
+          className="text-xl font-bold text-green-800 transition-colors duration-200 flex items-center group"
         >
           <svg
             viewBox="0 0 446.975 446.975"
-            className="h-5 w-6 mr-2 fill-green-800 opacity-80 transition-opacity duration-150 hover:opacity-100"
+            className="h-7 w-8 mr-2 mb-1.5 fill-green-700 group-hover:fill-green-900 group-hover:h-8 group-hover:w-9 drop-shadow-md group-hover:drop-shadow-lg transition-all duration-200"
           >
             <g>
               <g>
@@ -74,8 +74,8 @@ const Navbar: React.FC = () => {
               </g>
             </g>
           </svg>
-          <span className="font-serif tracking-wide">Rodriguez</span>
-          <span className="hidden sm:inline font-serif tracking-wide ml-1.5">Lawn Service</span>
+          <span className="font-serif tracking-wide drop-shadow-md group-hover:drop-shadow-lg transition-all duration-200">Rodriguez</span>
+          <span className="hidden sm:inline font-serif tracking-wide ml-1.5 drop-shadow-md group-hover:drop-shadow-lg transition-all duration-200">Lawn Service</span>
         </a>
 
         {/* Mobile Menu Toggle */}
