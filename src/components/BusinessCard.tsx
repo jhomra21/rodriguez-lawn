@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Phone } from 'lucide-react';
+import { Phone, MapPin, CheckCircle2, Tag } from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
@@ -45,42 +45,50 @@ const BusinessCard: React.FC = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       {/* Main Card Content Area -- Do not touch this div PLEASE */}
-      <div className="px-6 pt-8 pb-5 relative bg-white border border-zinc-200">
+      <div className="px-6 pt-8 pb-5 relative overflow-hidden bg-gradient-to-b from-zinc-50 via-white to-zinc-100 border border-gray-200 shadow-[0_3px_8px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,0.75)] rounded-t-xl -mb-5 before:absolute before:inset-0 before:rounded-t-xl before:bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.35)_0%,rgba(255,255,255,0)_65%)] before:pointer-events-none">
         {/* Subtle noise texture overlay */}
         <div style={noiseStyle}></div>
 
-        {/* Top section with RODRIGUEZ */}
-        <div className="mb-3 relative z-10 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight uppercase font-serif">Rodriguez</h1>
-        </div>
+      
 
         {/* Lawn Service immediately under Rodriguez - card style container */}
-        <div className="flex items-center justify-center py-2 px-6 mb-8 mx-auto">
-          {/* Left side icon (Palm Tree) */}
-          <div className="flex-shrink-0 mr-4">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-7 w-7 text-green-600"
-              fill="currentColor"
-              strokeWidth="0.5"
-              stroke="currentColor">
-              <path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/>
-              <path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/>
-              <path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/>
-              <path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/>
-            </svg>
+        <div className="relative overflow-hidden flex flex-col items-center justify-center py-3 px-6 mb-8 mx-auto rounded-lg 
+                        bg-gradient-to-b from-gray-50 via-white to-gray-100 shadow-[0_2px_5px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.7)] 
+                        before:absolute before:inset-0 before:rounded-lg before:bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.4)_0%,rgba(255,255,255,0)_65%)] 
+                        before:pointer-events-none border border-zinc-300/50">
+          {/* Top section with RODRIGUEZ */}
+          <div className="mb-3 relative z-10 text-center">
+            <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-b from-zinc-600 to-zinc-900 text-transparent bg-clip-text tracking-tight uppercase font-serif">Rodriguez</h1>
           </div>
+          
+          {/* Lawn Service section */}
+          <div className="flex items-center justify-center w-full">
+            {/* Left side icon (Palm Tree) */}
+            <div className="flex-shrink-0 mr-4">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-9 w-9 text-green-600"
+                fill="currentColor"
+                strokeWidth="0.5"
+                stroke="currentColor">
+                <path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/>
+                <path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/>
+                <path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/>
+                <path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/>
+              </svg>
+            </div>
 
-          {/* Lawn Service Text */}
-          <h2 className="text-center font-medium font-serif text-2xl sm:text-3xl text-gray-800">Lawn Service</h2>
+            {/* Lawn Service Text */}
+            <h2 className="text-center font-medium font-serif text-2xl sm:text-3xl text-gray-800">Lawn Service</h2>
 
-          {/* Tree - Right icon */}
-          <div className="flex-shrink-0 ml-4">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-7 w-7 text-green-600"
-              fill="currentColor"
-              strokeWidth="0.5"
-              stroke="currentColor">
-              <path d="M8 19a4 4 0 0 1-2.24-7.32A3.5 3.5 0 0 1 9 6.03V6a3 3 0 1 1 6 0v.04a3.5 3.5 0 0 1 3.24 5.65A4 4 0 0 1 16 19Z"/>
-              <path d="M12 19v3"/>
-            </svg>
+            {/* Tree - Right icon */}
+            <div className="flex-shrink-0 ml-4">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-9 w-9 text-green-600"
+                fill="currentColor"
+                strokeWidth="0.5"
+                stroke="currentColor">
+                <path d="M8 19a4 4 0 0 1-2.24-7.32A3.5 3.5 0 0 1 9 6.03V6a3 3 0 1 1 6 0v.04a3.5 3.5 0 0 1 3.24 5.65A4 4 0 0 1 16 19Z"/>
+                <path d="M12 19v3"/>
+              </svg>
+            </div>
           </div>
         </div>
 
@@ -91,21 +99,26 @@ const BusinessCard: React.FC = () => {
         <div className="relative z-10 flex flex-col items-center space-y-8">
           {/* Emilio - elevated card style */}
           <div className="w-full max-w-sm mx-auto">
-            <div className="pt-5 pb-4 px-6 bg-gradient-to-br from-zinc-50 via-green-100/40 to-zinc-50 border-b border-zinc-300 rounded-lg shadow-sm hover:shadow-md  transition-shadow duration-200">
-              <h2 className="text-center font-bold mb-1.5 font-serif text-3xl sm:text-4xl text-gray-800">Emilio</h2>
+            <div className="pt-5 pb-4 px-6 relative overflow-hidden bg-gradient-to-br from-green-100/70 via-green-50/50 to-green-100/70 border border-green-200/50 rounded-lg shadow-[0_3px_6px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.95)] before:absolute before:inset-0 before:rounded-lg before:bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.45)_0%,rgba(255,255,255,0)_60%)] before:pointer-events-none">
+              <h2 className="text-center font-bold mb-1.5 font-serif text-3xl sm:text-4xl text-zinc-900">Emilio</h2>
               <p className="text-center text-green-700 font-normal text-base sm:text-lg">24 Years of Experience</p>
             </div>
           </div>
 
           {/* Service promises - stacked pills */}
-          <div className="flex flex-col items-center space-y-2.5">
+          <div className="flex flex-col items-center space-y-3">
             {/* Free Estimates pill */}
-            <div className="inline-flex items-center py-2 px-5 bg-gray-50 border border-gray-200/50 rounded-xl text-gray-700 text-sm sm:text-base font-medium">
-              Free Estimates • Rio Grande Valley Wide
+            <div className="relative overflow-hidden inline-flex items-center gap-2 py-2.5 px-5 bg-gradient-to-br from-gray-100 via-white to-gray-100/70 border border-gray-200/70 rounded-xl text-gray-700 text-sm sm:text-base shadow-[0_3px_6px_rgba(0,0,0,0.1),inset_0_1px_1px_rgba(255,255,255,0.9)] before:absolute before:inset-[1.5px] before:rounded-lg before:bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.6)_0%,rgba(255,255,255,0)_70%)] before:opacity-90 before:-z-10 before:pointer-events-none">
+              <Tag className="h-4 w-4 text-orange-500 flex-shrink-0" />
+              <span className="font-semibold text-gray-800">Free Estimates</span>
+              <div className="h-4 w-px bg-gray-300 mx-1"></div> {/* Vertical line separator */}
+              <MapPin className="h-4 w-4 text-blue-500 flex-shrink-0 -ml-1" /> 
+              <span className="font-medium text-gray-600">Rio Grande Valley Wide</span>
             </div>
             
             {/* Best Prices pill */}
-            <div className="inline-flex items-center py-2 px-5 bg-green-50/60 border border-green-100/70 rounded-xl text-green-700 text-sm sm:text-base font-medium">
+            <div className="relative overflow-hidden inline-flex items-center gap-2 py-2.5 px-5 bg-gradient-to-br from-green-600 via-green-500 to-green-600 border border-green-700/50 rounded-xl text-white text-sm sm:text-base font-semibold shadow-[0_3px_7px_rgba(0,0,0,0.18),inset_0_1px_1.5px_rgba(255,255,255,0.5)] before:absolute before:inset-[1.5px] before:rounded-lg before:bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.3)_0%,rgba(255,255,255,0)_70%)] before:from-green-400/70 before:to-green-500/70 before:opacity-90 before:-z-10 before:pointer-events-none">
+              <CheckCircle2 className="h-4 w-4 text-white flex-shrink-0" /> 
               Best Prices Guaranteed
             </div>
           </div>
@@ -116,104 +129,108 @@ const BusinessCard: React.FC = () => {
       </div>
 
       {/* Contact Section - Notion-inspired Cards */}
-      <div className="bg-gray-50 border-t border-gray-200/30 py-6 px-6 sm:px-8 relative">
+      <div className="bg-white border-t-2 rounded-t-xl border-zinc-200/70 py-6 px-6 sm:px-8 relative">
         {/* Subtle noise texture overlay for contact section */}
         <div style={noiseStyle}></div>
 
         <TooltipProvider>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
             {/* Emilio (Spanish) */}
-            <Card className="bg-white border-gray-200/80 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <Card className="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-100/80 border border-gray-200/60 shadow-[0_4px_8px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,0.8)] rounded-lg before:absolute before:inset-[1.5px] before:rounded-lg before:bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.5)_0%,rgba(255,255,255,0)_70%)] before:opacity-90 before:-z-10 before:pointer-events-none">
               <CardContent className="p-4">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="h-9 w-9 rounded-md bg-gray-50 border border-gray-200/80 flex items-center justify-center flex-shrink-0">
-                    <Phone className="h-4 w-4 text-gray-700" />
+                <div className="flex flex-row items-center justify-between sm:flex-col sm:items-start sm:gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="h-9 w-9 rounded-md bg-gray-100/70 border border-gray-200/80 flex items-center justify-center flex-shrink-0 shadow-inner-sm">
+                      <Phone className="h-4 w-4 text-gray-700" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 font-medium leading-tight">Emilio (Spanish)</p>
+                      <Tooltip delayDuration={300}>
+                        <TooltipTrigger asChild>
+                          <a href="tel:+19563788069" className="text-base sm:text-lg text-gray-800 font-semibold hover:text-green-600 transition-colors leading-tight mt-0.5 block">
+                            (956) 378-8069
+                          </a>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Call or text Emilio</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-500 font-medium leading-tight">Emilio (Spanish)</p>
+
+                  <div className="border-t border-gray-100 w-full hidden sm:block"></div>
+
+                  {/* WhatsApp */}
+                  <div className="group flex items-center">
                     <Tooltip delayDuration={300}>
                       <TooltipTrigger asChild>
-                        <a href="tel:+19563788069" className="text-lg text-gray-800 font-semibold hover:text-green-600 transition-colors leading-tight mt-0.5 block">
-                          (956) 378-8069
+                        <a
+                          href="https://wa.me/19563788069"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2.5 text-sm text-gray-700 hover:text-green-600 transition-colors"
+                        >
+                          <span className="flex h-8 w-8 items-center justify-center bg-gray-50 rounded-md p-1.5 border border-gray-100 group-hover:bg-green-50 transition-colors">
+                            <WhatsAppIcon className="h-4.5 w-4.5 text-green-600 group-hover:scale-105 transition-transform duration-200" />
+                          </span>
+                          WhatsApp
                         </a>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Call or text Emilio</p>
+                        <p>Message Emilio on WhatsApp</p>
                       </TooltipContent>
                     </Tooltip>
                   </div>
-                </div>
-
-                <div className="border-t border-gray-100 my-3"></div>
-
-                {/* WhatsApp */}
-                <div className="group flex items-center">
-                  <Tooltip delayDuration={300}>
-                    <TooltipTrigger asChild>
-                      <a
-                        href="https://wa.me/19563788069"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2.5 text-sm text-gray-700 hover:text-green-600 transition-colors"
-                      >
-                        <span className="flex h-8 w-8 items-center justify-center bg-gray-50 rounded-md p-1.5 border border-gray-100 group-hover:bg-green-50 transition-colors">
-                          <WhatsAppIcon className="h-4.5 w-4.5 text-green-600 group-hover:scale-105 transition-transform duration-200" />
-                        </span>
-                        WhatsApp
-                      </a>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Message Emilio on WhatsApp</p>
-                    </TooltipContent>
-                  </Tooltip>
                 </div>
               </CardContent>
             </Card>
 
             {/* Ever (English) */}
-            <Card className="bg-white border-gray-200/80 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <Card className="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-100/80 border border-gray-200/60 shadow-[0_4px_8px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,0.8)] rounded-lg before:absolute before:inset-[1.5px] before:rounded-lg before:bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.5)_0%,rgba(255,255,255,0)_70%)] before:opacity-90 before:-z-10 before:pointer-events-none">
               <CardContent className="p-4">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="h-9 w-9 rounded-md bg-gray-50 border border-gray-200/80 flex items-center justify-center flex-shrink-0">
-                    <Phone className="h-4 w-4 text-gray-700" />
+                <div className="flex flex-row items-center justify-between sm:flex-col sm:items-start sm:gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="h-9 w-9 rounded-md bg-gray-100/70 border border-gray-200/80 flex items-center justify-center flex-shrink-0 shadow-inner-sm">
+                      <Phone className="h-4 w-4 text-gray-700" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 font-medium leading-tight">Ever (English)</p>
+                      <Tooltip delayDuration={300}>
+                        <TooltipTrigger asChild>
+                          <a href="tel:+19569297845" className="text-base sm:text-lg text-gray-800 font-semibold hover:text-green-600 transition-colors leading-tight mt-0.5 block">
+                            (956) 929-7845
+                          </a>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Call or text Ever</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-500 font-medium leading-tight">Ever (English)</p>
+
+                  <div className="border-t border-gray-100 w-full hidden sm:block"></div>
+
+                  {/* WhatsApp */}
+                  <div className="group flex items-center">
                     <Tooltip delayDuration={300}>
                       <TooltipTrigger asChild>
-                        <a href="tel:+19569297845" className="text-lg text-gray-800 font-semibold hover:text-green-600 transition-colors leading-tight mt-0.5 block">
-                          (956) 929-7845
+                        <a
+                          href="https://wa.me/19569297845"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2.5 text-sm text-gray-700 hover:text-green-600 transition-colors"
+                        >
+                          <span className="flex h-8 w-8 items-center justify-center bg-gray-50 rounded-md p-1.5 border border-gray-100 group-hover:bg-green-50 transition-colors">
+                            <WhatsAppIcon className="h-4.5 w-4.5 text-green-600 group-hover:scale-105 transition-transform duration-200" />
+                          </span>
+                          WhatsApp
                         </a>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Call or text Ever</p>
+                        <p>Message Ever on WhatsApp</p>
                       </TooltipContent>
                     </Tooltip>
                   </div>
-                </div>
-
-                <div className="border-t border-gray-100 my-3"></div>
-
-                {/* WhatsApp */}
-                <div className="group flex items-center">
-                  <Tooltip delayDuration={300}>
-                    <TooltipTrigger asChild>
-                      <a
-                        href="https://wa.me/19569297845"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2.5 text-sm text-gray-700 hover:text-green-600 transition-colors"
-                      >
-                        <span className="flex h-8 w-8 items-center justify-center bg-gray-50 rounded-md p-1.5 border border-gray-100 group-hover:bg-green-50 transition-colors">
-                          <WhatsAppIcon className="h-4.5 w-4.5 text-green-600 group-hover:scale-105 transition-transform duration-200" />
-                        </span>
-                        WhatsApp
-                      </a>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Message Ever on WhatsApp</p>
-                    </TooltipContent>
-                  </Tooltip>
                 </div>
               </CardContent>
             </Card>
