@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-gradient-to-b from-white to-green-50/30 border-t border-gray-200">
+    <footer className="rounded-t-xl bg-gradient-to-b from-white to-green-50/30 border-t border-zinc-300 drop-shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="py-12 md:py-16 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
           {/* Company Info */}
