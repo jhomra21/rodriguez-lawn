@@ -1,11 +1,16 @@
 ---
 import { Image } from 'astro:assets';
+import { Button } from './ui/button';
 
 // Import images directly
 import before01 from '../assets/before01.jpg';
 import before02 from '../assets/before02.jpg';
+import before03 from '../assets/before03.jpg';
+import before04 from '../assets/before04.jpg';
 import after01 from '../assets/after01.jpg';
 import after02 from '../assets/after02.jpg';
+import after03 from '../assets/after03.jpg';
+import after04 from '../assets/after04.jpg';
 
 // Props interface
 interface Props {
@@ -25,9 +30,19 @@ const {
   className = ""
 } = Astro.props;
 
-// Define the before/after images
-const beforeImageList = [before01, before02];
-const afterImageList = [after01, after02];
+// Define the before/after image sets
+const imageSets = [
+  {
+    beforeImages: [before01, before02],
+    afterImages: [after01, after02],
+    label: "Palm Tree Makeover"
+  },
+  {
+    beforeImages: [before03, before04],
+    afterImages: [after03, after04],
+    label: "Palm Tree Trimming & Maintenance"
+  }
+];
 ---
 
 <section class="py-8 sm:py-16 px-8 bg-gradient-to-b from-white to-green-50">
@@ -37,59 +52,80 @@ const afterImageList = [after01, after02];
       <p class="text-zinc-600/90 max-w-2xl mx-auto">{description}</p>
     </div>
     
+    <!-- Tab Navigation -->
+    <div class="flex justify-center border-b border-gray-200 mb-4">
+      {imageSets.map((set, index) => (
+        <button 
+          class="!cursor-pointer tab-button relative py-2 px-4 text-sm font-medium transition-all duration-200"
+          data-index={index}
+          data-active={index === 0 ? "true" : "false"}
+        >
+          {set.label}
+          <span class="absolute bottom-0 left-0 w-full h-0.5 bg-green-500 scale-x-0 transition-transform duration-300 origin-center tab-indicator"></span>
+        </button>
+      ))}
+    </div>
+    
     <div id="before-after-container" class:list={["relative w-full overflow-hidden rounded-xl shadow-xl border-2 border-white cursor-grab", className]}>
-      <div class="relative w-full">
-        <!-- After Images (Bottom Layer) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 aspect-auto md:aspect-[16/9] w-full">
-          {afterImageList.map((afterImage, i) => (
-            <div class="relative overflow-hidden w-full h-full min-h-[200px]">
-              <Image 
-                src={afterImage} 
-                alt={`${afterLabel} ${i + 1}`}
-                class="w-full h-full object-cover object-center"
-                width={afterImage.width} 
-                height={afterImage.height}
-                loading="lazy"
-              />
-            </div>
-          ))}
-        </div>
-
-        <!-- Before Images (Top Layer, clipped) -->
-        <div id="before-images" class="absolute inset-0 overflow-hidden">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-2 h-full w-full">
-            {beforeImageList.map((beforeImage, i) => (
+      {imageSets.map((set, setIndex) => (
+        <div 
+          class="image-set-container relative w-full transition-opacity duration-500 ease-in-out" 
+          data-index={setIndex}
+          style={setIndex === 0 ? "opacity: 1; z-index: 10;" : "opacity: 0; z-index: 0; position: absolute; top: 0; left: 0; right: 0; bottom: 0;"}
+        >
+          <!-- After Images (Bottom Layer) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2 aspect-auto md:aspect-[16/9] w-full">
+            {set.afterImages.map((afterImage, i) => (
               <div class="relative overflow-hidden w-full h-full min-h-[200px]">
                 <Image 
-                  src={beforeImage} 
-                  alt={`${beforeLabel} ${i + 1}`}
+                  src={afterImage} 
+                  alt={`${afterLabel} ${i + 1}`}
                   class="w-full h-full object-cover object-center"
-                  width={beforeImage.width} 
-                  height={beforeImage.height}
+                  width={afterImage.width} 
+                  height={afterImage.height}
                   loading="lazy"
                   quality={'mid'}
                 />
               </div>
             ))}
           </div>
-        </div>
 
-        <!-- Labels - more prominent with smooth transitions -->
-        <div id="before-label" class="absolute top-2 sm:top-4 left-2 sm:left-4 bg-black/90 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold select-none pointer-events-none shadow-lg transition-opacity duration-300 ease-in-out">
-          {beforeLabel}
-        </div>
-        <div id="after-label" class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-black/90 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold select-none pointer-events-none shadow-lg transition-opacity duration-300 ease-in-out">
-          {afterLabel}
-        </div>
-
-        <!-- Custom Handle Line with circle grip -->
-        <div id="slider-handle" class="absolute top-0 bottom-0 bg-white w-1 pointer-events-none shadow-lg" style="left: 50%; transform: translateX(-50%)">
-          <!-- Add handle circle -->
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full shadow-md flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-700">
-              <path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path>
-            </svg>
+          <!-- Before Images (Top Layer, clipped) -->
+          <div class="before-images absolute inset-0 overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 h-full w-full">
+              {set.beforeImages.map((beforeImage, i) => (
+                <div class="relative overflow-hidden w-full h-full min-h-[200px]">
+                  <Image 
+                    src={beforeImage} 
+                    alt={`${beforeLabel} ${i + 1}`}
+                    class="w-full h-full object-cover object-center"
+                    width={beforeImage.width} 
+                    height={beforeImage.height}
+                    loading="lazy"
+                    quality={'mid'}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
+        </div>
+      ))}
+
+      <!-- Labels - more prominent with smooth transitions -->
+      <div id="before-label" class="absolute top-2 sm:top-4 left-2 sm:left-4 bg-black/90 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold select-none pointer-events-none shadow-lg transition-opacity duration-300 ease-in-out z-30">
+        {beforeLabel}
+      </div>
+      <div id="after-label" class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-black/90 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold select-none pointer-events-none shadow-lg transition-opacity duration-300 ease-in-out z-30">
+        {afterLabel}
+      </div>
+
+      <!-- Custom Handle Line with circle grip -->
+      <div id="slider-handle" class="absolute top-0 bottom-0 bg-white w-1 pointer-events-none shadow-lg" style="left: 50%; transform: translateX(-50%); z-index: 20;">
+        <!-- Add handle circle -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full shadow-md flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-700">
+            <path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path>
+          </svg>
         </div>
       </div>
     </div>
@@ -107,21 +143,93 @@ const afterImageList = [after01, after02];
     height: 100%;
     display: block;
   }
+
+  /* Tab button styles */
+  .tab-button {
+    color: rgb(107 114 128);
+    position: relative;
+  }
+  
+  .tab-button[data-active="true"] {
+    color: rgb(22 163 74);
+    font-weight: 600;
+  }
+  
+  .tab-button[data-active="true"] .tab-indicator {
+    transform: scaleX(1);
+    transition: transform 0.2s ease-in;
+  }
+  
+  .tab-button:hover {
+    color: rgb(21 128 61);
+  }
 </style>
 
 <script>
   // Client-side JavaScript for the slider functionality
   document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('before-after-container');
-    const beforeImages = document.getElementById('before-images');
     const beforeLabel = document.getElementById('before-label');
     const afterLabel = document.getElementById('after-label');
     const sliderHandle = document.getElementById('slider-handle');
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const imageSetContainers = document.querySelectorAll('.image-set-container');
     
-    if (!container || !beforeImages || !beforeLabel || !afterLabel || !sliderHandle) return;
+    if (!container || !beforeLabel || !afterLabel || !sliderHandle) return;
     
     let isDragging = false;
     let sliderValue = 50; // Initial position (50%)
+    let currentSetIndex = 0;
+    
+    // Set initial active tab
+    updateActiveTab(0);
+    
+    // Function to switch between image sets
+    function switchImageSet(index: number) {
+      if (index === currentSetIndex) return;
+      
+      // Hide current set
+      const currentSet = document.querySelector(`.image-set-container[data-index="${currentSetIndex}"]`) as HTMLElement;
+      if (currentSet) {
+        currentSet.style.opacity = '0';
+        currentSet.style.zIndex = '0';
+      }
+      
+      // Show new set
+      const newSet = document.querySelector(`.image-set-container[data-index="${index}"]`) as HTMLElement;
+      if (newSet) {
+        newSet.style.opacity = '1';
+        newSet.style.zIndex = '10';
+      }
+      
+      currentSetIndex = index;
+      updateActiveTab(index);
+      
+      // Update slider for new set
+      const beforeImages = document.querySelectorAll('.before-images')[index] as HTMLElement;
+      if (beforeImages) {
+        beforeImages.style.clipPath = `inset(0 ${100 - sliderValue}% 0 0)`;
+      }
+    }
+    
+    // Update active tab state
+    function updateActiveTab(activeIndex: number) {
+      tabButtons.forEach((btn, index) => {
+        if (index === activeIndex) {
+          btn.setAttribute('data-active', 'true');
+        } else {
+          btn.setAttribute('data-active', 'false');
+        }
+      });
+    }
+    
+    // Add click event listeners to tabs
+    tabButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const index = parseInt(btn.getAttribute('data-index') || '0', 10);
+        switchImageSet(index);
+      });
+    });
     
     // Update the slider position and clipping
     const updateSliderPosition = (clientX: number) => {
@@ -131,7 +239,8 @@ const afterImageList = [after01, after02];
       const position = ((clientX - rect.left) / rect.width) * 100;
       sliderValue = Math.max(0, Math.min(100, position));
       
-      // Update the UI
+      // Update the UI for the current set
+      const beforeImages = document.querySelectorAll('.before-images')[currentSetIndex] as HTMLElement;
       if (beforeImages) {
         beforeImages.style.clipPath = `inset(0 ${100 - sliderValue}% 0 0)`;
       }
@@ -187,11 +296,15 @@ const afterImageList = [after01, after02];
     });
     
     // Initialize the UI
-    updateSliderPosition(container.getBoundingClientRect().width * 0.5 + container.getBoundingClientRect().left);
-
+    const allBeforeImages = document.querySelectorAll('.before-images');
+    allBeforeImages.forEach((element) => {
+      (element as HTMLElement).style.clipPath = `inset(0 50% 0 0)`;
+    });
+    
     // Handle window resize
     window.addEventListener('resize', () => {
       updateSliderPosition(container.getBoundingClientRect().width * sliderValue/100 + container.getBoundingClientRect().left);
     });
   });
+</script> 
 </script> 

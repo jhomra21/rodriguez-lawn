@@ -117,9 +117,13 @@ const BusinessCard: React.FC = () => {
             </div>
             
             {/* Best Prices pill */}
-            <div className="relative overflow-hidden inline-flex items-center gap-2 py-2.5 px-5 bg-gradient-to-br from-green-600 via-green-500 to-green-600 border border-green-700/50 rounded-xl text-white text-sm sm:text-base font-semibold shadow-[0_3px_7px_rgba(0,0,0,0.18),inset_0_1px_1.5px_rgba(255,255,255,0.5)] before:absolute before:inset-[1.5px] before:rounded-lg before:bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.3)_0%,rgba(255,255,255,0)_70%)] before:from-green-400/70 before:to-green-500/70 before:opacity-90 before:-z-10 before:pointer-events-none">
+            <div className="relative overflow-hidden inline-flex items-center gap-2 py-2.5 px-5 mb-2
+                            bg-gradient-to-br from-green-600 via-green-500 to-green-600 border border-green-700/50 
+                            rounded-xl text-white text-sm sm:text-base font-semibold shadow-[0_3px_7px_rgba(0,0,0,0.18),inset_0_1px_1.5px_rgba(255,255,255,0.5)] 
+                            before:absolute before:inset-[1.5px] before:rounded-lg before:bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.3)_0%,rgba(255,255,255,0)_70%)] 
+                            before:from-green-400/70 before:to-green-500/70 before:opacity-90 before:-z-10 before:pointer-events-none">
               <CheckCircle2 className="h-4 w-4 text-white flex-shrink-0" /> 
-              Best Prices Guaranteed
+              Best Prices in the Valley
             </div>
           </div>
         </div>

@@ -4,25 +4,14 @@ import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import BusinessCard from './BusinessCard';
 import { cn } from '../lib/utils';
-// Import background image from assets
-import bgImage from '../assets/after02.jpg';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  className?: string;
+}
+
+const Hero: React.FC<HeroProps> = ({ className }) => {
   return (
-    <section className="relative min-h-[80vh] flex items-center transition-all duration-150 ease-in overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-green-900/40 to-green-800/40 mix-blend-multiply" />
-        <img 
-          src={bgImage.src} 
-          alt="Professional lawn service" 
-          className="w-full h-full object-cover object-center"
-          loading="lazy"
-          width={bgImage.width}
-          height={bgImage.height}
-        />
-      </div>
-      
+    <section className={cn("relative min-h-[80vh] flex items-center transition-all duration-150 ease-in overflow-hidden", className)}>
       <div className="container mx-auto px-4 grid lg:grid-cols-5 gap-6 md:gap-12 items-center transition-all duration-150 ease-in py-16 md:py-20">
         {/* Left Column: Headline and CTAs */}
         <motion.div 
