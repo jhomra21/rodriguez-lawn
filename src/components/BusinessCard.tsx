@@ -65,14 +65,12 @@ const BusinessCard: React.FC = () => {
           <div className="flex items-center justify-center w-full">
             {/* Left side icon (Palm Tree) */}
             <div className="flex-shrink-0 mr-4">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-9 w-9 text-green-600"
-                fill="currentColor"
-                strokeWidth="0.5"
-                stroke="currentColor">
-                <path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"/>
-                <path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"/>
-                <path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35"/>
-                <path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"/>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-9 w-9"
+                strokeWidth="0.5">
+                <path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4" className="fill-green-600 stroke-green-700"/>
+                <path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3" className="fill-green-700 stroke-green-800"/>
+                <path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35" className="fill-green-800 stroke-green-900"/>
+                <path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14" className="fill-amber-600 stroke-amber-800"/>
               </svg>
             </div>
 
@@ -81,12 +79,30 @@ const BusinessCard: React.FC = () => {
 
             {/* Tree - Right icon */}
             <div className="flex-shrink-0 ml-4">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-9 w-9 text-green-600"
-                fill="currentColor"
-                strokeWidth="0.5"
-                stroke="currentColor">
-                <path d="M8 19a4 4 0 0 1-2.24-7.32A3.5 3.5 0 0 1 9 6.03V6a3 3 0 1 1 6 0v.04a3.5 3.5 0 0 1 3.24 5.65A4 4 0 0 1 16 19Z"/>
-                <path d="M12 19v3"/>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-10 w-10" strokeWidth="0.5">
+                {/* Tree Trunk Base */}
+                <path d="M11.5 18 L11.5 23 L12.5 23 L12.5 18 Z" className="fill-amber-700 stroke-amber-800"/>
+                
+                {/* Trunk Branch Left */}
+                <path d="M11.5 18 C11 18, 10 17, 9 15 L10 14.5 Z" className="fill-amber-600 stroke-amber-700"/>
+                
+                {/* Trunk Branch Right */}
+                <path d="M12.5 18 C13 18, 14 17, 15 15 L14 14.5 Z" className="fill-amber-600 stroke-amber-700"/>
+                
+                {/* Lower Foliage Base - Darkest */}
+                <path d="M6 15 C6 19, 9 21, 12 21 C15 21, 18 19, 18 15 C18 11, 15 13, 12 13 C9 13, 6 11, 6 15 Z" className="fill-green-800/80 stroke-green-900"/>
+                
+                {/* Middle Foliage Layer */}
+                <path d="M7 12 C7 16, 9.5 18, 12 18 C14.5 18, 17 16, 17 12 C17 8, 14.5 10, 12 10 C9.5 10, 7 8, 7 12 Z" className="fill-green-700 stroke-green-800"/>
+                
+                {/* Upper Foliage Layer */}
+                <path d="M8 9 C8 13, 10 15, 12 15 C14 15, 16 13, 16 9 C16 5, 14 7, 12 7 C10 7, 8 5, 8 9 Z" className="fill-green-600 stroke-green-700"/>
+                
+                {/* Top Foliage Crown */}
+                <path d="M9 6 C9 9, 10.5 11, 12 11 C13.5 11, 15 9, 15 6 C15 3, 13.5 4, 12 4 C10.5 4, 9 3, 9 6 Z" className="fill-green-500 stroke-green-600"/>
+                
+                {/* Highlight Foliage Accents - Light */}
+                <path d="M10 7 C10 9, 11 10, 12 10 C13 10, 14 9, 14 7 C14 5, 13 6, 12 6 C11 6, 10 5, 10 7 Z" className="fill-green-400/60 stroke-green-500"/>
               </svg>
             </div>
           </div>
@@ -123,7 +139,7 @@ const BusinessCard: React.FC = () => {
                             before:absolute before:inset-[1.5px] before:rounded-lg before:bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.3)_0%,rgba(255,255,255,0)_70%)] 
                             before:from-green-400/70 before:to-green-500/70 before:opacity-90 before:-z-10 before:pointer-events-none">
               <CheckCircle2 className="h-4 w-4 text-white flex-shrink-0" /> 
-              Best Prices in the Valley
+              Best Prices in the <p className="italic font-medium">Entire</p> Valley
             </div>
           </div>
         </div>
