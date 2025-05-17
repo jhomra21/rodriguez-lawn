@@ -17,7 +17,7 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": ["LocalBusiness", "LandscapingBusiness"],
   "name": "Rodriguez Lawn Service",
   "image": new URL('/lawnmower-logo.svg', siteUrl).toString(),
   "telephone": "(956) 378-8069",
