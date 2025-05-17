@@ -13,6 +13,51 @@ const {
 
 // Get the site URL for absolute paths
 const siteUrl = Astro.site || 'https://rodriguez-lawn.pages.dev';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Rodriguez Lawn Service",
+  "image": new URL('/lawnmower-logo.svg', siteUrl).toString(),
+  "telephone": "(956) 378-8069",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "McAllen",
+    "addressRegion": "TX",
+    "addressCountry": "US"
+  },
+  "description": "Expert tree and palm tree trimming, lawn care services.",
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "McAllen"
+    },
+    {
+      "@type": "City",
+      "name": "Edinburg"
+    },
+    {
+      "@type": "City",
+      "name": "Mission"
+    },
+    {
+      "@type": "City",
+      "name": "San Juan"
+    },
+    {
+      "@type": "City",
+      "name": "Pharr"
+    }
+  ],
+  "url": canonicalUrl.toString(),
+  // Consider adding "priceRange", "openingHoursSpecification" if applicable
+  // For "type", "LandscapingBusiness" is good. If more specific types fit, we can add them.
+  // e.g., if tree trimming is primary: "TreeTrimmingService"
+  // If lawn care is primary: "LawnCareService" (though not an official schema.org type, LandscapingBusiness covers it)
+  // Multiple types can be added in an array: "@type": ["LocalBusiness", "LandscapingBusiness", "HomeAndConstructionBusiness"]
+  "@id": siteUrl.toString() // Unique ID for the business
+};
 ---
 
 <!doctype html>
@@ -23,8 +68,11 @@ const siteUrl = Astro.site || 'https://rodriguez-lawn.pages.dev';
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
         <!-- <link rel="stylesheet" href="/src/styles/global.css"> -->
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="apple-touch-icon" href="/lawnmower-logo.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#15803d" />
+		<link rel="canonical" href={canonicalUrl.toString()} />
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 		
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
