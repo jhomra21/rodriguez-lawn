@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://rodriguezlawnservicergv.pages.dev',
+	site: 'https://rodriguezlawnservicergv.com',
 	vite: {
 		plugins: [tailwindcss()],
 	  },

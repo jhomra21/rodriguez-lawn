@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://rodriguezlawnservicergv.pages.dev/sitemap-index.xml 
+Sitemap: https://rodriguezlawnservicergv.com/sitemap-index.xml 
