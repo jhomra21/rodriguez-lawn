@@ -67,9 +67,9 @@ const jsonLd = {
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
         <!-- <link rel="stylesheet" href="/src/styles/global.css"> -->
-		<link rel="icon" href="/lawnmower-logo.svg" type="image/svg+xml" sizes="any" />
-		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-		<link rel="apple-touch-icon" href="/lawnmower-logo.svg" />
+		<link rel="icon" href={new URL('/favicon.ico', siteUrl).toString()} type="image/x-icon" />
+		<link rel="shortcut icon" href={new URL('/lawnmower-logo.svg', siteUrl).toString()} type="image/svg+xml" sizes="any" />
+		<link rel="apple-touch-icon" href={new URL('/lawnmower-logo.svg', siteUrl).toString()} />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#15803d" />
 		<link rel="canonical" href={canonicalUrl.toString()} />
