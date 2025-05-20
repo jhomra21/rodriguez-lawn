@@ -43,7 +43,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.4 }}
             >
-              Specializing in expert tree trimming, palm care, and comprehensive lawn services with over <span className="italic text-green-200 font-medium">24 years of experience</span>. Serving the Rio Grande Valley in Texas.
+              Expert tree trimming, palm trimming and maintenance, and comprehensive lawn services with over <span className="italic text-green-200 font-medium">24 years of experience</span>. Serving the Rio Grande Valley in Texas.
             </motion.p>
             <motion.div 
               className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
