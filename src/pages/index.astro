@@ -14,14 +14,15 @@ import { Image } from 'astro:assets';
 
 // Import background image
 import heroBackground from '../assets/after02.jpg';
+import heroBackground2 from '../assets/after-no-before01.jpg';
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
 
 <Layout 
-  title="Rodriguez Lawn Service - Specializing in Tree & Palm Trimming"
-  description="Professional tree trimming, palm care, and comprehensive lawn services with over 24 years of experience. Serving the Rio Grande Valley, Texas with quality lawn and tree care."
+  title="Rodriguez Tree Service - Specializing in Tree & Palm Trimming"
+  description="Professional tree trimming, palm care, and trunk maintenance with over 24 years of experience. Serving the Rio Grande Valley, Texas with quality tree and palm care."
 >
 	<Navbar client:load slot="navbar" />
 
@@ -32,9 +33,18 @@ import heroBackground from '../assets/after02.jpg';
 			<div class="absolute inset-0 z-0">
 				<div class="absolute inset-0 bg-gradient-to-r from-green-900/40 to-green-800/40 mix-blend-multiply z-10"></div>
 				<Image 
+					id="hero-bg-1"
 					src={heroBackground} 
-					alt="Professional lawn service" 
-					class="w-full h-full object-cover object-center"
+					alt="Professional tree and palm trimming service - View 1" 
+					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-100"
+					quality="mid"
+					loading="eager"
+				/>
+				<Image 
+					id="hero-bg-2"
+					src={heroBackground2} 
+					alt="Professional tree and palm trimming service - View 2" 
+					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-0"
 					quality="mid"
 					loading="eager"
 				/>
@@ -60,7 +70,7 @@ import heroBackground from '../assets/after02.jpg';
 				beforeLabel="Before Our Service"
 				afterLabel="After Our Magic"
 				title="Transform Your Property"
-				description="See the difference our professional lawn care makes. Our expert team can revitalize your outdoor space with our services."
+				description="See the difference our professional tree and palm trimming makes. Our expert team can revitalize your outdoor space with our services."
 			/>
 		</section>
 
@@ -68,11 +78,11 @@ import heroBackground from '../assets/after02.jpg';
 		<FAQ client:load />
 
 		<!-- Business Card Section -->
-		<section class="py-12 md:py-16 bg-gray-50">
+		<section id="contact" class="py-12 md:py-16 bg-gray-50">
 			<div class="container mx-auto px-4">
 				<ScrollAnimationWrapper client:load>
 					<h1 class="text-4xl font-bold bg-gradient-to-b from-green-400 to-green-900 text-transparent bg-clip-text text-center mb-8">Our Business Card</h1>
-					<p class="text-center text-gray-600 mb-10 max-w-2xl mx-auto">Save our contact information for when you need professional lawn care and tree services.</p>
+					<p class="text-center text-gray-600 mb-10 max-w-2xl mx-auto">Save our contact information for when you need professional tree and palm trimming services.</p>
 				</ScrollAnimationWrapper>
 				<BusinessCard client:load />
 			</div>
@@ -80,4 +90,68 @@ import heroBackground from '../assets/after02.jpg';
 	</PageTransition>
 
 	<Footer client:load slot="footer" />
+
+<script is:inline>
+  function initHeroSlideshow() {
+    const img1 = document.getElementById('hero-bg-1');
+    const img2 = document.getElementById('hero-bg-2');
+
+    if (!img1 || !img2) {
+      return;
+    }
+
+    if (window.heroImageInterval) {
+      clearInterval(window.heroImageInterval);
+    }
+
+    let currentImage = 1;
+    if (img1.classList.contains('opacity-100')) {
+        currentImage = 1;
+    } else if (img2.classList.contains('opacity-100')) {
+        currentImage = 2;
+    } else {
+        img1.classList.add('opacity-100');
+        img1.classList.remove('opacity-0');
+        img2.classList.add('opacity-0');
+        img2.classList.remove('opacity-100');
+        currentImage = 1;
+    }
+
+    const intervalTime = 7500; // time each image is shown: 9 seconds
+
+    const switchImages = () => {
+      if (currentImage === 1) {
+        img1.classList.remove('opacity-100');
+        img1.classList.add('opacity-0');
+        img2.classList.remove('opacity-0');
+        img2.classList.add('opacity-100');
+        currentImage = 2;
+      } else {
+        img2.classList.remove('opacity-100');
+        img2.classList.add('opacity-0');
+        img1.classList.remove('opacity-0');
+        img1.classList.add('opacity-100');
+        currentImage = 1;
+      }
+    };
+    
+    window.heroImageInterval = setInterval(switchImages, intervalTime);
+
+    document.removeEventListener('visibilitychange', handleVisibilityChangeForHero);
+    document.addEventListener('visibilitychange', handleVisibilityChangeForHero);
+  }
+
+  function handleVisibilityChangeForHero() {
+    if (document.hidden) {
+      if (window.heroImageInterval) {
+        clearInterval(window.heroImageInterval);
+      }
+    } else {
+      initHeroSlideshow(); 
+    }
+  }
+
+  document.addEventListener('astro:after-swap', initHeroSlideshow);
+  initHeroSlideshow(); 
+</script>
 </Layout>

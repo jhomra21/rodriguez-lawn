@@ -75,7 +75,7 @@ const BusinessCard: React.FC = () => {
             </div>
 
             {/* Lawn Service Text */}
-            <h2 className="text-center font-medium font-serif text-2xl sm:text-3xl text-gray-800">Lawn Service</h2>
+            <h2 className="text-center font-medium font-serif text-2xl sm:text-3xl text-gray-800">Trimming Services</h2>
 
             {/* Tree - Right icon */}
             <div className="flex-shrink-0 ml-4">
@@ -109,14 +109,14 @@ const BusinessCard: React.FC = () => {
         </div>
 
         {/* Specializing text */}
-        <p className="text-center text-gray-600 text-base sm:text-lg font-normal mb-10 relative z-10">Specializing in Tree & Palm Trimming</p>
+        <p className="text-center text-gray-600 text-base sm:text-lg font-normal mb-10 relative z-10">Specializing in Tree & Palm Trimming and Maintenance</p>
 
         {/* Middle section - Modernized Notion-like style */}
         <div className="relative z-10 flex flex-col items-center space-y-8">
           {/* Emilio - elevated card style */}
           <div className="w-full max-w-sm mx-auto">
             <div className="pt-5 pb-4 px-6 relative overflow-hidden bg-gradient-to-br from-green-100/70 via-green-50/50 to-green-100/70 border border-green-200/50 rounded-lg shadow-[0_3px_6px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.95)] before:absolute before:inset-0 before:rounded-lg before:bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.45)_0%,rgba(255,255,255,0)_60%)] before:pointer-events-none">
-              <h2 className="text-center font-bold mb-1.5 font-serif text-3xl sm:text-4xl text-zinc-900">Emilio</h2>
+              <h2 className="text-center font-bold mb-1.5 font-serif text-3xl sm:text-4xl text-zinc-900">Emilio & Ever</h2>
               <p className="text-center text-green-700 font-normal text-base sm:text-lg">24 Years of Experience</p>
             </div>
           </div>

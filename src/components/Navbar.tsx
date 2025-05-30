@@ -1,11 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "./ui/navigation-menu";
 import { Button } from "./ui/button";
 import { cn } from "../lib/utils";
 import { Menu, X } from "lucide-react";
@@ -74,8 +67,7 @@ const Navbar: React.FC = () => {
               </g>
             </g>
           </svg>
-          <span className="font-serif tracking-wide drop-shadow-md group-hover:drop-shadow-lg transition-all duration-200">Rodriguez</span>
-          <span className="hidden sm:inline font-serif tracking-wide ml-1.5 drop-shadow-md group-hover:drop-shadow-lg transition-all duration-200">Lawn Service</span>
+          <span className="hidden sm:inline font-serif tracking-wide ml-1.5 drop-shadow-md group-hover:drop-shadow-lg transition-all duration-200 bg-gradient-to-b from-green-500 to-green-950 text-transparent bg-clip-text">Rodriguez Trimming Services</span>
         </a>
 
         {/* Mobile Menu Toggle */}

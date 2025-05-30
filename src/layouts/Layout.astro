@@ -8,7 +8,7 @@ interface Props {
 
 const { 
 	title,
-	description = "Rodriguez Lawn Service - Expert Tree Trimming and Lawn Care Services in Rio Grande Valley, TX" 
+	description = "Rodriguez Trimming Service - Expert Tree & Palm Trimming Services in Rio Grande Valley, TX" 
 } = Astro.props;
 
 // Get the site URL for absolute paths
@@ -17,8 +17,8 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "LandscapingBusiness"],
-  "name": "Rodriguez Lawn Service",
+  "@type": ["LocalBusiness", "TreeTrimmingService"],
+  "name": "Rodriguez Trimming Services",
   "image": new URL('/lawnmower-logo.svg', siteUrl).toString(),
   "telephone": "(956) 378-8069",
   "address": {
@@ -27,7 +27,7 @@ const jsonLd = {
     "addressRegion": "TX",
     "addressCountry": "US"
   },
-  "description": "Expert tree and palm tree trimming, lawn care services.",
+  "description": "Expert tree and palm tree trimming services, trunk maintenance and tree health services.",
   "areaServed": [
     {
       "@type": "City",
@@ -83,8 +83,8 @@ const jsonLd = {
 		<meta property="og:image" content={new URL('/og-image.png', siteUrl).toString()} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="Rodriguez Lawn Service - Professional Tree & Lawn Care" />
-		<meta property="og:site_name" content="Rodriguez Lawn Service" />
+		<meta property="og:image:alt" content="Rodriguez Trimming Service - Professional Tree & Palm Care" />
+		<meta property="og:site_name" content="Rodriguez Trimming Service" />
 		
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />

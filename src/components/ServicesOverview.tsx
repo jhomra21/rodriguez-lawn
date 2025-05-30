@@ -8,22 +8,22 @@ const services = [
   {
     icon: <TreeDeciduous className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
     title: 'Tree & Palm Trimming',
-    description: 'Expert trimming for all types of trees and palms to enhance health and aesthetics.',
-  },
-  {
-    icon: <Home className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
-    title: 'Lawn Maintenance',
-    description: 'Comprehensive lawn care including mowing, edging, and fertilization for a lush, green yard.',
+    description: 'Expert trimming for all types of trees and palms to enhance health, safety, and aesthetics.',
   },
   {
     icon: <GitBranchPlus className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
-    title: 'Tree & Shrub Propagation',
-    description: 'Expert propagation services, including grafting and rooting, to cultivate new trees and shrubs from existing stock.',
+    title: 'Trunk Maintenance',
+    description: 'Professional trunk cleaning, disease prevention, and structural support for healthy and stable trees.',
+  },
+  {
+    icon: <Home className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
+    title: 'Palm Specialization',
+    description: 'Specialized care for all palm varieties including frond trimming, trunk cleaning, and health treatments.',
   },
   {
     icon: <Sprout className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
-    title: 'Planting & Mulching',
-    description: 'Beautify your landscape with new plantings and fresh mulch for a vibrant look.',
+    title: 'Tree Health Services',
+    description: 'Comprehensive tree health assessments, disease treatment, and preventative care for long-term vitality.',
   },
 ];
 

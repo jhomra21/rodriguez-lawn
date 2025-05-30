@@ -89,13 +89,13 @@ const Footer: React.FC = () => {
                   </g>
                 </g>
               </svg>
-              <span className="font-serif tracking-wide">Rodriguez</span>
-              <span className="hidden sm:inline font-serif tracking-wide ml-1.5">Lawn Service</span>
+              <span className="hidden sm:inline font-serif tracking-wide ml-1.5 drop-shadow-md group-hover:drop-shadow-lg transition-all duration-200 bg-gradient-to-b from-green-500 to-green-950 text-transparent bg-clip-text">Rodriguez Trimming Services</span>
+
             </a>
             
             <p className="text-gray-600 text-sm leading-relaxed max-w-md mb-6">
-              Providing professional lawn care and tree services with 24 years of experience. 
-              We take pride in transforming and maintaining the beauty of your outdoor spaces.
+              Providing professional tree and palm trimming services with 24 years of experience. 
+              We take pride in enhancing the health, safety, and beauty of your trees and outdoor spaces.
             </p>
             
             {/* Service Area */}

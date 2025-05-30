@@ -9,13 +9,13 @@ import {
 
 const FAQSection: React.FC = () => {
   return (
-    <section id="faq" className="py-16 md:py-24 bg-gray-50">
+    <section id="faq" className="py-16 md:py-24 bg-gradient-to-b from-green-50 to-zinc-50">
       <div className="container mx-auto px-4">
         <ScrollAnimationWrapper>
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-b from-zinc-500 to-gray-900 text-transparent bg-clip-text mb-4">Frequently Asked Questions</h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Find answers to common questions about our lawn care and tree services.
+              Find answers to common questions about our tree and palm trimming services.
             </p>
           </div>
         </ScrollAnimationWrapper>
@@ -36,10 +36,10 @@ const FAQSection: React.FC = () => {
               <ScrollAnimationWrapper delay={0.2}>
               <AccordionItem value="item-2" className="!border-b border-zinc-300/50">
                 <AccordionTrigger className="text-left font-medium cursor-pointer">
-                  How often should I schedule lawn maintenance?
+                  How often should I schedule tree trimming?
                 </AccordionTrigger>
                 <AccordionContent>
-                  For most residential properties in the Rio Grande Valley, we recommend bi-weekly lawn maintenance during the growing season (spring through fall) and monthly during winter. However, this can vary based on your specific lawn type, irrigation system, and personal preferences.
+                  For most residential properties in the Rio Grande Valley, we recommend yearly tree trimming, during the growing season (spring through fall). However, this can vary based on your specific lawn type, irrigation system, and personal preferences.
                 </AccordionContent>
               </AccordionItem>
               </ScrollAnimationWrapper>
@@ -59,7 +59,7 @@ const FAQSection: React.FC = () => {
                   What payment methods do you accept?
                 </AccordionTrigger>
                 <AccordionContent>
-                  We accept cash, checks, and all major credit cards. For recurring services, we can also set up convenient automatic payment options.
+                  We accept cash, and virtual payments through Cash App. For recurring services, we can also set up convenient automatic payment options.
                 </AccordionContent>
               </AccordionItem>
               </ScrollAnimationWrapper>
@@ -75,16 +75,6 @@ const FAQSection: React.FC = () => {
               </ScrollAnimationWrapper>              
               <ScrollAnimationWrapper delay={0.4}>
               <AccordionItem value="item-6" className="!border-b border-zinc-300/50">
-                <AccordionTrigger className="text-left font-medium cursor-pointer">
-                  Are you licensed and insured?
-                </AccordionTrigger>
-                <AccordionContent>
-                  Yes, we are fully licensed and insured. Our team follows all safety protocols and best practices to ensure quality service while protecting your property.
-                </AccordionContent>
-              </AccordionItem>
-              </ScrollAnimationWrapper>
-              <ScrollAnimationWrapper delay={0.45}>
-              <AccordionItem value="item-7" className="!border-b border-zinc-300/50">
                 <AccordionTrigger className="text-left font-medium cursor-pointer">
                   How can I get started with your services?
                 </AccordionTrigger>
