@@ -1,0 +1,310 @@
+---
+import { Image } from 'astro:assets';
+import { Button } from './ui/button';
+
+// Import all images
+import before01 from '../assets/before01.jpg';
+import before02 from '../assets/before02.jpg';
+import before03 from '../assets/before03.jpg';
+import before04 from '../assets/before04.jpg';
+import after01 from '../assets/after01.jpg';
+import after02 from '../assets/after02.jpg';
+import after03 from '../assets/after03.jpg';
+import after04 from '../assets/after04.jpg';
+import afterNoBefore01 from '../assets/after-no-before01.jpg';
+import ScrollAnimationWrapper from './ScrollAnimationWrapper';
+
+// Define the gallery images with descriptions
+const galleryImages = [
+  { 
+    src: after01, 
+    alt: "Palm tree after professional trimming", 
+    description: "Palm tree revitalized with professional trimming"
+  },
+  { 
+    src: after02, 
+    alt: "Beautifully trimmed palm tree", 
+    description: "Clean lines and healthy fronds after our service"
+  },
+  { 
+    src: after03, 
+    alt: "Palm tree maintenance results", 
+    description: "Regular maintenance keeps palms looking their best"
+  },
+  { 
+    src: after04, 
+    alt: "Professional palm tree care", 
+    description: "Expert trimming for optimal tree health"
+  },
+  { 
+    src: afterNoBefore01, 
+    alt: "Expertly maintained palm tree", 
+    description: "Our trimming services enhance property aesthetics"
+  }
+];
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "",
+  description = "Browse through our collection of tree and palm trimming projects"
+} = Astro.props;
+---
+<section class="py-12 md:py-20 bg-green-50">
+  <div class="container mx-auto px-4">  
+    <ScrollAnimationWrapper client:load>
+      <h1 class="text-4xl font-bold bg-gradient-to-b from-green-400 to-green-900 text-transparent bg-clip-text text-center mb-4">{title}</h1>
+      <p class="italic text-center mb-12 text-zinc-500">{description}</p>
+    </ScrollAnimationWrapper>
+    <!-- Preview grid - shows a sample of images -->
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+      {galleryImages.slice(0, 5).map((image, index) => (
+        <ScrollAnimationWrapper client:load delay={index * .250}>
+          <div class="gallery-thumbnail relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer aspect-square" data-index={index}>
+          <Image 
+            src={image.src} 
+            alt={image.alt}
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            width={300} 
+            height={300}
+            quality="mid"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
+            <p class="text-white text-sm p-3">{image.description}</p>
+          </div>
+        </div>
+        </ScrollAnimationWrapper>
+      ))}
+    </div>
+    
+  </div>
+
+  <!-- Full Screen Gallery Modal -->
+  <div id="gallery-modal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+    <div id="modal-backdrop" class="absolute inset-0"></div>
+    <div class="relative w-full max-w-5xl mx-auto p-4 flex flex-col h-full">
+      <!-- Close button -->
+      <button id="close-gallery" class="absolute top-4 right-4 z-10 text-white hover:text-green-400 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        <span class="sr-only">Close</span>
+      </button>
+
+      <!-- Main image container -->
+      <div class="flex-1 flex items-center justify-center">
+        <div id="gallery-main-image" class="w-full h-full max-h-[80vh] max-w-4xl mx-auto flex items-center justify-center relative">
+          {galleryImages.map((image, index) => (
+            <div
+              id={`fullscreen-image-${index}`}
+              class="fullscreen-image absolute inset-0 w-full h-full flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300"
+              data-index={index}
+            >
+              <div class="relative w-full h-full flex items-center justify-center">
+                <Image 
+                  src={image.src} 
+                  alt={image.alt}
+                  class="max-w-full max-h-full object-contain transition-transform duration-300 cursor-zoom-in"
+                  width={1200} 
+                  height={900}
+                  quality="high"
+                  loading="eager"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Navigation buttons -->
+      <div class="absolute inset-y-0 left-8 flex items-center z-20">
+        <button id="prev-image" class="p-2 rounded-full bg-black/50 text-white hover:bg-green-600/80 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          <span class="sr-only">Previous</span>
+        </button>
+      </div>
+
+      <div class="absolute inset-y-0 right-8 flex items-center z-20">
+        <button id="next-image" class="p-2 rounded-full bg-black/50 text-white hover:bg-green-600/80 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          <span class="sr-only">Next</span>
+        </button>
+      </div>
+
+      <!-- Image info -->
+      <div class="absolute bottom-0 inset-x-0 bg-transparent p-4 text-white flex items-center justify-center">
+        <p id="gallery-image-description" class="text-center text-lg"></p>
+        <p id="image-counter" class="text-center text-sm text-gray-300 ml-3 border border-white/10 p-2 rounded-md"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Use the same images defined in the Astro component
+    const galleryImages = [
+      { 
+        src: '/src/assets/after01.jpg', 
+        alt: "Palm tree after professional trimming", 
+        description: "Palm tree revitalized with professional trimming"
+      },
+      { 
+        src: '/src/assets/after02.jpg', 
+        alt: "Beautifully trimmed palm tree", 
+        description: "Clean lines and healthy fronds after our service"
+      },
+      { 
+        src: '/src/assets/after03.jpg', 
+        alt: "Palm tree maintenance results", 
+        description: "Regular maintenance keeps palms looking their best"
+      },
+      { 
+        src: '/src/assets/after04.jpg', 
+        alt: "Professional palm tree care", 
+        description: "Expert trimming for optimal tree health"
+      },
+      { 
+        src: '/src/assets/after-no-before01.jpg', 
+        alt: "Expertly maintained palm tree", 
+        description: "Our trimming services enhance property aesthetics"
+      }
+    ];
+
+    let currentImageIndex = 0;
+    const modal = document.getElementById('gallery-modal');
+    const openButton = document.getElementById('open-gallery');
+    const closeButton = document.getElementById('close-gallery');
+    const mainImageContainer = document.getElementById('gallery-main-image');
+    const imageDescription = document.getElementById('gallery-image-description');
+    const imageCounter = document.getElementById('image-counter');
+    const prevButton = document.getElementById('prev-image');
+    const nextButton = document.getElementById('next-image');
+    const thumbnails = document.querySelectorAll('.gallery-thumbnail');
+
+    // Function to update the main image
+    function updateMainImage(index: number) {
+      if (!imageDescription || !imageCounter) return;
+      
+      // Hide all fullscreen images
+      document.querySelectorAll('.fullscreen-image').forEach(el => {
+        el.classList.add('opacity-0', 'pointer-events-none');
+      });
+      
+      // Show the selected image
+      const fullscreenImage = document.getElementById(`fullscreen-image-${index}`);
+      if (fullscreenImage) {
+        fullscreenImage.classList.remove('opacity-0', 'pointer-events-none');
+        
+        // Get the Image element inside the fullscreen container
+        const imgElement = fullscreenImage.querySelector('img');
+        if (imgElement) {
+          // Add zoom interaction
+          let isZoomed = false;
+          imgElement.onclick = (e) => {
+            e.preventDefault();
+            isZoomed = !isZoomed;
+            if (isZoomed) {
+              imgElement.classList.add('scale-150', 'cursor-zoom-out');
+              imgElement.classList.remove('cursor-zoom-in');
+            } else {
+              imgElement.classList.remove('scale-150', 'cursor-zoom-out');
+              imgElement.classList.add('cursor-zoom-in');
+            }
+          };
+        }
+      }
+      
+      currentImageIndex = index;
+      
+      // Update description and counter
+      imageDescription.textContent = galleryImages[index].description;
+      imageCounter.textContent = `${index + 1} / ${galleryImages.length}`;
+    }
+
+    // Open gallery modal
+    if (openButton) {
+      openButton.addEventListener('click', () => {
+        if (modal) {
+          modal.classList.remove('opacity-0', 'pointer-events-none');
+          document.body.style.overflow = 'hidden'; // Prevent scrolling
+          updateMainImage(0);
+        }
+      });
+    }
+
+    // Function to close the modal
+    function closeModal() {
+      if (modal) {
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        document.body.style.overflow = ''; // Restore scrolling
+      }
+    }
+    
+    // Close gallery modal with the close button
+    if (closeButton) {
+      closeButton.addEventListener('click', closeModal);
+    }
+    
+    // Close modal when clicking on the dark background
+    const modalBackdrop = document.getElementById('modal-backdrop');
+    if (modalBackdrop) {
+      modalBackdrop.addEventListener('click', closeModal);
+    }
+
+    // Click on thumbnails - make sure they open the modal and show correct image
+    thumbnails.forEach((thumbnail) => {
+      thumbnail.addEventListener('click', () => {
+        const index = parseInt(thumbnail.getAttribute('data-index') || '0', 10);
+        if (modal) {
+          modal.classList.remove('opacity-0', 'pointer-events-none');
+          document.body.style.overflow = 'hidden';
+          updateMainImage(index);
+        }
+      });
+    });
+
+    // Previous image
+    if (prevButton) {
+      prevButton.addEventListener('click', () => {
+        const newIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+        updateMainImage(newIndex);
+      });
+    }
+
+    // Next image
+    if (nextButton) {
+      nextButton.addEventListener('click', () => {
+        const newIndex = (currentImageIndex + 1) % galleryImages.length;
+        updateMainImage(newIndex);
+      });
+    }
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal && !modal.classList.contains('pointer-events-none')) {
+        closeModal();
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (modal && !modal.classList.contains('pointer-events-none')) {
+        if (e.key === 'ArrowLeft' && prevButton) {
+          prevButton.click();
+        } else if (e.key === 'ArrowRight' && nextButton) {
+          nextButton.click();
+        }
+      }
+    });
+  });
+</script>

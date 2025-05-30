@@ -6,6 +6,7 @@ import Footer from '../components/Footer.tsx';
 import Hero from '../components/Hero.tsx';
 import ServicesOverview from '../components/ServicesOverview.tsx';
 import BeforeAndAfter from '../components/BeforeAndAfter.astro';
+import ImageGallery from '../components/ImageGallery.astro';
 import FAQ from '../components/FAQ.tsx';
 import PageTransition from '../components/PageTransition.tsx';
 import ScrollAnimationWrapper from '../components/ScrollAnimationWrapper.tsx';
@@ -73,6 +74,12 @@ import heroBackground2 from '../assets/after-no-before01.jpg';
 				description="See the difference our professional tree and palm trimming makes. Our expert team can revitalize your outdoor space with our services."
 			/>
 		</section>
+
+		<!-- Image Gallery Section -->
+		<ImageGallery 
+			title="More Photos" 
+			description="See our work!"
+		/>
 
 		<!-- Contact Section -->
 		<FAQ client:load />
