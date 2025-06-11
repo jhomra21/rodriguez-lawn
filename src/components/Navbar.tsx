@@ -67,7 +67,10 @@ const Navbar: React.FC = () => {
               </g>
             </g>
           </svg>
-          <span className="hidden sm:inline font-serif tracking-wide ml-1.5 drop-shadow-md group-hover:drop-shadow-lg transition-all duration-200 bg-gradient-to-b from-green-500 to-green-950 text-transparent bg-clip-text">Rodriguez Trimming Services</span>
+          <span className="inline font-serif tracking-wide ml-1.5 drop-shadow-md group-hover:drop-shadow-lg transition-all duration-200 bg-gradient-to-b from-green-500 to-green-950 text-transparent bg-clip-text">
+            <span className="sm:hidden">Rodriguez</span>
+            <span className="hidden sm:inline">Rodriguez Trimming Services</span>
+          </span>
         </a>
 
         {/* Mobile Menu Toggle */}
