@@ -2,30 +2,18 @@
 import { Image } from 'astro:assets';
 import { Button } from './ui/button';
 
-// Import all images
-import before01 from '../assets/before01.jpg';
-import before02 from '../assets/before02.jpg';
-import before03 from '../assets/before03.jpg';
-import before04 from '../assets/before04.jpg';
 import after01 from '../assets/after01.jpg';
 import after02 from '../assets/after02.jpg';
 import after03 from '../assets/after03.jpg';
 import after04 from '../assets/after04.jpg';
 import afterNoBefore01 from '../assets/after-no-before01.jpg';
+import inAction01 from '../assets/in-action.jpeg';
+import inAction02 from '../assets/in-action02.jpeg';
+import inAction03 from '../assets/in-action03.jpeg';
 import ScrollAnimationWrapper from './ScrollAnimationWrapper';
 
 // Define the gallery images with descriptions
 const galleryImages = [
-  { 
-    src: after01, 
-    alt: "Palm tree after professional trimming", 
-    description: "Palm tree revitalized with professional trimming"
-  },
-  { 
-    src: after02, 
-    alt: "Beautifully trimmed palm tree", 
-    description: "Clean lines and healthy fronds after our service"
-  },
   { 
     src: after03, 
     alt: "Palm tree maintenance results", 
@@ -40,7 +28,32 @@ const galleryImages = [
     src: afterNoBefore01, 
     alt: "Expertly maintained palm tree", 
     description: "Our trimming services enhance property aesthetics"
-  }
+  },
+  {
+    src: inAction01,
+    alt: "Crew trimming a palm tree",
+    description: "Our team in action providing expert trimming"
+  },
+  {
+    src: inAction02,
+    alt: "Cutting branches with professional equipment",
+    description: "Safety-first, precision cutting on site"
+  },
+  {
+    src: inAction03,
+    alt: "Cleaning up debris after trimming",
+    description: "We leave your property spotless after work"
+  },
+  { 
+    src: after01, 
+    alt: "Palm tree after professional trimming", 
+    description: "Palm tree revitalized with professional trimming"
+  },
+  { 
+    src: after02, 
+    alt: "Beautifully trimmed palm tree", 
+    description: "Clean lines and healthy fronds after our service"
+  },
 ];
 
 interface Props {
@@ -62,7 +75,7 @@ const {
     <!-- Preview grid - shows a sample of images -->
     
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-      {galleryImages.slice(0, 5).map((image, index) => (
+      {galleryImages.slice(0, 8).map((image, index) => (
         <ScrollAnimationWrapper client:load delay={index * .250}>
           <div class="gallery-thumbnail relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer aspect-square" data-index={index}>
           <Image 
@@ -177,6 +190,21 @@ const {
         src: '/src/assets/after-no-before01.jpg', 
         alt: "Expertly maintained palm tree", 
         description: "Our trimming services enhance property aesthetics"
+      },
+      {
+        src: '/src/assets/in-action.jpeg',
+        alt: "Crew trimming a palm tree",
+        description: "Our team in action providing expert trimming"
+      },
+      {
+        src: '/src/assets/in-action02.jpeg',
+        alt: "Cutting branches with professional equipment",
+        description: "Safety-first, precision cutting on site"
+      },
+      {
+        src: '/src/assets/in-action03.jpeg',
+        alt: "Cleaning up debris after trimming",
+        description: "We leave your property spotless after work"
       }
     ];
 
