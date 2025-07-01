@@ -225,7 +225,7 @@ const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-200/80 py-5 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm order-2 md:order-1 mt-3 md:mt-0">
-            &copy; {currentYear} Rodriguez Lawn Service. All rights reserved.
+            &copy; {currentYear} Rodriguez Tree & Palm Trimming Service. All rights reserved.
           </p>
           
           <div className="flex items-center gap-2 order-1 md:order-2">
