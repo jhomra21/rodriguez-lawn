@@ -36,7 +36,44 @@ const noiseStyle = {
   mixBlendMode: 'multiply',
 } as React.CSSProperties;
 
-const BusinessCard: React.FC = () => {
+type CardStrings = {
+  experience: string;
+  specializing: string;
+  freeEstimates: string;
+  rgvWide: string;
+  bestPricesPrefix: string;
+  bestPricesEmphasis: string;
+  bestPricesSuffix: string;
+  emilioLabel: string;
+  everLabel: string;
+  callEmilio: string;
+  callEver: string;
+  messageEmilio: string;
+  messageEver: string;
+};
+
+const defaultStrings: CardStrings = {
+  experience: '24 Years of Experience',
+  specializing: 'Specializing in Tree & Palm Trimming and Maintenance',
+  freeEstimates: 'Free Estimates',
+  rgvWide: 'Rio Grande Valley Wide',
+  bestPricesPrefix: 'Best Prices in the ',
+  bestPricesEmphasis: 'Entire',
+  bestPricesSuffix: ' Valley',
+  emilioLabel: 'Emilio (Spanish)',
+  everLabel: 'Ever (English)',
+  callEmilio: 'Call or text Emilio',
+  callEver: 'Call or text Ever',
+  messageEmilio: 'Message Emilio on WhatsApp',
+  messageEver: 'Message Ever on WhatsApp',
+};
+
+interface BusinessCardProps {
+  strings?: Partial<CardStrings>;
+}
+
+const BusinessCard: React.FC<BusinessCardProps> = ({ strings }) => {
+  const s: CardStrings = { ...defaultStrings, ...(strings || {}) };
   return (
     <motion.div
       className="max-w-full w-full xs:max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto overflow-hidden shadow-md rounded-xl border border-gray-200/70 bg-white"
@@ -109,7 +146,7 @@ const BusinessCard: React.FC = () => {
         </div>
 
         {/* Specializing text */}
-        <p className="text-center text-gray-600 text-base sm:text-lg font-normal mb-10 relative z-10">Specializing in Tree & Palm Trimming and Maintenance</p>
+        <p className="text-center text-gray-600 text-base sm:text-lg font-normal mb-10 relative z-10">{s.specializing}</p>
 
         {/* Middle section - Modernized Notion-like style */}
         <div className="relative z-10 flex flex-col items-center space-y-8">
@@ -117,7 +154,7 @@ const BusinessCard: React.FC = () => {
           <div className="w-full max-w-sm mx-auto">
             <div className="pt-5 pb-4 px-6 relative overflow-hidden bg-gradient-to-br from-green-100/70 via-green-50/50 to-green-100/70 border border-green-200/50 rounded-lg shadow-[0_3px_6px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.95)] before:absolute before:inset-0 before:rounded-lg before:bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.45)_0%,rgba(255,255,255,0)_60%)] before:pointer-events-none">
               <h2 className="text-center font-bold mb-1.5 font-serif text-3xl sm:text-4xl text-zinc-900">Emilio & Ever</h2>
-              <p className="text-center text-green-700 font-normal text-base sm:text-lg">24 Years of Experience</p>
+              <p className="text-center text-green-700 font-normal text-base sm:text-lg">{s.experience}</p>
             </div>
           </div>
 
@@ -126,10 +163,10 @@ const BusinessCard: React.FC = () => {
             {/* Free Estimates pill */}
             <div className="relative overflow-hidden inline-flex items-center gap-2 py-2.5 px-5 bg-gradient-to-br from-gray-100 via-white to-gray-100/70 border border-gray-200/70 rounded-xl text-gray-700 text-sm sm:text-base shadow-[0_3px_6px_rgba(0,0,0,0.1),inset_0_1px_1px_rgba(255,255,255,0.9)] before:absolute before:inset-[1.5px] before:rounded-lg before:bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.6)_0%,rgba(255,255,255,0)_70%)] before:opacity-90 before:-z-10 before:pointer-events-none">
               <Tag className="h-4 w-4 text-orange-500 flex-shrink-0" />
-              <span className="font-semibold text-gray-800">Free Estimates</span>
+              <span className="font-semibold text-gray-800">{s.freeEstimates}</span>
               <div className="h-4 w-px bg-gray-300 mx-1"></div> {/* Vertical line separator */}
               <MapPin className="h-4 w-4 text-blue-500 flex-shrink-0 -ml-1" /> 
-              <span className="font-medium text-gray-600">Rio Grande Valley Wide</span>
+              <span className="font-medium text-gray-600">{s.rgvWide}</span>
             </div>
             
             {/* Best Prices pill */}
@@ -139,7 +176,7 @@ const BusinessCard: React.FC = () => {
                             before:absolute before:inset-[1.5px] before:rounded-lg before:bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.3)_0%,rgba(255,255,255,0)_70%)] 
                             before:from-green-400/70 before:to-green-500/70 before:opacity-90 before:-z-10 before:pointer-events-none">
               <CheckCircle2 className="h-4 w-4 text-white flex-shrink-0" /> 
-              Best Prices in the <p className="italic font-medium">Entire</p> Valley
+              {s.bestPricesPrefix} <p className="italic font-medium">{s.bestPricesEmphasis}</p>{s.bestPricesSuffix}
             </div>
           </div>
         </div>
@@ -164,7 +201,7 @@ const BusinessCard: React.FC = () => {
                       <Phone className="h-4 w-4 text-gray-700" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500 font-medium leading-tight">Emilio (Spanish)</p>
+                      <p className="text-sm text-gray-500 font-medium leading-tight">{s.emilioLabel}</p>
                       <Tooltip delayDuration={300}>
                         <TooltipTrigger asChild>
                           <a href="tel:+19563788069" className="text-base sm:text-lg text-gray-800 font-semibold hover:text-green-600 transition-colors leading-tight mt-0.5 block">
@@ -172,7 +209,7 @@ const BusinessCard: React.FC = () => {
                           </a>
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>Call or text Emilio</p>
+                        <p>{s.callEmilio}</p>
                         </TooltipContent>
                       </Tooltip>
                     </div>
@@ -197,7 +234,7 @@ const BusinessCard: React.FC = () => {
                         </a>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Message Emilio on WhatsApp</p>
+                        <p>{s.messageEmilio}</p>
                       </TooltipContent>
                     </Tooltip>
                   </div>
@@ -214,7 +251,7 @@ const BusinessCard: React.FC = () => {
                       <Phone className="h-4 w-4 text-gray-700" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500 font-medium leading-tight">Ever (English)</p>
+                      <p className="text-sm text-gray-500 font-medium leading-tight">{s.everLabel}</p>
                       <Tooltip delayDuration={300}>
                         <TooltipTrigger asChild>
                           <a href="tel:+19569297845" className="text-base sm:text-lg text-gray-800 font-semibold hover:text-green-600 transition-colors leading-tight mt-0.5 block">
@@ -222,7 +259,7 @@ const BusinessCard: React.FC = () => {
                           </a>
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>Call or text Ever</p>
+                        <p>{s.callEver}</p>
                         </TooltipContent>
                       </Tooltip>
                     </div>
@@ -247,7 +284,7 @@ const BusinessCard: React.FC = () => {
                         </a>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Message Ever on WhatsApp</p>
+                        <p>{s.messageEver}</p>
                       </TooltipContent>
                     </Tooltip>
                   </div>

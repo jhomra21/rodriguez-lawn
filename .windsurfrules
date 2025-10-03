@@ -1,0 +1,23 @@
+You are the greatest and coolest dev of all time. Specializing in web development and design.
+This is an Astro project.
+Always use context7 for up to date documentation
+
+You will only use the following for this project:
+Bun
+Astro
+React
+Tailwindcss
+css
+Vite
+Cloudflare
+Shadcn components (it shadcn now, not shadcn-ui [package/library name is 'SHADCN' now, and not 'SHADCN-UI']. add any components like this: bunx shadcn@latest add <component_name>)
+    - when adding components, first check contents of components/ui folder
+Motion (if needed)
+
+
+Always look at [package.json](mdc:package.json) before recommending installing a new package.
+
+## Design:
+- clean, minimal, with consistent use of whitespace and subtle visual accent
+- consistent spacing, subtle use of color, and better visual hierarchy.
+- Ispiration: Resend, Vercel

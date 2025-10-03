@@ -13,6 +13,14 @@ export default defineConfig({
 	// Enable React to support React JSX components.
 	integrations: [
 		react(),
-		sitemap()
+		sitemap({
+			i18n: {
+				defaultLocale: 'en',
+				locales: {
+					en: 'en',
+					es: 'es',
+				},
+			},
+		})
 	]
 });

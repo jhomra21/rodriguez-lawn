@@ -1,111 +1,172 @@
 ---
-import '../styles/global.css'; // Use the comprehensive global.css
+import "../styles/global.css"; // Use the comprehensive global.css
 
 interface Props {
-	title: string;
-	description?: string;
+    title: string;
+    description?: string;
 }
 
-const { 
-	title,
-	description = "Rodriguez Trees - Expert Tree & Palm Trimming Services in Rio Grande Valley, TX" 
+const {
+    title,
+    description = "Rodriguez Trees - Expert Tree & Palm Trimming Services in Rio Grande Valley, TX",
 } = Astro.props;
 
 // Get the site URL for absolute paths
-const siteUrl = Astro.site || 'https://rodriguezlawnservicergv.com';
+const siteUrl = Astro.site || "https://rodriguezlawnservicergv.com";
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "TreeTrimmingService"],
-  "name": "Rodriguez Tree & Palm Trimming Services",
-  "image": new URL('/lawnmower-logo.svg', siteUrl).toString(),
-  "telephone": "(956) 378-8069",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "McAllen",
-    "addressRegion": "TX",
-    "addressCountry": "US"
-  },
-  "description": "Expert tree and palm tree trimming services, trunk maintenance and tree health services.",
-  "areaServed": [
+// Locale and alternate URLs
+const isEs = Astro.url.pathname.startsWith("/es");
+const lang = isEs ? "es" : "en";
+const pathNoEs = isEs ? Astro.url.pathname.slice(3) || "/" : Astro.url.pathname;
+const enAlt = new URL(pathNoEs, siteUrl);
+const esAlt = new URL(
+    pathNoEs.startsWith("/") ? "/es" + pathNoEs : "/es/" + pathNoEs,
+    siteUrl,
+);
+
+const jsonLd = [
     {
-      "@type": "City",
-      "name": "McAllen"
+        "@context": "https://schema.org",
+        "@type": ["LocalBusiness", "TreeTrimmingService"],
+        inLanguage: "en",
+        name: "Rodriguez Tree & Palm Trimming Services",
+        image: new URL("/lawnmower-logo.svg", siteUrl).toString(),
+        telephone: "(956) 378-8069",
+        address: {
+            "@type": "PostalAddress",
+            addressLocality: "McAllen",
+            addressRegion: "TX",
+            addressCountry: "US",
+        },
+        description:
+            "Expert tree and palm tree trimming services, trunk maintenance and tree health services.",
+        areaServed: [
+            { "@type": "City", name: "McAllen" },
+            { "@type": "City", name: "Edinburg" },
+            { "@type": "City", name: "Mission" },
+            { "@type": "City", name: "San Juan" },
+            { "@type": "City", name: "Pharr" },
+        ],
+        url: canonicalUrl.toString(),
+        "@id": siteUrl.toString(),
     },
     {
-      "@type": "City",
-      "name": "Edinburg"
+        "@context": "https://schema.org",
+        "@type": ["LocalBusiness", "TreeTrimmingService"],
+        inLanguage: "es",
+        name: "Rodriguez Servicios de Poda de Árboles y Palmeras",
+        image: new URL("/lawnmower-logo.svg", siteUrl).toString(),
+        telephone: "(956) 378-8069",
+        address: {
+            "@type": "PostalAddress",
+            addressLocality: "McAllen",
+            addressRegion: "TX",
+            addressCountry: "US",
+        },
+        description:
+            "Servicios expertos de poda de árboles y palmeras, mantenimiento de troncos y cuidado de la salud de árboles en el Valle del Río Grande.",
+        areaServed: [
+            { "@type": "City", name: "McAllen" },
+            { "@type": "City", name: "Edinburg" },
+            { "@type": "City", name: "Mission" },
+            { "@type": "City", name: "San Juan" },
+            { "@type": "City", name: "Pharr" },
+        ],
+        url: canonicalUrl.toString(),
+        "@id": siteUrl.toString(),
     },
-    {
-      "@type": "City",
-      "name": "Mission"
-    },
-    {
-      "@type": "City",
-      "name": "San Juan"
-    },
-    {
-      "@type": "City",
-      "name": "Pharr"
-    }
-  ],
-  "url": canonicalUrl.toString(),
-  // Consider adding "priceRange", "openingHoursSpecification" if applicable
-  // For "type", "LandscapingBusiness" is good. If more specific types fit, we can add them.
-  // e.g., if tree trimming is primary: "TreeTrimmingService"
-  // If lawn care is primary: "LawnCareService" (though not an official schema.org type, LandscapingBusiness covers it)
-  // Multiple types can be added in an array: "@type": ["LocalBusiness", "LandscapingBusiness", "HomeAndConstructionBusiness"]
-  "@id": siteUrl.toString() // Unique ID for the business
-};
+];
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content={description} />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+<html lang={lang}>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content={description} />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+        />
         <!-- <link rel="stylesheet" href="/src/styles/global.css"> -->
-		<link rel="icon" href={new URL('/favicon.ico', siteUrl).toString()} type="image/x-icon" />
-		<link rel="shortcut icon" href={new URL('/lawnmower-logo.svg', siteUrl).toString()} type="image/svg+xml" sizes="any" />
-		<link rel="apple-touch-icon" href={new URL('/lawnmower-logo.svg', siteUrl).toString()} />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="theme-color" content="#15803d" />
-		<link rel="canonical" href={canonicalUrl.toString()} />
-		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-		
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={new URL(Astro.url.pathname, siteUrl).toString()} />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content={new URL('/og-image.png', siteUrl).toString()} />
-		<meta property="og:image:width" content="1200" />
-		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="Rodriguez Tree & Palm Trimming Service - Professional Tree & Palm Care" />
-		<meta property="og:site_name" content="Rodriguez Tree & Palm Trimming Service" />
-		
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content={new URL(Astro.url.pathname, siteUrl).toString()} />
-		<meta property="twitter:title" content={title} />
-		<meta property="twitter:description" content={description} />
-		<meta property="twitter:image" content={new URL('/og-image.png', siteUrl).toString()} />
-		<meta name="twitter:image:width" content="1200" />
-		<meta name="twitter:image:height" content="630" />
-		
-		<title>{title}</title>
-	</head>
-	<body class="bg-white text-gray-800 antialiased min-h-screen flex flex-col transition-all duration-150 ease-in">
-		<header class="sticky top-0 z-50 w-full">
-			<slot name="navbar" />
-		</header>
-		<main class="flex-grow">
-			<slot />
-		</main>
-		<footer class="mt-auto">
-			<slot name="footer" />
-		</footer>
-	</body>
-</html> 
+        <link
+            rel="icon"
+            href={new URL("/favicon.ico", siteUrl).toString()}
+            type="image/x-icon"
+        />
+        <link
+            rel="shortcut icon"
+            href={new URL("/lawnmower-logo.svg", siteUrl).toString()}
+            type="image/svg+xml"
+            sizes="any"
+        />
+        <link
+            rel="apple-touch-icon"
+            href={new URL("/lawnmower-logo.svg", siteUrl).toString()}
+        />
+        <meta name="generator" content={Astro.generator} />
+        <meta name="theme-color" content="#15803d" />
+        <link rel="canonical" href={canonicalUrl.toString()} />
+        <link rel="alternate" hreflang="en" href={enAlt.toString()} />
+        <link rel="alternate" hreflang="es" href={esAlt.toString()} />
+        <link rel="alternate" hreflang="x-default" href={enAlt.toString()} />
+        <script
+            is:inline
+            type="application/ld+json"
+            set:html={JSON.stringify(jsonLd)}
+        />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:url"
+            content={new URL(Astro.url.pathname, siteUrl).toString()}
+        />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta
+            property="og:image"
+            content={new URL("/og-image.png", siteUrl).toString()}
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta
+            property="og:image:alt"
+            content="Rodriguez Tree & Palm Trimming Service - Professional Tree & Palm Care"
+        />
+        <meta
+            property="og:site_name"
+            content="Rodriguez Tree & Palm Trimming Service"
+        />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+            property="twitter:url"
+            content={new URL(Astro.url.pathname, siteUrl).toString()}
+        />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
+        <meta
+            property="twitter:image"
+            content={new URL("/og-image.png", siteUrl).toString()}
+        />
+        <meta name="twitter:image:width" content="1200" />
+        <meta name="twitter:image:height" content="630" />
+
+        <title>{title}</title>
+    </head>
+    <body
+        class="bg-white text-gray-800 antialiased min-h-screen flex flex-col transition-all duration-150 ease-in"
+    >
+        <header class="sticky top-0 z-50 w-full">
+            <slot name="navbar" />
+        </header>
+        <main class="flex-grow">
+            <slot />
+        </main>
+        <footer class="mt-auto">
+            <slot name="footer" />
+        </footer>
+    </body>
+</html>

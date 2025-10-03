@@ -1,10 +1,12 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { TreeDeciduous, Home, Sprout, GitBranchPlus } from 'lucide-react'; // Icons for services
+import { TreeDeciduous, Home, Sprout, GitBranchPlus } from 'lucide-react';
 import { motion } from 'motion/react';
 import { cn } from '../lib/utils';
 
-const services = [
+type Locale = 'en' | 'es';
+
+const servicesEn = [
   {
     icon: <TreeDeciduous className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
     title: 'Tree & Palm Trimming',
@@ -24,6 +26,29 @@ const services = [
     icon: <Sprout className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
     title: 'Tree Health Services',
     description: 'Comprehensive tree health assessments, disease treatment, and preventative care for long-term vitality.',
+  },
+];
+
+const servicesEs = [
+  {
+    icon: <TreeDeciduous className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
+    title: 'Poda de Árboles y Palmeras',
+    description: 'Poda experta de todo tipo de árboles y palmeras para mejorar su salud, seguridad y estética.',
+  },
+  {
+    icon: <GitBranchPlus className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
+    title: 'Mantenimiento de Troncos',
+    description: 'Limpieza de troncos, prevención de enfermedades y soporte estructural para árboles sanos y estables.',
+  },
+  {
+    icon: <Home className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
+    title: 'Especialistas en Palmas',
+    description: 'Cuidado especializado para palmas: corte de hojas, limpieza de troncos y tratamientos de salud.',
+  },
+  {
+    icon: <Sprout className="h-7 w-7 text-green-600 group-hover:text-green-700 transition-colors duration-300" />,
+    title: 'Cuidado y Salud de Árboles',
+    description: 'Evaluaciones de salud, tratamiento de enfermedades y cuidado preventivo para una vitalidad duradera.',
   },
 ];
 
@@ -50,7 +75,10 @@ const item = {
   }
 };
 
-const ServicesOverview: React.FC = () => {
+interface Props { locale?: Locale }
+
+const ServicesOverview: React.FC<Props> = ({ locale = 'en' }) => {
+  const services = locale === 'es' ? servicesEs : servicesEn;
   return (
     <div className="container mx-auto px-4">
       {/* Services Grid */}

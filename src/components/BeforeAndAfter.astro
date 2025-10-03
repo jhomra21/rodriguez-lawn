@@ -19,6 +19,7 @@ interface Props {
   title?: string;
   description?: string;
   className?: string;
+  tabLabels?: string[];
 }
 
 // Default props
@@ -27,20 +28,27 @@ const {
   afterLabel = "After",
   title = "See the Transformation",
   description = "Drag the slider to see the difference our professional lawn care services can make.",
-  className = ""
+  className = "",
+  tabLabels = []
 } = Astro.props;
 
 // Define the before/after image sets
+const defaultTabLabels = [
+  "Palm Tree Trimming & Maintenance",
+  "Palm Tree Makeover",
+];
+const labels = tabLabels.length ? tabLabels : defaultTabLabels;
+
 const imageSets = [
   {
     beforeImages: [before03, before04],
     afterImages: [after03, after04],
-    label: "Palm Tree Trimming & Maintenance"
+    label: labels[0]
   },
   {
     beforeImages: [before01, before02],
     afterImages: [after01, after02],
-    label: "Palm Tree Makeover"
+    label: labels[1]
   }
 ];
 ---

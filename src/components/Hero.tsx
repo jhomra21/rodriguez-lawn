@@ -7,9 +7,26 @@ import { cn } from '../lib/utils';
 
 interface HeroProps {
   className?: string;
+  strings?: {
+    line1?: string;
+    line2?: string;
+    tagline?: string;
+    ctaPrimary?: string;
+    ctaSecondary?: string;
+  };
+  businessCardStrings?: Record<string, string>;
 }
 
-const Hero: React.FC<HeroProps> = ({ className }) => {
+const Hero: React.FC<HeroProps> = ({ className, strings, businessCardStrings }) => {
+  const s = {
+    line1: 'Professional',
+    line2: 'Tree & Palm Care',
+    tagline:
+      'Expert tree trimming, palm maintenance, and trunk services with over <span class="italic text-green-200 font-medium">24 years of experience</span>. Serving the Rio Grande Valley in Texas.',
+    ctaPrimary: 'Request Free Estimate',
+    ctaSecondary: 'Our Services',
+    ...strings,
+  };
   return (
     <section className={cn("relative min-h-[80vh] flex items-center transition-all duration-150 ease-in overflow-hidden", className)}>
       <div className="container mx-auto px-4 grid lg:grid-cols-5 gap-6 md:gap-12 items-center transition-all duration-150 ease-in py-16 mb-30 md:py-20">
@@ -27,14 +44,14 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.4 }}
             >
-              <span className="font-bold leading-tight bg-gradient-to-b from-zinc-50 via-zinc-100 to-zinc-400 text-transparent bg-clip-text">Professional </span> <br />
+              <span className="font-bold leading-tight bg-gradient-to-b from-zinc-50 via-zinc-100 to-zinc-400 text-transparent bg-clip-text">{s.line1} </span> <br />
               <motion.span 
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4, duration: 0.4 }}
               >
-               <span className="leading-tight font-bold bg-gradient-to-b from-green-200/90 to-green-500 text-transparent bg-clip-text">Tree & Palm Care</span>
+               <span className="leading-tight font-bold bg-gradient-to-b from-green-200/90 to-green-500 text-transparent bg-clip-text">{s.line2}</span>
               </motion.span>
             </motion.h1>
             <motion.p 
@@ -43,7 +60,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.4 }}
             >
-              Expert tree trimming, palm maintenance, and trunk services with over <span className="italic text-green-200 font-medium">24 years of experience</span>. Serving the Rio Grande Valley in Texas.
+              <span dangerouslySetInnerHTML={{ __html: s.tagline }} />
             </motion.p>
             <motion.div 
               className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
@@ -68,7 +85,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
                 )}
               >
                 <a href="#contact" className="z-10 flex items-center justify-center">
-                  Request Free Estimate
+                  {s.ctaPrimary}
                 </a>
               </Button>
               <Button 
@@ -88,7 +105,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
                 )}
               >
                 <a href="#services" className="z-10 flex items-center justify-center">
-                  Our Services <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
+                  {s.ctaSecondary} <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
                 </a>
               </Button>
             </motion.div>
@@ -97,7 +114,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
 
         {/* Right Column: Business Card */}
         <div className="lg:col-span-2 order-1 lg:order-2 mb-6 lg:mb-0 w-full">
-          <BusinessCard />
+          <BusinessCard strings={businessCardStrings as any} />
         </div>
       </div>
     </section>

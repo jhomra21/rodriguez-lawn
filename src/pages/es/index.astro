@@ -1,0 +1,201 @@
+---
+// Component Imports
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.tsx';
+import Footer from '../../components/Footer.tsx';
+import Hero from '../../components/Hero.tsx';
+import ServicesOverview from '../../components/ServicesOverview.tsx';
+import BeforeAndAfter from '../../components/BeforeAndAfter.astro';
+import ImageGallery from '../../components/ImageGallery.astro';
+import PageTransition from '../../components/PageTransition.tsx';
+import ScrollAnimationWrapper from '../../components/ScrollAnimationWrapper.tsx';
+import BusinessCard from '../../components/BusinessCard.tsx';
+import { Image } from 'astro:assets';
+
+// Import background image
+import heroBackground from '../../assets/after02.jpg';
+import heroBackground2 from '../../assets/in-action02.jpeg';
+import heroBackground3 from '../../assets/after-no-before01.jpg';
+---
+
+<Layout 
+  title="Rodriguez Servicio de Árboles - Especialistas en Poda de Árboles y Palmas"
+  description="Poda de árboles, cuidado de palmas y mantenimiento de troncos con más de 24 años de experiencia. Servimos el Valle del Río Grande en Texas."
+>
+	<Navbar client:load slot="navbar" labels={{ services: 'Servicios', contact: 'Contacto', estimate: 'Cotización Gratis', brandShort: 'Rodriguez', brandLong: 'Rodriguez Servicios de Poda' }} />
+
+	<PageTransition client:load>
+		<!-- Hero Section -->
+		<section id="top" class="relative">
+			<!-- Background Image with Overlay -->
+			<div class="absolute inset-0 z-0 ">
+				<div class="absolute inset-0 bg-gradient-to-r from-green-900/40 to-green-800/40 mix-blend-multiply z-10"></div>
+				<Image 
+					id="hero-bg-1"
+					src={heroBackground2} 
+					alt="Servicio profesional de poda de árboles y palmeras - Vista 1" 
+					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-100"
+					quality="mid"
+					loading="eager"
+				/>
+				<Image 
+					id="hero-bg-2"
+					src={heroBackground}
+					alt="Servicio profesional de poda de árboles y palmeras - Vista 2" 
+					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-0"
+					quality="mid"
+					loading="eager"
+				/>
+				<Image 
+					id="hero-bg-3"
+					src={heroBackground3}  
+					alt="Servicio profesional de poda de árboles y palmeras - Vista 3" 
+					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-0"
+					quality="mid"
+					loading="eager"
+				/>
+			</div>
+            <Hero client:load strings={{ line1: 'Cuidado Profesional', line2: 'de Árboles y Palmas', tagline: 'Podas de árboles, mantenimiento de palmas y servicios de tronco con más de <span class="italic text-green-200 font-medium">24 años de experiencia</span>. Servimos al Valle del Río Grande en Texas.', ctaPrimary: 'Solicitar Cotización Gratis', ctaSecondary: 'Nuestros Servicios' }} businessCardStrings={{
+  experience: '24 años de experiencia',
+  specializing: 'Especialistas en poda y mantenimiento de árboles y palmeras',
+  freeEstimates: 'Cotizaciones gratis',
+  rgvWide: 'En todo el Valle del Río Grande',
+  bestPricesPrefix: 'Mejores precios en ',
+  bestPricesEmphasis: 'todo el',
+  bestPricesSuffix: ' Valle',
+  emilioLabel: 'Emilio (Español)',
+  everLabel: 'Ever (Inglés)',
+  callEmilio: 'Llama o envía mensaje a Emilio',
+  callEver: 'Llama o envía mensaje a Ever',
+  messageEmilio: 'Envíale mensaje a Emilio por WhatsApp',
+  messageEver: 'Envíale mensaje a Ever por WhatsApp',
+}} />
+		</section>
+
+		<!-- Services Section -->
+		<section id="services" class="relative z-20 -mt-16 md:-mt-24 py-12 md:py-20 bg-white pt-20 rounded-t-2xl
+									  border-t border-zinc-400/40">
+			<div class="container mx-auto px-4">
+				<ScrollAnimationWrapper client:load>
+					<h1 class="text-4xl font-bold bg-gradient-to-b from-green-400 to-green-900 text-transparent bg-clip-text text-center mb-4">Nuestros Servicios</h1>
+					<p class="italic text-center mb-12 text-zinc-500">Servicios profesionales respaldados por más de 24 años de experiencia.</p>
+				</ScrollAnimationWrapper>
+				
+				<ServicesOverview client:load locale="es" />
+			</div>
+		</section>
+
+		<!-- Before and After Section -->
+		<section class="bg-gray-50">
+            <BeforeAndAfter
+				beforeLabel="Antes"
+				afterLabel="Después"
+				title="Transforma tu Propiedad"
+                description="Mira la diferencia que hace nuestra poda profesional de árboles y palmas. Nuestro equipo puede revitalizar tu espacio exterior."
+                tabLabels={["Poda y mantenimiento de palmeras", "Renovación de palmeras"]}
+			/>
+		</section>
+
+		<!-- Image Gallery Section -->
+		<ImageGallery 
+			title="Más Fotos" 
+			description="¡Mira nuestro trabajo!"
+		/>
+
+		<!-- Contact Section -->
+		<!-- Omitimos el FAQ por ahora para mantener el contenido 100% en español en esta página -->
+
+		<!-- Business Card Section -->
+		<section id="contact" class="py-12 md:py-16 bg-gray-50">
+			<div class="container mx-auto px-4">
+				<ScrollAnimationWrapper client:load>
+					<h1 class="text-4xl font-bold bg-gradient-to-b from-green-400 to-green-900 text-transparent bg-clip-text text-center mb-8">Nuestra Tarjeta</h1>
+					<p class="text-center text-gray-600 mb-10 max-w-2xl mx-auto">Guarda nuestro contacto para cuando necesites poda profesional de árboles y palmas.</p>
+				</ScrollAnimationWrapper>
+                <BusinessCard client:load strings={{
+                  experience: '24 años de experiencia',
+                  specializing: 'Especialistas en poda y mantenimiento de árboles y palmeras',
+                  freeEstimates: 'Cotizaciones gratis',
+                  rgvWide: 'En todo el Valle del Río Grande',
+                  bestPricesPrefix: 'Mejores precios en ',
+                  bestPricesEmphasis: 'todo el',
+                  bestPricesSuffix: ' Valle',
+                  emilioLabel: 'Emilio (Español)',
+                  everLabel: 'Ever (Inglés)',
+                  callEmilio: 'Llama o envía mensaje a Emilio',
+                  callEver: 'Llama o envía mensaje a Ever',
+                  messageEmilio: 'Envíale mensaje a Emilio por WhatsApp',
+                  messageEver: 'Envíale mensaje a Ever por WhatsApp',
+                }} />
+			</div>
+		</section>
+	</PageTransition>
+    <Footer client:load slot="footer" labels={{
+      quickLinks: 'Enlaces rápidos',
+      services: 'Servicios',
+      contact: 'Contacto',
+      getEstimate: 'Cotización',
+      companyBlurb: 'Ofrecemos servicios profesionales de poda de árboles y palmeras con 24 años de experiencia. Mejoramos la salud, seguridad y belleza de tus árboles y espacios exteriores.',
+      serviceAreas: 'Áreas de servicio',
+      serviceAreasDetail: 'Atendemos Edinburg, TX y todo el Valle: McAllen, Mission, Pharr, San Juan y alrededores',
+      contactUs: 'Contáctanos',
+      spanish: 'Español',
+      english: 'Inglés',
+      whatsappButton: 'Contáctanos por WhatsApp',
+      tooltipCall: 'Llama o envía mensaje a',
+      tooltipMessage: 'Envíanos mensaje por WhatsApp',
+      designedWithRGV: 'Diseñado con ❤️ en el RGV',
+      allRights: 'Todos los derechos reservados.',
+    }} />
+<script is:inline>
+  function initHeroSlideshow() {
+    const images = [
+      document.getElementById('hero-bg-1'),
+      document.getElementById('hero-bg-2'),
+      document.getElementById('hero-bg-3')
+    ].filter(Boolean);
+
+    if (images.length < 3) return;
+
+    if (window.heroImageInterval) {
+      clearInterval(window.heroImageInterval);
+    }
+
+    let currentIndex = images.findIndex(img => img.classList.contains('opacity-100'));
+    if (currentIndex === -1) {
+      currentIndex = 0;
+      images[0].classList.add('opacity-100');
+      images[0].classList.remove('opacity-0');
+    }
+
+    const intervalTime = 7500;
+
+    const switchImages = () => {
+      const nextIndex = (currentIndex + 1) % images.length;
+      images[currentIndex].classList.remove('opacity-100');
+      images[currentIndex].classList.add('opacity-0');
+      images[nextIndex].classList.remove('opacity-0');
+      images[nextIndex].classList.add('opacity-100');
+      currentIndex = nextIndex;
+    };
+
+    window.heroImageInterval = setInterval(switchImages, intervalTime);
+
+    document.removeEventListener('visibilitychange', handleVisibilityChangeForHero);
+    document.addEventListener('visibilitychange', handleVisibilityChangeForHero);
+  }
+
+  function handleVisibilityChangeForHero() {
+    if (document.hidden) {
+      if (window.heroImageInterval) {
+        clearInterval(window.heroImageInterval);
+      }
+    } else {
+      initHeroSlideshow(); 
+    }
+  }
+
+  document.addEventListener('astro:after-swap', initHeroSlideshow);
+  initHeroSlideshow(); 
+</script>
+</Layout>
