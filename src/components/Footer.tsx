@@ -9,7 +9,6 @@ import {
 import { motion } from "motion/react";
 import { cn } from "../lib/utils";
 
-// WhatsApp Icon Component
 const WhatsAppIcon: React.FC<{ className?: string }> = ({ className }) => (
   <svg
     viewBox="0 0 256 259"
@@ -70,7 +69,6 @@ interface FooterProps {
   labels?: Partial<FooterLabels>;
 }
 
-// Quick Links Component
 const QuickLinks: React.FC<{ labels: FooterLabels }> = ({ labels }) => {
   const links = [
     {

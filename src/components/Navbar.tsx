@@ -28,7 +28,7 @@ const Navbar: React.FC<Props> = ({ labels }) => {
     brandShort: "Rodriguez",
     brandLong: "Rodriguez Trimming Services",
     ...labels,
-  } as Labels;
+  };
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);

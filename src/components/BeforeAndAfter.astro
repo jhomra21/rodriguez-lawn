@@ -2,17 +2,17 @@
 import { Image } from 'astro:assets';
 import { Button } from './ui/button';
 
-// Import images directly
 import before01 from '../assets/before01.jpg';
 import before02 from '../assets/before02.jpg';
 import before03 from '../assets/before03.jpg';
 import before04 from '../assets/before04.jpg';
+import before05 from '../assets/before05.jpeg';
 import after01 from '../assets/after01.jpg';
 import after02 from '../assets/after02.jpg';
 import after03 from '../assets/after03.jpg';
 import after04 from '../assets/after04.jpg';
+import after05 from '../assets/after05.jpeg';
 
-// Props interface
 interface Props {
   beforeLabel?: string;
   afterLabel?: string;
@@ -22,7 +22,6 @@ interface Props {
   tabLabels?: string[];
 }
 
-// Default props
 const { 
   beforeLabel = "Before",
   afterLabel = "After",
@@ -32,46 +31,89 @@ const {
   tabLabels = []
 } = Astro.props;
 
-// Define the before/after image sets
 const defaultTabLabels = [
-  "Palm Tree Trimming & Maintenance",
-  "Palm Tree Makeover",
+  "Palm Trimming",
+  "Palm Cleanup",
+  "Palm Trimming",
+  "Palm Maintenance",
+  "Tree Makeover",
 ];
-const labels = tabLabels.length ? tabLabels : defaultTabLabels;
+const labels = tabLabels.length >= 5 ? tabLabels : defaultTabLabels;
 
 const imageSets = [
   {
-    beforeImages: [before03, before04],
-    afterImages: [after03, after04],
+    beforeImage: before03,
+    afterImage: after03,
     label: labels[0]
   },
   {
-    beforeImages: [before01, before02],
-    afterImages: [after01, after02],
+    beforeImage: before04,
+    afterImage: after04,
     label: labels[1]
+  },
+  {
+    beforeImage: before01,
+    afterImage: after01,
+    label: labels[2]
+  },
+  {
+    beforeImage: before02,
+    afterImage: after02,
+    label: labels[3]
+  },
+  {
+    beforeImage: before05,
+    afterImage: after05,
+    label: labels[4]
   }
 ];
 ---
 
-<section class="py-8 sm:py-16 px-8 bg-gradient-to-b from-white to-green-50">
+<section class="py-8 sm:py-16 px-4 sm:px-8 bg-gradient-to-b from-white to-green-50">
   <div class="max-w-4xl mx-auto">
     <div class="text-center mb-6 sm:mb-10">
       <h2 class="text-3xl md:text-4xl font-bold bg-gradient-to-b from-green-400 to-green-900 text-transparent bg-clip-text pb-4">{title}</h2>
       <p class="text-zinc-600/90 max-w-2xl mx-auto">{description}</p>
     </div>
     
-    <!-- Tab Navigation -->
-    <div class="flex justify-center border-b border-gray-200 mb-4">
-      {imageSets.map((set, index) => (
-        <button 
-          class="!cursor-pointer tab-button relative py-2 px-4 text-sm font-medium transition-all duration-200"
-          data-index={index}
-          data-active={index === 0 ? "true" : "false"}
-        >
-          {set.label}
-          <span class="absolute bottom-0 left-0 w-full h-0.5 bg-green-500 scale-x-0 transition-transform duration-300 origin-center tab-indicator"></span>
-        </button>
-      ))}
+    <!-- Tab Navigation with Arrows -->
+    <div class="relative flex items-center justify-center gap-2 mb-4">
+      <!-- Left Arrow -->
+      <button 
+        id="tab-prev" 
+        class="tab-arrow flex-shrink-0 p-2 rounded-full bg-green-100 hover:bg-green-200 text-green-700 transition-colors"
+        aria-label="Previous tab"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      
+      <!-- Scrollable Tabs Container -->
+      <div id="tabs-container" class="overflow-x-auto scrollbar-hide max-w-[calc(100%-6rem)]">
+        <div class="flex gap-1 sm:gap-2 px-1 py-1">
+          {imageSets.map((set, index) => (
+            <button 
+              class="!cursor-pointer tab-button flex-shrink-0 relative py-2 px-3 sm:px-4 text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap rounded-md"
+              data-index={index}
+              data-active={index === 0 ? "true" : "false"}
+            >
+              {set.label}
+            </button>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Right Arrow -->
+      <button 
+        id="tab-next" 
+        class="tab-arrow flex-shrink-0 p-2 rounded-full bg-green-100 hover:bg-green-200 text-green-700 transition-colors"
+        aria-label="Next tab"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
     </div>
     
     <div id="before-after-container" class:list={["relative w-full overflow-hidden rounded-xl shadow-xl border-2 border-white cursor-grab", className]}>
@@ -81,39 +123,35 @@ const imageSets = [
           data-index={setIndex}
           style={setIndex === 0 ? "opacity: 1; z-index: 10;" : "opacity: 0; z-index: 0; position: absolute; top: 0; left: 0; right: 0; bottom: 0;"}
         >
-          <!-- After Images (Bottom Layer) -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-2 aspect-auto md:aspect-[16/9] w-full">
-            {set.afterImages.map((afterImage, i) => (
-              <div class="relative overflow-hidden w-full h-full min-h-[200px]">
+          <!-- After Image (Bottom Layer) -->
+          <div class="aspect-[4/3] md:aspect-[16/9] w-full">
+            <div class="relative overflow-hidden w-full h-full">
+              <Image 
+                src={set.afterImage} 
+                alt={`${afterLabel} - ${set.label}`}
+                class="w-full h-full object-cover object-center"
+                width={set.afterImage.width} 
+                height={set.afterImage.height}
+                loading={setIndex === 0 ? "eager" : "lazy"}
+                quality={'mid'}
+              />
+            </div>
+          </div>
+
+          <!-- Before Image (Top Layer, clipped) -->
+          <div class="before-images absolute inset-0 overflow-hidden">
+            <div class="w-full h-full">
+              <div class="relative overflow-hidden w-full h-full">
                 <Image 
-                  src={afterImage} 
-                  alt={`${afterLabel} ${i + 1}`}
+                  src={set.beforeImage} 
+                  alt={`${beforeLabel} - ${set.label}`}
                   class="w-full h-full object-cover object-center"
-                  width={afterImage.width} 
-                  height={afterImage.height}
-                  loading="lazy"
+                  width={set.beforeImage.width} 
+                  height={set.beforeImage.height}
+                  loading={setIndex === 0 ? "eager" : "lazy"}
                   quality={'mid'}
                 />
               </div>
-            ))}
-          </div>
-
-          <!-- Before Images (Top Layer, clipped) -->
-          <div class="before-images absolute inset-0 overflow-hidden">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 h-full w-full">
-              {set.beforeImages.map((beforeImage, i) => (
-                <div class="relative overflow-hidden w-full h-full min-h-[200px]">
-                  <Image 
-                    src={beforeImage} 
-                    alt={`${beforeLabel} ${i + 1}`}
-                    class="w-full h-full object-cover object-center"
-                    width={beforeImage.width} 
-                    height={beforeImage.height}
-                    loading="lazy"
-                    quality={'mid'}
-                  />
-                </div>
-              ))}
             </div>
           </div>
         </div>
@@ -138,6 +176,17 @@ const imageSets = [
       </div>
     </div>
     
+    <!-- Tab indicator dots -->
+    <div class="flex justify-center gap-2 mt-4">
+      {imageSets.map((_, index) => (
+        <button 
+          class="tab-dot w-2 h-2 rounded-full transition-all duration-300"
+          data-index={index}
+          aria-label={`Go to slide ${index + 1}`}
+        ></button>
+      ))}
+    </div>
+    
     <div class="text-center mt-4 sm:mt-6 text-gray-600 text-sm italic">
       Actual results may vary based on your property's specific conditions and chosen services.
     </div>
@@ -152,24 +201,41 @@ const imageSets = [
     display: block;
   }
 
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Tab button styles */
   .tab-button {
     color: rgb(107 114 128);
+    background-color: rgb(243 244 246);
     position: relative;
   }
   
   .tab-button[data-active="true"] {
-    color: rgb(22 163 74);
+    color: white;
+    background-color: rgb(22 163 74);
     font-weight: 600;
   }
   
-  .tab-button[data-active="true"] .tab-indicator {
-    transform: scaleX(1);
-    transition: transform 0.2s ease-in;
+  .tab-button:hover:not([data-active="true"]) {
+    background-color: rgb(229 231 235);
+    color: rgb(21 128 61);
+  }
+
+  /* Tab dots */
+  .tab-dot {
+    background-color: rgb(209 213 219);
   }
   
-  .tab-button:hover {
-    color: rgb(21 128 61);
+  .tab-dot[data-active="true"] {
+    background-color: rgb(22 163 74);
+    transform: scale(1.25);
   }
 </style>
 
@@ -181,7 +247,12 @@ const imageSets = [
     const afterLabel = document.getElementById('after-label');
     const sliderHandle = document.getElementById('slider-handle');
     const tabButtons = document.querySelectorAll('.tab-button');
+    const tabDots = document.querySelectorAll('.tab-dot');
+    const tabPrev = document.getElementById('tab-prev');
+    const tabNext = document.getElementById('tab-next');
+    const tabsContainer = document.getElementById('tabs-container');
     const imageSetContainers = document.querySelectorAll('.image-set-container');
+    const totalSets = imageSetContainers.length;
     
     if (!container || !beforeLabel || !afterLabel || !sliderHandle) return;
     
@@ -194,7 +265,7 @@ const imageSets = [
     
     // Function to switch between image sets
     function switchImageSet(index: number) {
-      if (index === currentSetIndex) return;
+      if (index === currentSetIndex || index < 0 || index >= totalSets) return;
       
       // Hide current set
       const currentSet = document.querySelector(`.image-set-container[data-index="${currentSetIndex}"]`) as HTMLElement;
@@ -218,6 +289,22 @@ const imageSets = [
       if (beforeImages) {
         beforeImages.style.clipPath = `inset(0 ${100 - sliderValue}% 0 0)`;
       }
+      
+      // Scroll the active tab into view
+      scrollTabIntoView(index);
+    }
+    
+    // Scroll active tab into view
+    function scrollTabIntoView(index: number) {
+      const activeTab = tabButtons[index] as HTMLElement;
+      if (activeTab && tabsContainer) {
+        const containerRect = tabsContainer.getBoundingClientRect();
+        const tabRect = activeTab.getBoundingClientRect();
+        
+        if (tabRect.left < containerRect.left || tabRect.right > containerRect.right) {
+          activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      }
     }
     
     // Update active tab state
@@ -229,6 +316,14 @@ const imageSets = [
           btn.setAttribute('data-active', 'false');
         }
       });
+      
+      tabDots.forEach((dot, index) => {
+        if (index === activeIndex) {
+          dot.setAttribute('data-active', 'true');
+        } else {
+          dot.setAttribute('data-active', 'false');
+        }
+      });
     }
     
     // Add click event listeners to tabs
@@ -238,6 +333,29 @@ const imageSets = [
         switchImageSet(index);
       });
     });
+    
+    // Add click event listeners to dots
+    tabDots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const index = parseInt(dot.getAttribute('data-index') || '0', 10);
+        switchImageSet(index);
+      });
+    });
+    
+    // Arrow navigation
+    if (tabPrev) {
+      tabPrev.addEventListener('click', () => {
+        const newIndex = currentSetIndex === 0 ? totalSets - 1 : currentSetIndex - 1;
+        switchImageSet(newIndex);
+      });
+    }
+    
+    if (tabNext) {
+      tabNext.addEventListener('click', () => {
+        const newIndex = currentSetIndex === totalSets - 1 ? 0 : currentSetIndex + 1;
+        switchImageSet(newIndex);
+      });
+    }
     
     // Update the slider position and clipping
     const updateSliderPosition = (clientX: number) => {
@@ -314,5 +432,4 @@ const imageSets = [
       updateSliderPosition(container.getBoundingClientRect().width * sliderValue/100 + container.getBoundingClientRect().left);
     });
   });
-</script> 
-</script> 
+</script>

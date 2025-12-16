@@ -13,16 +13,13 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 
-// WhatsApp Icon Component
 const WhatsAppIcon: React.FC<{ className?: string }> = ({ className }) => (
   <svg viewBox="0 0 256 259" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" className={className}>
-    {/* Simplified WhatsApp icon for cleaner look if needed, or keep as is if it fits */}
-    <path d="m67.663 221.823 4.185 2.093c17.44 10.463 36.971 15.346 56.503 15.346 61.385 0 111.609-50.224 111.609-111.609 0-29.297-11.859-57.897-32.785-78.824-20.927-20.927-48.83-32.785-78.824-32.785-61.385 0-111.61 50.224-110.912 112.307 0 20.926 6.278 41.156 16.741 58.594l2.79 4.186-11.16 41.156 41.853-10.464Z" fill="#25D366"/> {/* Notion-like solid green */}
-    <path d="M219.033 37.668C195.316 13.254 162.531 0 129.048 0 57.898 0 .698 57.897 1.395 128.35c0 22.322 6.278 43.947 16.742 63.478L0 258.096l67.663-17.439c18.834 10.464 39.76 15.347 60.688 15.347 70.453 0 127.653-57.898 127.653-128.35 0-34.181-13.254-66.269-36.97-89.986ZM129.048 234.38c-18.834 0-37.668-4.882-53.712-14.648l-4.185-2.093-40.458 10.463 10.463-39.76-2.79-4.186C7.673 134.63 22.322 69.058 72.546 38.365c50.224-30.692 115.097-16.043 145.79 34.181 30.692 50.224 16.043 115.097-34.18 145.79-16.045 10.463-35.576 16.043-55.108 16.043Zm61.385-77.428-7.673-3.488s-11.16-4.883-18.136-8.371c-.698 0-1.395-.698-2.093-.698-2.093 0-3.488.698-4.883 1.396 0 0-.697.697-10.463 11.858-.698 1.395-2.093 2.093-3.488 2.093h-.698c-.697 0-2.092-.698-2.79-1.395l-3.488-1.395c-7.673-3.488-14.648-7.674-20.229-13.254-1.395-1.395-3.488-2.79-4.883-4.185-4.883-4.883-9.766-10.464-13.253-16.742l-.698-1.395c-.697-.698-.697-1.395-1.395-2.79 0-1.395 0-2.79.698-3.488 0 0 2.79-3.488 4.882-5.58 1.396-1.396 2.093-3.488 3.488-4.883 1.395-2.093 2.79-4.883 1.395-6.976-.697-3.488-9.068-22.322-11.16-26.507-1.396-2.093-2.79-2.79-4.883-3.488H83.01c-1.396 0-2.79.698-4.186.698l-.698.697c-1.395.698-2.79 2.093-4.185 2.79-1.395 1.396-2.093 2.79-3.488 4.186-4.883 6.278-7.673 13.951-7.673 21.624 0 5.58 1.395 11.161 3.488 16.044l.698 2.093c6.278 13.253 14.648 25.112 25.81 35.575l2.79 2.79c2.092 2.093 4.185 3.488 5.58 5.58 14.649 12.557 31.39 21.625 50.224 26.508 2.093.697 4.883.697 6.976 1.395h6.975c3.488 0 7.673-1.395 10.464-2.79 2.092-1.395 3.487-1.395 4.882-2.79l1.396-1.396c1.395-1.395 2.79-2.092 4.185-3.487 1.395-1.395 2.79-2.79 3.488-4.186 1.395-2.79 2.092-6.278 2.79-9.765v-4.883s-.698-.698-2.093-1.395Z" fill="#FFF"/>
+    <path d="m67.663 221.823 4.185 2.093c17.44 10.463 36.971 15.346 56.503 15.346 61.385 0 111.609-50.224 111.609-111.609 0-29.297-11.859-57.897-32.785-78.824-20.927-20.927-48.83-32.785-78.824-32.785-61.385 0-111.61 50.224-110.912 112.307 0 20.926 6.278 41.156 16.741 58.594l2.79 4.186-11.16 41.156 41.853-10.464Z" fill="#25D366" />
+    <path d="M219.033 37.668C195.316 13.254 162.531 0 129.048 0 57.898 0 .698 57.897 1.395 128.35c0 22.322 6.278 43.947 16.742 63.478L0 258.096l67.663-17.439c18.834 10.464 39.76 15.347 60.688 15.347 70.453 0 127.653-57.898 127.653-128.35 0-34.181-13.254-66.269-36.97-89.986ZM129.048 234.38c-18.834 0-37.668-4.882-53.712-14.648l-4.185-2.093-40.458 10.463 10.463-39.76-2.79-4.186C7.673 134.63 22.322 69.058 72.546 38.365c50.224-30.692 115.097-16.043 145.79 34.181 30.692 50.224 16.043 115.097-34.18 145.79-16.045 10.463-35.576 16.043-55.108 16.043Zm61.385-77.428-7.673-3.488s-11.16-4.883-18.136-8.371c-.698 0-1.395-.698-2.093-.698-2.093 0-3.488.698-4.883 1.396 0 0-.697.697-10.463 11.858-.698 1.395-2.093 2.093-3.488 2.093h-.698c-.697 0-2.092-.698-2.79-1.395l-3.488-1.395c-7.673-3.488-14.648-7.674-20.229-13.254-1.395-1.395-3.488-2.79-4.883-4.185-4.883-4.883-9.766-10.464-13.253-16.742l-.698-1.395c-.697-.698-.697-1.395-1.395-2.79 0-1.395 0-2.79.698-3.488 0 0 2.79-3.488 4.882-5.58 1.396-1.396 2.093-3.488 3.488-4.883 1.395-2.093 2.79-4.883 1.395-6.976-.697-3.488-9.068-22.322-11.16-26.507-1.396-2.093-2.79-2.79-4.883-3.488H83.01c-1.396 0-2.79.698-4.186.698l-.698.697c-1.395.698-2.79 2.093-4.185 2.79-1.395 1.396-2.093 2.79-3.488 4.186-4.883 6.278-7.673 13.951-7.673 21.624 0 5.58 1.395 11.161 3.488 16.044l.698 2.093c6.278 13.253 14.648 25.112 25.81 35.575l2.79 2.79c2.092 2.093 4.185 3.488 5.58 5.58 14.649 12.557 31.39 21.625 50.224 26.508 2.093.697 4.883.697 6.976 1.395h6.975c3.488 0 7.673-1.395 10.464-2.79 2.092-1.395 3.487-1.395 4.882-2.79l1.396-1.396c1.395-1.395 2.79-2.092 4.185-3.487 1.395-1.395 2.79-2.79 3.488-4.186 1.395-2.79 2.092-6.278 2.79-9.765v-4.883s-.698-.698-2.093-1.395Z" fill="#FFF" />
   </svg>
 );
 
-// Subtle noise texture for Notion-like feel
 const noiseStyle = {
   position: 'absolute',
   top: 0,
@@ -86,7 +83,7 @@ const BusinessCard: React.FC<BusinessCardProps> = ({ strings }) => {
         {/* Subtle noise texture overlay */}
         <div style={noiseStyle}></div>
 
-      
+
 
         {/* Lawn Service immediately under Rodriguez - card style container */}
         <div className="relative overflow-hidden flex flex-col items-center justify-center py-6 px-6 mb-8 -mx-6 -mt-8 rounded-t-xl rounded-b-xl 
@@ -97,17 +94,17 @@ const BusinessCard: React.FC<BusinessCardProps> = ({ strings }) => {
           <div className="mb-3 relative z-10 text-center">
             <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-b from-zinc-500 to-zinc-900 text-transparent bg-clip-text tracking-tight uppercase font-serif">Rodriguez</h1>
           </div>
-          
+
           {/* Lawn Service section */}
           <div className="flex items-center justify-center w-full">
             {/* Left side icon (Palm Tree) */}
             <div className="flex-shrink-0 mr-4">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-9 w-9"
                 strokeWidth="0.5">
-                <path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4" className="fill-green-600 stroke-green-700"/>
-                <path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3" className="fill-green-700 stroke-green-800"/>
-                <path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35" className="fill-green-800 stroke-green-900"/>
-                <path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14" className="fill-amber-600 stroke-amber-800"/>
+                <path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4" className="fill-green-600 stroke-green-700" />
+                <path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3" className="fill-green-700 stroke-green-800" />
+                <path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35" className="fill-green-800 stroke-green-900" />
+                <path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14" className="fill-amber-600 stroke-amber-800" />
               </svg>
             </div>
 
@@ -118,28 +115,28 @@ const BusinessCard: React.FC<BusinessCardProps> = ({ strings }) => {
             <div className="flex-shrink-0 ml-4">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-10 w-10" strokeWidth="0.5">
                 {/* Tree Trunk Base */}
-                <path d="M11.5 18 L11.5 23 L12.5 23 L12.5 18 Z" className="fill-amber-700 stroke-amber-800"/>
-                
+                <path d="M11.5 18 L11.5 23 L12.5 23 L12.5 18 Z" className="fill-amber-700 stroke-amber-800" />
+
                 {/* Trunk Branch Left */}
-                <path d="M11.5 18 C11 18, 10 17, 9 15 L10 14.5 Z" className="fill-amber-600 stroke-amber-700"/>
-                
+                <path d="M11.5 18 C11 18, 10 17, 9 15 L10 14.5 Z" className="fill-amber-600 stroke-amber-700" />
+
                 {/* Trunk Branch Right */}
-                <path d="M12.5 18 C13 18, 14 17, 15 15 L14 14.5 Z" className="fill-amber-600 stroke-amber-700"/>
-                
+                <path d="M12.5 18 C13 18, 14 17, 15 15 L14 14.5 Z" className="fill-amber-600 stroke-amber-700" />
+
                 {/* Lower Foliage Base - Darkest */}
-                <path d="M6 15 C6 19, 9 21, 12 21 C15 21, 18 19, 18 15 C18 11, 15 13, 12 13 C9 13, 6 11, 6 15 Z" className="fill-green-800/80 stroke-green-900"/>
-                
+                <path d="M6 15 C6 19, 9 21, 12 21 C15 21, 18 19, 18 15 C18 11, 15 13, 12 13 C9 13, 6 11, 6 15 Z" className="fill-green-800/80 stroke-green-900" />
+
                 {/* Middle Foliage Layer */}
-                <path d="M7 12 C7 16, 9.5 18, 12 18 C14.5 18, 17 16, 17 12 C17 8, 14.5 10, 12 10 C9.5 10, 7 8, 7 12 Z" className="fill-green-700 stroke-green-800"/>
-                
+                <path d="M7 12 C7 16, 9.5 18, 12 18 C14.5 18, 17 16, 17 12 C17 8, 14.5 10, 12 10 C9.5 10, 7 8, 7 12 Z" className="fill-green-700 stroke-green-800" />
+
                 {/* Upper Foliage Layer */}
-                <path d="M8 9 C8 13, 10 15, 12 15 C14 15, 16 13, 16 9 C16 5, 14 7, 12 7 C10 7, 8 5, 8 9 Z" className="fill-green-600 stroke-green-700"/>
-                
+                <path d="M8 9 C8 13, 10 15, 12 15 C14 15, 16 13, 16 9 C16 5, 14 7, 12 7 C10 7, 8 5, 8 9 Z" className="fill-green-600 stroke-green-700" />
+
                 {/* Top Foliage Crown */}
-                <path d="M9 6 C9 9, 10.5 11, 12 11 C13.5 11, 15 9, 15 6 C15 3, 13.5 4, 12 4 C10.5 4, 9 3, 9 6 Z" className="fill-green-500 stroke-green-600"/>
-                
+                <path d="M9 6 C9 9, 10.5 11, 12 11 C13.5 11, 15 9, 15 6 C15 3, 13.5 4, 12 4 C10.5 4, 9 3, 9 6 Z" className="fill-green-500 stroke-green-600" />
+
                 {/* Highlight Foliage Accents - Light */}
-                <path d="M10 7 C10 9, 11 10, 12 10 C13 10, 14 9, 14 7 C14 5, 13 6, 12 6 C11 6, 10 5, 10 7 Z" className="fill-green-400/60 stroke-green-500"/>
+                <path d="M10 7 C10 9, 11 10, 12 10 C13 10, 14 9, 14 7 C14 5, 13 6, 12 6 C11 6, 10 5, 10 7 Z" className="fill-green-400/60 stroke-green-500" />
               </svg>
             </div>
           </div>
@@ -165,17 +162,17 @@ const BusinessCard: React.FC<BusinessCardProps> = ({ strings }) => {
               <Tag className="h-4 w-4 text-orange-500 flex-shrink-0" />
               <span className="font-semibold text-gray-800">{s.freeEstimates}</span>
               <div className="h-4 w-px bg-gray-300 mx-1"></div> {/* Vertical line separator */}
-              <MapPin className="h-4 w-4 text-blue-500 flex-shrink-0 -ml-1" /> 
+              <MapPin className="h-4 w-4 text-blue-500 flex-shrink-0 -ml-1" />
               <span className="font-medium text-gray-600">{s.rgvWide}</span>
             </div>
-            
+
             {/* Best Prices pill */}
             <div className="relative overflow-hidden inline-flex items-center gap-2 py-2.5 px-5 mb-2
                             bg-gradient-to-br from-green-600 via-green-500 to-green-600 border border-green-700/50 
                             rounded-xl text-white text-sm sm:text-base font-semibold shadow-[0_3px_7px_rgba(0,0,0,0.18),inset_0_1px_1.5px_rgba(255,255,255,0.5)] 
                             before:absolute before:inset-[1.5px] before:rounded-lg before:bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.3)_0%,rgba(255,255,255,0)_70%)] 
                             before:from-green-400/70 before:to-green-500/70 before:opacity-90 before:-z-10 before:pointer-events-none">
-              <CheckCircle2 className="h-4 w-4 text-white flex-shrink-0" /> 
+              <CheckCircle2 className="h-4 w-4 text-white flex-shrink-0" />
               {s.bestPricesPrefix} <p className="italic font-medium">{s.bestPricesEmphasis}</p>{s.bestPricesSuffix}
             </div>
           </div>
@@ -209,7 +206,7 @@ const BusinessCard: React.FC<BusinessCardProps> = ({ strings }) => {
                           </a>
                         </TooltipTrigger>
                         <TooltipContent>
-                        <p>{s.callEmilio}</p>
+                          <p>{s.callEmilio}</p>
                         </TooltipContent>
                       </Tooltip>
                     </div>
@@ -259,7 +256,7 @@ const BusinessCard: React.FC<BusinessCardProps> = ({ strings }) => {
                           </a>
                         </TooltipTrigger>
                         <TooltipContent>
-                        <p>{s.callEver}</p>
+                          <p>{s.callEver}</p>
                         </TooltipContent>
                       </Tooltip>
                     </div>
