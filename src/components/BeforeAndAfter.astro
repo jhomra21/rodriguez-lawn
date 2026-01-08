@@ -7,11 +7,13 @@ import before02 from '../assets/before02.jpg';
 import before03 from '../assets/before03.jpg';
 import before04 from '../assets/before04.jpg';
 import before05 from '../assets/before05.jpeg';
+import before06 from '../assets/before06.jpeg';
 import after01 from '../assets/after01.jpg';
 import after02 from '../assets/after02.jpg';
 import after03 from '../assets/after03.jpg';
 import after04 from '../assets/after04.jpg';
 import after05 from '../assets/after05.jpeg';
+import after06 from '../assets/after06.jpeg';
 
 interface Props {
   beforeLabel?: string;
@@ -22,7 +24,7 @@ interface Props {
   tabLabels?: string[];
 }
 
-const { 
+const {
   beforeLabel = "Before",
   afterLabel = "After",
   title = "See the Transformation",
@@ -37,8 +39,9 @@ const defaultTabLabels = [
   "Palm Trimming",
   "Palm Maintenance",
   "Tree Makeover",
+  "Palm Restoration",
 ];
-const labels = tabLabels.length >= 5 ? tabLabels : defaultTabLabels;
+const labels = tabLabels.length >= 6 ? tabLabels : defaultTabLabels;
 
 const imageSets = [
   {
@@ -53,18 +56,23 @@ const imageSets = [
   },
   {
     beforeImage: before01,
-    afterImage: after01,
+    afterImage: after02, // this is swapped on purpose with one under
     label: labels[2]
   },
   {
     beforeImage: before02,
-    afterImage: after02,
+    afterImage: after01, // this is swapped on purpose with one above
     label: labels[3]
   },
   {
     beforeImage: before05,
     afterImage: after05,
     label: labels[4]
+  },
+  {
+    beforeImage: before06,
+    afterImage: after06,
+    label: labels[5]
   }
 ];
 ---
@@ -75,12 +83,12 @@ const imageSets = [
       <h2 class="text-3xl md:text-4xl font-bold bg-gradient-to-b from-green-400 to-green-900 text-transparent bg-clip-text pb-4">{title}</h2>
       <p class="text-zinc-600/90 max-w-2xl mx-auto">{description}</p>
     </div>
-    
+
     <!-- Tab Navigation with Arrows -->
     <div class="relative flex items-center justify-center gap-2 mb-4">
       <!-- Left Arrow -->
-      <button 
-        id="tab-prev" 
+      <button
+        id="tab-prev"
         class="tab-arrow flex-shrink-0 p-2 rounded-full bg-green-100 hover:bg-green-200 text-green-700 transition-colors"
         aria-label="Previous tab"
       >
@@ -88,13 +96,13 @@ const imageSets = [
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
-      
+
       <!-- Scrollable Tabs Container -->
       <div id="tabs-container" class="overflow-x-auto scrollbar-hide max-w-[calc(100%-6rem)]">
         <div class="flex gap-1 sm:gap-2 px-1 py-1">
           {imageSets.map((set, index) => (
-            <button 
-              class="!cursor-pointer tab-button flex-shrink-0 relative py-2 px-3 sm:px-4 text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap rounded-md"
+            <button
+              class="!cursor-pointer tab-button flex-shrink-0 relative py-2 px-3 sm:px-4 text-xs sm:text-sm font-semibold transition-colors duration-200 whitespace-nowrap rounded-md"
               data-index={index}
               data-active={index === 0 ? "true" : "false"}
             >
@@ -103,10 +111,10 @@ const imageSets = [
           ))}
         </div>
       </div>
-      
+
       <!-- Right Arrow -->
-      <button 
-        id="tab-next" 
+      <button
+        id="tab-next"
         class="tab-arrow flex-shrink-0 p-2 rounded-full bg-green-100 hover:bg-green-200 text-green-700 transition-colors"
         aria-label="Next tab"
       >
@@ -115,24 +123,26 @@ const imageSets = [
         </svg>
       </button>
     </div>
-    
+
     <div id="before-after-container" class:list={["relative w-full overflow-hidden rounded-xl shadow-xl border-2 border-white cursor-grab", className]}>
       {imageSets.map((set, setIndex) => (
-        <div 
-          class="image-set-container relative w-full transition-opacity duration-500 ease-in-out" 
+        <div
+          class="image-set-container relative w-full transition-opacity duration-500 ease-in-out"
           data-index={setIndex}
+          data-image-width={set.afterImage.width}
+          data-image-height={set.afterImage.height}
           style={setIndex === 0 ? "opacity: 1; z-index: 10;" : "opacity: 0; z-index: 0; position: absolute; top: 0; left: 0; right: 0; bottom: 0;"}
         >
           <!-- After Image (Bottom Layer) -->
-          <div class="aspect-[4/3] md:aspect-[16/9] w-full">
+          <div class="aspect-[3/2.5] w-full">
             <div class="relative overflow-hidden w-full h-full">
-              <Image 
-                src={set.afterImage} 
+              <Image
+                src={set.afterImage}
                 alt={`${afterLabel} - ${set.label}`}
-                class="w-full h-full object-cover object-center"
-                width={set.afterImage.width} 
+                class="w-full h-full object-contain object-center bg-white/30"
+                width={set.afterImage.width}
                 height={set.afterImage.height}
-                loading={setIndex === 0 ? "eager" : "lazy"}
+                loading="lazy"
                 quality={'mid'}
               />
             </div>
@@ -142,13 +152,13 @@ const imageSets = [
           <div class="before-images absolute inset-0 overflow-hidden">
             <div class="w-full h-full">
               <div class="relative overflow-hidden w-full h-full">
-                <Image 
-                  src={set.beforeImage} 
+                <Image
+                  src={set.beforeImage}
                   alt={`${beforeLabel} - ${set.label}`}
-                  class="w-full h-full object-cover object-center"
-                  width={set.beforeImage.width} 
+                  class="w-full h-full object-contain object-center bg-white/30"
+                  width={set.beforeImage.width}
                   height={set.beforeImage.height}
-                  loading={setIndex === 0 ? "eager" : "lazy"}
+                  loading="lazy"
                   quality={'mid'}
                 />
               </div>
@@ -175,18 +185,18 @@ const imageSets = [
         </div>
       </div>
     </div>
-    
+
     <!-- Tab indicator dots -->
     <div class="flex justify-center gap-2 mt-4">
       {imageSets.map((_, index) => (
-        <button 
+        <button
           class="tab-dot w-2 h-2 rounded-full transition-all duration-300"
           data-index={index}
           aria-label={`Go to slide ${index + 1}`}
         ></button>
       ))}
     </div>
-    
+
     <div class="text-center mt-4 sm:mt-6 text-gray-600 text-sm italic">
       Actual results may vary based on your property's specific conditions and chosen services.
     </div>
@@ -216,13 +226,12 @@ const imageSets = [
     background-color: rgb(243 244 246);
     position: relative;
   }
-  
+
   .tab-button[data-active="true"] {
     color: white;
     background-color: rgb(22 163 74);
-    font-weight: 600;
   }
-  
+
   .tab-button:hover:not([data-active="true"]) {
     background-color: rgb(229 231 235);
     color: rgb(21 128 61);
@@ -232,7 +241,7 @@ const imageSets = [
   .tab-dot {
     background-color: rgb(209 213 219);
   }
-  
+
   .tab-dot[data-active="true"] {
     background-color: rgb(22 163 74);
     transform: scale(1.25);
@@ -253,60 +262,59 @@ const imageSets = [
     const tabsContainer = document.getElementById('tabs-container');
     const imageSetContainers = document.querySelectorAll('.image-set-container');
     const totalSets = imageSetContainers.length;
-    
+
     if (!container || !beforeLabel || !afterLabel || !sliderHandle) return;
-    
+
     let isDragging = false;
     let sliderValue = 50; // Initial position (50%)
     let currentSetIndex = 0;
-    
+
     // Set initial active tab
     updateActiveTab(0);
-    
+
     // Function to switch between image sets
     function switchImageSet(index: number) {
       if (index === currentSetIndex || index < 0 || index >= totalSets) return;
-      
+
       // Hide current set
       const currentSet = document.querySelector(`.image-set-container[data-index="${currentSetIndex}"]`) as HTMLElement;
       if (currentSet) {
         currentSet.style.opacity = '0';
         currentSet.style.zIndex = '0';
       }
-      
+
       // Show new set
       const newSet = document.querySelector(`.image-set-container[data-index="${index}"]`) as HTMLElement;
       if (newSet) {
         newSet.style.opacity = '1';
         newSet.style.zIndex = '10';
       }
-      
+
       currentSetIndex = index;
       updateActiveTab(index);
-      
+
       // Update slider for new set
-      const beforeImages = document.querySelectorAll('.before-images')[index] as HTMLElement;
-      if (beforeImages) {
-        beforeImages.style.clipPath = `inset(0 ${100 - sliderValue}% 0 0)`;
-      }
-      
+      const rect = container!.getBoundingClientRect();
+      const bounds = getImageBounds(rect, index);
+      applySliderPosition(rect, bounds);
+
       // Scroll the active tab into view
       scrollTabIntoView(index);
     }
-    
+
     // Scroll active tab into view
     function scrollTabIntoView(index: number) {
       const activeTab = tabButtons[index] as HTMLElement;
       if (activeTab && tabsContainer) {
         const containerRect = tabsContainer.getBoundingClientRect();
         const tabRect = activeTab.getBoundingClientRect();
-        
+
         if (tabRect.left < containerRect.left || tabRect.right > containerRect.right) {
           activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
         }
       }
     }
-    
+
     // Update active tab state
     function updateActiveTab(activeIndex: number) {
       tabButtons.forEach((btn, index) => {
@@ -316,7 +324,7 @@ const imageSets = [
           btn.setAttribute('data-active', 'false');
         }
       });
-      
+
       tabDots.forEach((dot, index) => {
         if (index === activeIndex) {
           dot.setAttribute('data-active', 'true');
@@ -325,7 +333,7 @@ const imageSets = [
         }
       });
     }
-    
+
     // Add click event listeners to tabs
     tabButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -333,7 +341,7 @@ const imageSets = [
         switchImageSet(index);
       });
     });
-    
+
     // Add click event listeners to dots
     tabDots.forEach((dot) => {
       dot.addEventListener('click', () => {
@@ -341,7 +349,7 @@ const imageSets = [
         switchImageSet(index);
       });
     });
-    
+
     // Arrow navigation
     if (tabPrev) {
       tabPrev.addEventListener('click', () => {
@@ -349,58 +357,111 @@ const imageSets = [
         switchImageSet(newIndex);
       });
     }
-    
+
     if (tabNext) {
       tabNext.addEventListener('click', () => {
         const newIndex = currentSetIndex === totalSets - 1 ? 0 : currentSetIndex + 1;
         switchImageSet(newIndex);
       });
     }
-    
-    // Update the slider position and clipping
-    const updateSliderPosition = (clientX: number) => {
-      if (!container) return;
-      
-      const rect = container.getBoundingClientRect();
-      const position = ((clientX - rect.left) / rect.width) * 100;
-      sliderValue = Math.max(0, Math.min(100, position));
-      
-      // Update the UI for the current set
+
+    const getImageBounds = (rect: DOMRect, index: number) => {
+      const setContainer = document.querySelector(
+        `.image-set-container[data-index="${index}"]`,
+      ) as HTMLElement | null;
+      const imageWidth = Number(setContainer?.getAttribute("data-image-width"));
+      const imageHeight = Number(setContainer?.getAttribute("data-image-height"));
+
+      if (!imageWidth || !imageHeight) {
+        return {
+          offsetX: 0,
+          offsetY: 0,
+          imageWidth: rect.width,
+          imageHeight: rect.height,
+        };
+      }
+
+      const containerAspect = rect.width / rect.height;
+      const imageAspect = imageWidth / imageHeight;
+
+      if (imageAspect > containerAspect) {
+        const fittedHeight = rect.width / imageAspect;
+        return {
+          offsetX: 0,
+          offsetY: (rect.height - fittedHeight) / 2,
+          imageWidth: rect.width,
+          imageHeight: fittedHeight,
+        };
+      }
+
+      const fittedWidth = rect.height * imageAspect;
+      return {
+        offsetX: (rect.width - fittedWidth) / 2,
+        offsetY: 0,
+        imageWidth: fittedWidth,
+        imageHeight: rect.height,
+      };
+    };
+
+    const applySliderPosition = (rect: DOMRect, bounds: ReturnType<typeof getImageBounds>) => {
+      const minX = rect.left + bounds.offsetX;
+      const maxX = rect.left + bounds.offsetX + bounds.imageWidth;
+      const clientX = minX + (sliderValue / 100) * bounds.imageWidth;
+      const clampedX = Math.max(minX, Math.min(maxX, clientX));
+      sliderValue = ((clampedX - minX) / bounds.imageWidth) * 100;
+
       const beforeImages = document.querySelectorAll('.before-images')[currentSetIndex] as HTMLElement;
       if (beforeImages) {
-        beforeImages.style.clipPath = `inset(0 ${100 - sliderValue}% 0 0)`;
+        const topInset = bounds.offsetY;
+        const bottomInset = rect.height - (bounds.offsetY + bounds.imageHeight);
+        const leftInset = bounds.offsetX;
+        const rightInset = rect.width - (bounds.offsetX + (sliderValue / 100) * bounds.imageWidth);
+        beforeImages.style.clipPath = `inset(${topInset}px ${rightInset}px ${bottomInset}px ${leftInset}px)`;
       }
-      
+
       if (sliderHandle) {
-        sliderHandle.style.left = `${sliderValue}%`;
+        sliderHandle.style.left = `${bounds.offsetX + (sliderValue / 100) * bounds.imageWidth}px`;
       }
-      
-      // Update label visibility
+
       if (beforeLabel) {
         beforeLabel.style.opacity = sliderValue > 15 ? '1' : '0';
       }
-      
+
       if (afterLabel) {
         afterLabel.style.opacity = sliderValue < 85 ? '1' : '0';
       }
     };
-    
+
+    // Update the slider position and clipping
+    const updateSliderPosition = (clientX: number) => {
+      if (!container) return;
+
+      const rect = container.getBoundingClientRect();
+      const bounds = getImageBounds(rect, currentSetIndex);
+      const minX = rect.left + bounds.offsetX;
+      const maxX = rect.left + bounds.offsetX + bounds.imageWidth;
+      const clampedX = Math.max(minX, Math.min(maxX, clientX));
+      sliderValue = ((clampedX - minX) / bounds.imageWidth) * 100;
+
+      applySliderPosition(rect, bounds);
+    };
+
     // Mouse events
     container.addEventListener('mousedown', (e) => {
       isDragging = true;
       updateSliderPosition(e.clientX);
       e.preventDefault();
     });
-    
+
     document.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
       updateSliderPosition(e.clientX);
     });
-    
+
     document.addEventListener('mouseup', () => {
       isDragging = false;
     });
-    
+
     // Touch events
     container.addEventListener('touchstart', (e) => {
       if (e.touches.length > 0) {
@@ -409,27 +470,35 @@ const imageSets = [
       }
       e.preventDefault();
     });
-    
+
     document.addEventListener('touchmove', (e) => {
       if (!isDragging) return;
       if (e.touches.length > 0) {
         updateSliderPosition(e.touches[0].clientX);
       }
     });
-    
+
     document.addEventListener('touchend', () => {
       isDragging = false;
     });
-    
+
     // Initialize the UI
     const allBeforeImages = document.querySelectorAll('.before-images');
-    allBeforeImages.forEach((element) => {
-      (element as HTMLElement).style.clipPath = `inset(0 50% 0 0)`;
+    allBeforeImages.forEach((element, index) => {
+      const rect = container.getBoundingClientRect();
+      const bounds = getImageBounds(rect, index);
+      const topInset = bounds.offsetY;
+      const bottomInset = rect.height - (bounds.offsetY + bounds.imageHeight);
+      const leftInset = bounds.offsetX;
+      const rightInset = rect.width - (bounds.offsetX + (sliderValue / 100) * bounds.imageWidth);
+      (element as HTMLElement).style.clipPath = `inset(${topInset}px ${rightInset}px ${bottomInset}px ${leftInset}px)`;
     });
-    
+
     // Handle window resize
     window.addEventListener('resize', () => {
-      updateSliderPosition(container.getBoundingClientRect().width * sliderValue/100 + container.getBoundingClientRect().left);
+      const rect = container.getBoundingClientRect();
+      const bounds = getImageBounds(rect, currentSetIndex);
+      applySliderPosition(rect, bounds);
     });
   });
 </script>
