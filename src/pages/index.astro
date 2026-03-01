@@ -17,6 +17,7 @@ import { Image } from 'astro:assets';
 import heroBackground from '../assets/after02.jpg';
 import heroBackground2 from '../assets/in-action02.jpeg';
 import heroBackground3 from '../assets/after-no-before01.jpg';
+import heroBackground4 from '../assets/tree-removal01.jpeg';
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
@@ -44,16 +45,24 @@ import heroBackground3 from '../assets/after-no-before01.jpg';
 				/>
 				<Image 
 					id="hero-bg-2"
-					src={heroBackground}
-					alt="Professional tree and palm trimming service - View 2" 
+					src={heroBackground4}
+					alt="Professional tree removal service" 
 					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-0"
 					quality="mid"
 					loading="eager"
 				/>
 				<Image 
 					id="hero-bg-3"
+					src={heroBackground}
+					alt="Professional tree and palm trimming service - View 3" 
+					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-0"
+					quality="mid"
+					loading="eager"
+				/>
+				<Image 
+					id="hero-bg-4"
 					src={heroBackground3}  
-					alt="Professional tree and palm trimming service - View 2" 
+					alt="Professional tree and palm trimming service - View 4" 
 					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-0"
 					quality="mid"
 					loading="eager"
@@ -113,10 +122,11 @@ import heroBackground3 from '../assets/after-no-before01.jpg';
     const images = [
       document.getElementById('hero-bg-1'),
       document.getElementById('hero-bg-2'),
-      document.getElementById('hero-bg-3')
+      document.getElementById('hero-bg-3'),
+      document.getElementById('hero-bg-4')
     ].filter(Boolean);
 
-    if (images.length < 3) return;
+    if (images.length < 4) return;
 
     if (window.heroImageInterval) {
       clearInterval(window.heroImageInterval);
