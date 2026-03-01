@@ -13,6 +13,7 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
+        style={{ transformStyle: 'preserve-3d' }}
       >
         {children}
       </motion.div>

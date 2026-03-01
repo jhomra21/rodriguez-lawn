@@ -28,11 +28,11 @@ const Hero: React.FC<HeroProps> = ({ className, strings, businessCardStrings }) 
     ...strings,
   };
   return (
-    <section className={cn("relative min-h-[80vh] flex items-center transition-all duration-150 ease-in overflow-hidden", className)}>
-      <div className="container mx-auto px-4 grid lg:grid-cols-5 gap-6 md:gap-12 items-center transition-all duration-150 ease-in py-16 mb-30 md:py-20">
+    <section className={cn("relative min-h-[80vh] flex items-center overflow-hidden", className)}>
+      <div className="container mx-auto px-4 grid lg:grid-cols-5 gap-6 md:gap-12 items-center py-16 mb-30 md:py-20">
         {/* Left Column: Headline and CTAs */}
         <motion.div
-          className="bg-transparent backdrop-blur-sm lg:col-span-3 text-center lg:text-left order-2 lg:order-1 rounded-lg p-6 border border-zinc-400/40"
+          className="bg-black/20 backdrop-blur-sm lg:col-span-3 text-center lg:text-left order-2 lg:order-1 rounded-lg p-6 border border-zinc-400/40"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}

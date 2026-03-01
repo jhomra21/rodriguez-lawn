@@ -30,39 +30,27 @@ import heroBackground4 from '../../assets/tree-removal01.jpeg';
 		<section id="top" class="relative">
 			<!-- Background Image with Overlay -->
 			<div class="absolute inset-0 z-0 ">
-				<div class="absolute inset-0 bg-gradient-to-r from-green-900/40 to-green-800/40 mix-blend-multiply z-10"></div>
-				<Image 
-					id="hero-bg-1"
-					src={heroBackground2} 
-					alt="Servicio profesional de poda de árboles y palmeras - Vista 1" 
-					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-100 will-change-[opacity]"
-					quality="mid"
-					loading="eager"
+				<div class="absolute inset-0 bg-gradient-to-r from-green-900/40 to-green-800/40 z-10"></div>
+				<img
+					id="hero-layer-back"
+					class="w-full h-full object-cover object-center absolute inset-0 opacity-0 transition-opacity duration-2500 ease-in-out"
+					alt=""
+					decoding="async"
+					style="transform-style:preserve-3d;will-change:opacity"
 				/>
-				<Image 
-					id="hero-bg-2"
-					src={heroBackground4}
-					alt="Servicio profesional de remoción de árboles" 
-					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-0 will-change-[opacity]"
-					quality="mid"
-					loading="eager"
+				<img
+					id="hero-layer-front"
+					class="w-full h-full object-cover object-center absolute inset-0 opacity-100 transition-opacity duration-2500 ease-in-out"
+					alt=""
+					decoding="async"
+					style="transform-style:preserve-3d;will-change:opacity"
 				/>
-				<Image 
-					id="hero-bg-3"
-					src={heroBackground}
-					alt="Servicio profesional de poda de árboles y palmeras - Vista 3" 
-					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-0 will-change-[opacity]"
-					quality="mid"
-					loading="eager"
-				/>
-				<Image 
-					id="hero-bg-4"
-					src={heroBackground3}  
-					alt="Servicio profesional de poda de árboles y palmeras - Vista 4"
-					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-0 will-change-[opacity]"
-					quality="mid"
-					loading="eager"
-				/>
+			</div>
+			<div class="hidden">
+				<Image id="hero-src-0" src={heroBackground2} alt="" width={1920} height={1080} quality="mid" loading="eager" />
+				<Image id="hero-src-1" src={heroBackground4} alt="" width={1920} height={1080} quality="mid" loading="lazy" />
+				<Image id="hero-src-2" src={heroBackground} alt="" width={1920} height={1080} quality="mid" loading="lazy" />
+				<Image id="hero-src-3" src={heroBackground3} alt="" width={1920} height={1080} quality="mid" loading="lazy" />
 			</div>
             <Hero client:load strings={{ line1: 'Cuidado Profesional', line2: 'de Árboles y Palmas', tagline: 'Podas de árboles, mantenimiento de palmas y servicios de tronco con más de <span class="italic text-green-200 font-medium">24 años de experiencia</span>. Servimos al Valle del Río Grande en Texas.', ctaPrimary: 'Solicitar Cotización Gratis', ctaSecondary: 'Nuestros Servicios' }} businessCardStrings={{
   experience: '24 años de experiencia',
@@ -158,36 +146,61 @@ import heroBackground4 from '../../assets/tree-removal01.jpeg';
     }} />
 <script is:inline>
   function initHeroSlideshow() {
-    const images = [
-      document.getElementById('hero-bg-1'),
-      document.getElementById('hero-bg-2'),
-      document.getElementById('hero-bg-3'),
-      document.getElementById('hero-bg-4')
-    ].filter(Boolean);
+    var srcs = [];
+    for (var i = 0; i < 4; i++) {
+      var el = document.getElementById('hero-src-' + i);
+      if (el) srcs.push(el.getAttribute('src'));
+    }
+    if (srcs.length < 2) return;
 
-    if (images.length < 4) return;
+    var front = document.getElementById('hero-layer-front');
+    var back = document.getElementById('hero-layer-back');
+    if (!front || !back) return;
+
+    front.src = srcs[0];
+    front.alt = 'Servicio profesional de poda de árboles y palmeras';
 
     if (window.heroImageInterval) {
       clearInterval(window.heroImageInterval);
     }
 
-    let currentIndex = images.findIndex(img => img.classList.contains('opacity-100'));
-    if (currentIndex === -1) {
-      currentIndex = 0;
-      images[0].classList.add('opacity-100');
-      images[0].classList.remove('opacity-0');
+    var currentIndex = 0;
+    var isSwitching = false;
+    var intervalTime = 7500;
+
+    function switchImages() {
+      if (isSwitching) return;
+      isSwitching = true;
+
+      var nextIndex = (currentIndex + 1) % srcs.length;
+      back.src = srcs[nextIndex];
+
+      var ready = back.decode ? back.decode() : Promise.resolve();
+      ready.then(doSwap).catch(doSwap);
+
+      function doSwap() {
+        back.classList.remove('opacity-0');
+        back.classList.add('opacity-100');
+        front.classList.remove('opacity-100');
+        front.classList.add('opacity-0');
+
+        setTimeout(function() {
+          front.src = srcs[nextIndex];
+          front.classList.remove('opacity-0');
+          front.classList.add('opacity-100');
+          back.classList.remove('opacity-100');
+          back.classList.add('opacity-0');
+          front.style.transition = 'none';
+          back.style.transition = 'none';
+          void front.offsetHeight;
+          front.style.transition = '';
+          back.style.transition = '';
+
+          currentIndex = nextIndex;
+          isSwitching = false;
+        }, 2600);
+      }
     }
-
-    const intervalTime = 7500;
-
-    const switchImages = () => {
-      const nextIndex = (currentIndex + 1) % images.length;
-      images[currentIndex].classList.remove('opacity-100');
-      images[currentIndex].classList.add('opacity-0');
-      images[nextIndex].classList.remove('opacity-0');
-      images[nextIndex].classList.add('opacity-100');
-      currentIndex = nextIndex;
-    };
 
     window.heroImageInterval = setInterval(switchImages, intervalTime);
 
@@ -201,11 +214,11 @@ import heroBackground4 from '../../assets/tree-removal01.jpeg';
         clearInterval(window.heroImageInterval);
       }
     } else {
-      initHeroSlideshow(); 
+      initHeroSlideshow();
     }
   }
 
   document.addEventListener('astro:after-swap', initHeroSlideshow);
-  initHeroSlideshow(); 
+  initHeroSlideshow();
 </script>
 </Layout>

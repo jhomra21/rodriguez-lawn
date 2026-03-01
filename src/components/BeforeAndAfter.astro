@@ -276,6 +276,8 @@ const imageSets = [
     let isDragging = false;
     let sliderValue = 50; // Initial position (50%)
     let currentSetIndex = 0;
+    let rafId: number | null = null;
+    let pendingClientX: number | null = null;
 
     // Set initial active tab
     updateActiveTab(0);
@@ -454,39 +456,39 @@ const imageSets = [
       applySliderPosition(rect, bounds);
     };
 
-    // Mouse events
-    container.addEventListener('mousedown', (e) => {
+    // rAF-throttled slider update
+    const scheduleSliderUpdate = (clientX: number) => {
+      pendingClientX = clientX;
+      if (rafId === null) {
+        rafId = requestAnimationFrame(() => {
+          if (pendingClientX !== null) {
+            updateSliderPosition(pendingClientX);
+            pendingClientX = null;
+          }
+          rafId = null;
+        });
+      }
+    };
+
+    // Pointer events (unified mouse + touch)
+    container.addEventListener('pointerdown', (e) => {
       isDragging = true;
+      container.setPointerCapture(e.pointerId);
       updateSliderPosition(e.clientX);
       e.preventDefault();
     });
 
-    document.addEventListener('mousemove', (e) => {
+    container.addEventListener('pointermove', (e) => {
       if (!isDragging) return;
-      updateSliderPosition(e.clientX);
+      scheduleSliderUpdate(e.clientX);
     });
 
-    document.addEventListener('mouseup', () => {
+    container.addEventListener('pointerup', (e) => {
       isDragging = false;
+      container.releasePointerCapture(e.pointerId);
     });
 
-    // Touch events
-    container.addEventListener('touchstart', (e) => {
-      if (e.touches.length > 0) {
-        isDragging = true;
-        updateSliderPosition(e.touches[0].clientX);
-      }
-      e.preventDefault();
-    });
-
-    document.addEventListener('touchmove', (e) => {
-      if (!isDragging) return;
-      if (e.touches.length > 0) {
-        updateSliderPosition(e.touches[0].clientX);
-      }
-    });
-
-    document.addEventListener('touchend', () => {
+    document.addEventListener('pointerup', () => {
       isDragging = false;
     });
 
