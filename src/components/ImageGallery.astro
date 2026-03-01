@@ -134,7 +134,7 @@ const {
 
 <section class="py-12 md:py-20 bg-green-50">
   <div class="container mx-auto px-4">
-    <ScrollAnimationWrapper client:load>
+    <ScrollAnimationWrapper client:visible>
       <h1
         class="text-4xl font-bold bg-gradient-to-b from-green-400 to-green-900 text-transparent bg-clip-text text-center mb-4"
       >
@@ -149,7 +149,7 @@ const {
     >
       {
         galleryImages.map((image, index) => (
-          <ScrollAnimationWrapper client:load delay={index * 0.125}>
+          <ScrollAnimationWrapper client:visible delay={index * 0.125}>
             <div
               class="gallery-thumbnail relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer aspect-square"
               data-index={index}

@@ -35,7 +35,7 @@ import heroBackground4 from '../../assets/tree-removal01.jpeg';
 					id="hero-bg-1"
 					src={heroBackground2} 
 					alt="Servicio profesional de poda de árboles y palmeras - Vista 1" 
-					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-100"
+					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-100 will-change-[opacity]"
 					quality="mid"
 					loading="eager"
 				/>
@@ -43,7 +43,7 @@ import heroBackground4 from '../../assets/tree-removal01.jpeg';
 					id="hero-bg-2"
 					src={heroBackground4}
 					alt="Servicio profesional de remoción de árboles" 
-					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-0"
+					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-0 will-change-[opacity]"
 					quality="mid"
 					loading="eager"
 				/>
@@ -51,7 +51,7 @@ import heroBackground4 from '../../assets/tree-removal01.jpeg';
 					id="hero-bg-3"
 					src={heroBackground}
 					alt="Servicio profesional de poda de árboles y palmeras - Vista 3" 
-					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-0"
+					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-0 will-change-[opacity]"
 					quality="mid"
 					loading="eager"
 				/>
@@ -59,7 +59,7 @@ import heroBackground4 from '../../assets/tree-removal01.jpeg';
 					id="hero-bg-4"
 					src={heroBackground3}  
 					alt="Servicio profesional de poda de árboles y palmeras - Vista 4"
-					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-0"
+					class="w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-2500 ease-in-out opacity-0 will-change-[opacity]"
 					quality="mid"
 					loading="eager"
 				/>
@@ -85,12 +85,12 @@ import heroBackground4 from '../../assets/tree-removal01.jpeg';
 		<section id="services" class="relative z-20 -mt-16 md:-mt-24 py-12 md:py-20 bg-white pt-20 rounded-t-2xl
 									  border-t border-zinc-400/40">
 			<div class="container mx-auto px-4">
-				<ScrollAnimationWrapper client:load>
+				<ScrollAnimationWrapper client:visible>
 					<h1 class="text-4xl font-bold bg-gradient-to-b from-green-400 to-green-900 text-transparent bg-clip-text text-center mb-4">Nuestros Servicios</h1>
 					<p class="italic text-center mb-12 text-zinc-500">Servicios profesionales respaldados por más de 24 años de experiencia.</p>
 				</ScrollAnimationWrapper>
 				
-				<ServicesOverview client:load locale="es" />
+				<ServicesOverview client:visible locale="es" />
 			</div>
 		</section>
 
@@ -117,11 +117,11 @@ import heroBackground4 from '../../assets/tree-removal01.jpeg';
 		<!-- Business Card Section -->
 		<section id="contact" class="py-12 md:py-16 bg-gray-50">
 			<div class="container mx-auto px-4">
-				<ScrollAnimationWrapper client:load>
+				<ScrollAnimationWrapper client:visible>
 					<h1 class="text-4xl font-bold bg-gradient-to-b from-green-400 to-green-900 text-transparent bg-clip-text text-center mb-8">Nuestra Tarjeta</h1>
 					<p class="text-center text-gray-600 mb-10 max-w-2xl mx-auto">Guarda nuestro contacto para cuando necesites poda profesional de árboles y palmas.</p>
 				</ScrollAnimationWrapper>
-                <BusinessCard client:load strings={{
+                <BusinessCard client:visible strings={{
                   experience: '24 años de experiencia',
                   specializing: 'Especialistas en poda y mantenimiento de árboles y palmeras',
                   freeEstimates: 'Cotizaciones gratis',
@@ -139,7 +139,7 @@ import heroBackground4 from '../../assets/tree-removal01.jpeg';
 			</div>
 		</section>
 	</PageTransition>
-    <Footer client:load slot="footer" labels={{
+    <Footer client:visible slot="footer" labels={{
       quickLinks: 'Enlaces rápidos',
       services: 'Servicios',
       contact: 'Contacto',

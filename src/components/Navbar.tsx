@@ -34,19 +34,22 @@ const Navbar: React.FC<Props> = ({ labels }) => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const scrolledRef = React.useRef(scrolled);
+  scrolledRef.current = scrolled;
+
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
+      if (isScrolled !== scrolledRef.current) {
         setScrolled(isScrolled);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [scrolled]);
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
