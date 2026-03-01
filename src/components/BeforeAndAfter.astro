@@ -14,6 +14,8 @@ import after03 from '../assets/after03.jpg';
 import after04 from '../assets/after04.jpg';
 import after05 from '../assets/after05.jpeg';
 import after06 from '../assets/after06.jpeg';
+import before07 from '../assets/before07.jpeg';
+import after07 from '../assets/after07.jpeg';
 
 interface Props {
   beforeLabel?: string;
@@ -40,8 +42,9 @@ const defaultTabLabels = [
   "Palm Maintenance",
   "Tree Makeover",
   "Palm Restoration",
+  "Palm Cleanup",
 ];
-const labels = tabLabels.length >= 6 ? tabLabels : defaultTabLabels;
+const labels = tabLabels.length >= 7 ? tabLabels : defaultTabLabels;
 
 const imageSets = [
   {
@@ -73,6 +76,11 @@ const imageSets = [
     beforeImage: before06,
     afterImage: after06,
     label: labels[5]
+  },
+  {
+    beforeImage: before07,
+    afterImage: after07,
+    label: labels[6]
   }
 ];
 ---
