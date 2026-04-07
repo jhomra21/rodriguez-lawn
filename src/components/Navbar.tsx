@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { cn } from "../lib/utils";
 import { Menu, X } from "lucide-react";
@@ -13,13 +13,13 @@ type Labels = {
 
 interface Props {
   labels?: Partial<Labels>;
+  switchHref?: string;
+  switchLabel?: string;
 }
 
-const Navbar: React.FC<Props> = ({ labels }) => {
+const Navbar: React.FC<Props> = ({ labels, switchHref = "/es", switchLabel = "ES" }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [switchHref, setSwitchHref] = useState<string>("/es");
-  const [switchLabel, setSwitchLabel] = useState<"EN" | "ES">("ES");
 
   const l: Labels = {
     services: "Services",
@@ -30,39 +30,17 @@ const Navbar: React.FC<Props> = ({ labels }) => {
     ...labels,
   };
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
-
-  const scrolledRef = React.useRef(scrolled);
-  scrolledRef.current = scrolled;
+  const toggleMobileMenu = () => setMobileMenuOpen(prev => !prev);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolledRef.current) {
-        setScrolled(isScrolled);
-      }
+    const onScroll = () => {
+      const next = window.scrollY > 10;
+      setScrolled(prev => (prev === next ? prev : next));
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const pathname = window.location.pathname || "/";
-    const isEs = pathname.startsWith("/es");
-    const pathNoEs = isEs ? pathname.slice(3) || "/" : pathname;
-    const href = isEs
-      ? pathNoEs || "/"
-      : pathNoEs.startsWith("/")
-        ? `/es${pathNoEs}`
-        : `/es/${pathNoEs}`;
-    setSwitchHref(href);
-    setSwitchLabel(isEs ? "EN" : "ES");
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
@@ -108,8 +86,8 @@ const Navbar: React.FC<Props> = ({ labels }) => {
             </g>
           </svg>
           <span className="inline font-serif tracking-wide ml-1.5 drop-shadow-md group-hover:drop-shadow-lg transition-all duration-200 bg-gradient-to-b from-green-500 to-green-950 text-transparent bg-clip-text">
-            <span className="sm:hidden">Rodriguez Trimming Services</span>
-            <span className="hidden sm:inline">Rodriguez</span>
+            <span className="sm:hidden">{l.brandLong}</span>
+            <span className="hidden sm:inline">{l.brandShort}</span>
           </span>
         </a>
 

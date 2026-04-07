@@ -10,7 +10,9 @@ interface HeroProps {
   strings?: {
     line1?: string;
     line2?: string;
-    tagline?: string;
+    taglinePrefix?: string;
+    taglineEmphasis?: string;
+    taglineSuffix?: string;
     ctaPrimary?: string;
     ctaSecondary?: string;
   };
@@ -21,8 +23,9 @@ const Hero: React.FC<HeroProps> = ({ className, strings, businessCardStrings }) 
   const s = {
     line1: 'Professional',
     line2: 'Tree & Palm Care',
-    tagline:
-      'Expert tree trimming, palm maintenance, and trunk services with over <span class="italic text-green-200 font-medium">24 years of experience</span>. Serving the Rio Grande Valley in Texas.',
+    taglinePrefix: 'Expert tree trimming, palm maintenance, and trunk services with over ',
+    taglineEmphasis: '24 years of experience',
+    taglineSuffix: '. Serving the Rio Grande Valley in Texas.',
     ctaPrimary: 'Request Free Estimate',
     ctaSecondary: 'Our Services',
     ...strings,
@@ -38,36 +41,16 @@ const Hero: React.FC<HeroProps> = ({ className, strings, businessCardStrings }) 
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           {/* Content with glass panel */}
-          <motion.h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.4 }}
-          >
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
             <span className="font-bold leading-tight bg-gradient-to-b from-zinc-50 via-zinc-100 to-zinc-400 text-transparent bg-clip-text">{s.line1} </span> <br />
-            <motion.span
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.4 }}
-            >
+            <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
               <span className="leading-tight font-bold bg-gradient-to-b from-green-200/90 to-green-500 text-transparent bg-clip-text">{s.line2}</span>
-            </motion.span>
-          </motion.h1>
-          <motion.p
-            className="mt-3 md:mt-4 text-base md:text-lg lg:text-xl text-gray-100 max-w-2xl mx-auto lg:mx-0 drop-shadow"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.4 }}
-          >
-            <span dangerouslySetInnerHTML={{ __html: s.tagline }} />
-          </motion.p>
-          <motion.div
-            className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.3 }}
-          >
+            </span>
+          </h1>
+          <p className="mt-3 md:mt-4 text-base md:text-lg lg:text-xl text-gray-100 max-w-2xl mx-auto lg:mx-0 drop-shadow">
+            {s.taglinePrefix}<span className="italic text-green-200 font-medium">{s.taglineEmphasis}</span>{s.taglineSuffix}
+          </p>
+          <div className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <Button
               asChild
               size="lg"
@@ -108,7 +91,7 @@ const Hero: React.FC<HeroProps> = ({ className, strings, businessCardStrings }) 
                 {s.ctaSecondary} <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
               </a>
             </Button>
-          </motion.div>
+          </div>
 
         </motion.div>
 

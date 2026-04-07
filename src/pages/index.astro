@@ -8,8 +8,6 @@ import ServicesOverview from '../components/ServicesOverview.tsx';
 import BeforeAndAfter from '../components/BeforeAndAfter.astro';
 import ImageGallery from '../components/ImageGallery.astro';
 import FAQ from '../components/FAQ.tsx';
-import PageTransition from '../components/PageTransition.tsx';
-import ScrollAnimationWrapper from '../components/ScrollAnimationWrapper.tsx';
 import BusinessCard from '../components/BusinessCard.tsx';
 import { Image } from 'astro:assets';
 
@@ -18,180 +16,86 @@ import heroBackground from '../assets/after02.jpg';
 import heroBackground2 from '../assets/in-action02.jpeg';
 import heroBackground3 from '../assets/after-no-before01.jpg';
 import heroBackground4 from '../assets/tree-removal01.jpeg';
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
 ---
 
 <Layout 
   title="Rodriguez Tree Service - Specializing in Tree & Palm Trimming"
   description="Professional tree trimming, palm care, and trunk maintenance with over 24 years of experience. Serving the Rio Grande Valley, Texas with quality tree and palm care."
 >
-	<Navbar client:load slot="navbar" />
+	<Navbar client:load slot="navbar" switchHref="/es" switchLabel="ES" />
 
-	<PageTransition client:load>
-		<!-- Hero Section -->
-		<section id="top" class="relative">
-			<!-- Background Image with Overlay -->
-			<div class="absolute inset-0 z-0 ">
-				<div class="absolute inset-0 bg-gradient-to-r from-green-900/40 to-green-800/40 z-10"></div>
-				<!-- Two-layer slideshow: only current + next are rendered as compositor layers -->
-				<img
-					id="hero-layer-back"
-					class="w-full h-full object-cover object-center absolute inset-0 opacity-0 transition-opacity duration-2500 ease-in-out"
-					alt=""
-					decoding="async"
-					style="transform-style:preserve-3d;will-change:opacity"
-				/>
-				<img
-					id="hero-layer-front"
-					class="w-full h-full object-cover object-center absolute inset-0 opacity-100 transition-opacity duration-2500 ease-in-out"
-					alt=""
-					decoding="async"
-					style="transform-style:preserve-3d;will-change:opacity"
-				/>
-			</div>
-			<!-- Preload hero image sources from Astro-optimized images (hidden, only used for src URLs) -->
-			<div class="hidden">
-				<Image id="hero-src-0" src={heroBackground2} alt="" width={1920} height={1080} quality="mid" loading="eager" />
-				<Image id="hero-src-1" src={heroBackground4} alt="" width={1920} height={1080} quality="mid" loading="lazy" />
-				<Image id="hero-src-2" src={heroBackground} alt="" width={1920} height={1080} quality="mid" loading="lazy" />
-				<Image id="hero-src-3" src={heroBackground3} alt="" width={1920} height={1080} quality="mid" loading="lazy" />
-			</div>
-			<Hero client:load />
-		</section>
-
-		<!-- Services Section -->
-		<section id="services" class="relative z-20 -mt-16 md:-mt-24 py-12 md:py-20 bg-white pt-20 rounded-t-2xl
-									  border-t border-zinc-400/40">
-			<div class="container mx-auto px-4">
-				<ScrollAnimationWrapper client:visible>
-					<h1 class="text-4xl font-bold bg-gradient-to-b from-green-400 to-green-900 text-transparent bg-clip-text text-center mb-4">Our Services</h1>
-					<p class="italic text-center mb-12 text-zinc-500">Professional services backed by over 24 years of experience.</p>
-				</ScrollAnimationWrapper>
-				
-				<ServicesOverview client:visible />
-			</div>
-		</section>
-
-		<!-- Before and After Section -->
-		<section class="bg-gray-50">
-			<BeforeAndAfter
-				beforeLabel="Before Our Service"
-				afterLabel="After Our Magic"
-				title="Transform Your Property"
-				description="See the difference our professional tree and palm trimming makes. Our expert team can revitalize your outdoor space with our services."
+	<!-- Hero Section -->
+	<section id="top" class="relative">
+		<!-- Background Image with Overlay -->
+		<div class="absolute inset-0 z-0">
+			<div class="absolute inset-0 bg-gradient-to-r from-green-900/40 to-green-800/40 z-10"></div>
+			<img
+				id="hero-layer-back"
+				class="w-full h-full object-cover object-center absolute inset-0 opacity-0 transition-opacity duration-2500 ease-in-out"
+				alt=""
+				decoding="async"
 			/>
-		</section>
+			<img
+				id="hero-layer-front"
+				class="w-full h-full object-cover object-center absolute inset-0 opacity-100 transition-opacity duration-2500 ease-in-out"
+				alt=""
+				decoding="async"
+			/>
+		</div>
+		<!-- Preload hero image sources from Astro-optimized images (hidden, only used for src URLs) -->
+		<div class="hidden">
+			<Image id="hero-src-0" src={heroBackground2} alt="" width={1920} height={1080} quality="mid" loading="eager" />
+			<Image id="hero-src-1" src={heroBackground4} alt="" width={1920} height={1080} quality="mid" loading="lazy" />
+			<Image id="hero-src-2" src={heroBackground} alt="" width={1920} height={1080} quality="mid" loading="lazy" />
+			<Image id="hero-src-3" src={heroBackground3} alt="" width={1920} height={1080} quality="mid" loading="lazy" />
+		</div>
+		<Hero client:load />
+	</section>
 
-		<!-- Image Gallery Section -->
-		<ImageGallery 
-			title="More Photos" 
-			description="See our work!"
-		/>
-
-		<!-- Contact Section -->
-		<FAQ client:visible />
-
-		<!-- Business Card Section -->
-		<section id="contact" class="py-12 md:py-16 bg-gray-50">
-			<div class="container mx-auto px-4">
-				<ScrollAnimationWrapper client:visible>
-					<h1 class="text-4xl font-bold bg-gradient-to-b from-green-400 to-green-900 text-transparent bg-clip-text text-center mb-8">Our Business Card</h1>
-					<p class="text-center text-gray-600 mb-10 max-w-2xl mx-auto">Save our contact information for when you need professional tree and palm trimming services.</p>
-				</ScrollAnimationWrapper>
-				<BusinessCard client:visible />
+	<!-- Services Section -->
+	<section id="services" class="relative z-20 -mt-16 md:-mt-24 py-12 md:py-20 bg-white pt-20 rounded-t-2xl
+								  border-t border-zinc-400/40">
+		<div class="container mx-auto px-4">
+			<div class="scroll-reveal">
+				<h1 class="text-4xl font-bold bg-gradient-to-b from-green-400 to-green-900 text-transparent bg-clip-text text-center mb-4">Our Services</h1>
+				<p class="italic text-center mb-12 text-zinc-500">Professional services backed by over 24 years of experience.</p>
 			</div>
-		</section>
-	</PageTransition>
+			
+			<ServicesOverview client:visible />
+		</div>
+	</section>
+
+	<!-- Before and After Section -->
+	<section class="bg-gray-50">
+		<BeforeAndAfter
+			beforeLabel="Before Our Service"
+			afterLabel="After Our Magic"
+			title="Transform Your Property"
+			description="See the difference our professional tree and palm trimming makes. Our expert team can revitalize your outdoor space with our services."
+		/>
+	</section>
+
+	<!-- Image Gallery Section -->
+	<ImageGallery 
+		title="More Photos" 
+		description="See our work!"
+	/>
+
+	<!-- Contact Section -->
+	<FAQ client:visible />
+
+	<!-- Business Card Section -->
+	<section id="contact" class="py-12 md:py-16 bg-gray-50">
+		<div class="container mx-auto px-4">
+			<div class="scroll-reveal">
+				<h1 class="text-4xl font-bold bg-gradient-to-b from-green-400 to-green-900 text-transparent bg-clip-text text-center mb-8">Our Business Card</h1>
+				<p class="text-center text-gray-600 mb-10 max-w-2xl mx-auto">Save our contact information for when you need professional tree and palm trimming services.</p>
+			</div>
+			<BusinessCard client:visible />
+		</div>
+	</section>
 
 	<Footer client:visible slot="footer" />
 
-<script is:inline>
-  function initHeroSlideshow() {
-    // Collect optimized src URLs from hidden Astro <Image> elements
-    var srcs = [];
-    for (var i = 0; i < 4; i++) {
-      var el = document.getElementById('hero-src-' + i);
-      if (el) srcs.push(el.getAttribute('src'));
-    }
-    if (srcs.length < 2) return;
-
-    var front = document.getElementById('hero-layer-front');
-    var back = document.getElementById('hero-layer-back');
-    if (!front || !back) return;
-
-    // Set initial image
-    front.src = srcs[0];
-    front.alt = 'Professional tree and palm trimming service';
-
-    if (window.heroImageInterval) {
-      clearInterval(window.heroImageInterval);
-    }
-
-    var currentIndex = 0;
-    var isSwitching = false;
-    var intervalTime = 7500;
-
-    function switchImages() {
-      if (isSwitching) return;
-      isSwitching = true;
-
-      var nextIndex = (currentIndex + 1) % srcs.length;
-
-      // Load the next image into the hidden back layer
-      back.src = srcs[nextIndex];
-
-      // Pre-decode it off the main thread, then crossfade
-      var ready = back.decode ? back.decode() : Promise.resolve();
-      ready.then(doSwap).catch(doSwap);
-
-      function doSwap() {
-        // Crossfade: back fades in, front fades out
-        back.classList.remove('opacity-0');
-        back.classList.add('opacity-100');
-        front.classList.remove('opacity-100');
-        front.classList.add('opacity-0');
-
-        // After CSS transition ends (~2.5s), swap roles
-        setTimeout(function() {
-          // Put the now-visible image into front, reset back
-          front.src = srcs[nextIndex];
-          front.classList.remove('opacity-0');
-          front.classList.add('opacity-100');
-          back.classList.remove('opacity-100');
-          back.classList.add('opacity-0');
-          // Skip transition during the instant swap
-          front.style.transition = 'none';
-          back.style.transition = 'none';
-          // Force reflow then re-enable transitions
-          void front.offsetHeight;
-          front.style.transition = '';
-          back.style.transition = '';
-
-          currentIndex = nextIndex;
-          isSwitching = false;
-        }, 2600);
-      }
-    }
-
-    window.heroImageInterval = setInterval(switchImages, intervalTime);
-
-    document.removeEventListener('visibilitychange', handleVisibilityChangeForHero);
-    document.addEventListener('visibilitychange', handleVisibilityChangeForHero);
-  }
-
-  function handleVisibilityChangeForHero() {
-    if (document.hidden) {
-      if (window.heroImageInterval) {
-        clearInterval(window.heroImageInterval);
-      }
-    } else {
-      initHeroSlideshow();
-    }
-  }
-
-  document.addEventListener('astro:after-swap', initHeroSlideshow);
-  initHeroSlideshow();
-</script>
+<script is:inline src="/hero-slideshow.js"></script>
 </Layout>

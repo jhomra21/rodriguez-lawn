@@ -1,5 +1,53 @@
 # Repository Guidelines
 
+## Philosophy
+This codebase will outlive you. Every shortcut becomes someone else's burden. Every hack compounds into technical debt that slows the whole team down. 
+
+You are not just writing code, you are shaping the future of this project. The patterns you establish will be copied. The corners you cut will be cut again.
+
+Fight entropy. Leave the codebase better than you found it.
+
+Do not write plausible code, write accurate code backed by the reality of this codebase
+
+## Code Thinking
+
+Review your implementation before stopping. Check whether there is a better or simpler approach whether any redundant code remains, whether duplicate logic was introduced, and whether any dead or unused code was left behind. If you find issues, fix them now; if not, briefly confirm the implementation is clean.
+                
+Think carefully and only action the specific task I have given you with the most concise and elegant solution that takes into consideration existing code across codebase.
+
+Prefer the most concise and elegant solutions that changes or adds as little code as possible.
+
+## Engineering Rules (Non-Negotiable)
+
+- Functional style first: prefer pure functions, immutable updates, explicit inputs/outputs.
+- Single responsibility: each function/module should have one reason to change.
+- Complexity budget:
+  - Target `O(1)` or `O(log n)` where practical.
+  - Avoid accidental `O(n^2+)` (nested scans in hot paths).
+  - Use `Map`/`Set` for membership and indexing instead of repeated linear lookups.
+- Performance footgun policy:
+  - Do not introduce `setTimeout`, `setInterval`, `requestAnimationFrame`, or self-rescheduling loops unless explicitly justified in code comments and cleaned up deterministically.
+  - No polling loops when event-driven/reactive alternatives exist.
+- Avoid hidden side effects: no mutation of shared module state unless clearly documented.
+
+## Code Maintainability
+
+- Two things that make code actually maintainable:
+  1. reduce the layers a reader has to trace
+  2. reduce the state a reader has to hold in their head
+
+## Code Organization
+
+- Keep app-specific logic organized.
+- Prefer composition over inheritance; avoid god-modules.
+- Keep adapters thin and deterministic; isolate I/O at boundaries.
+
+## Change Quality Bar
+
+- Keep diffs focused; do not mix refactors with feature behavior changes unless requested.
+- Preserve public contracts unless change is intentional and documented.
+- Validate before finishing
+
 ## Project Structure & Module Organization
 This is an Astro site with React components and Tailwind styling.
 - `src/pages/` contains route entries (`.astro` and `.tsx`).
@@ -39,88 +87,3 @@ For pull requests:
 ## Configuration Notes
 - Astro config lives in `astro.config.mjs` (React integration, sitemap, Tailwind via Vite).
 - The site URL for sitemap generation is set in `astro.config.mjs`.
-
-## Software Engineering Patterns
-
-Optimization patterns focused on developer experience (DX), code clarity, and maintainability.
-
----
-
-### 1. Syntactic Sugar
-
-Making existing functionality nicer to write and read without adding new capabilities.
-
-**Real-world examples**:
-| Domain | Example |
-|--------|---------|
-| JavaScript | `async/await` is sugar over Promises |
-| CSS | `margin: 10px` is sugar for margin-top/right/bottom/left |
-| React | `useState` is sugar over `useReducer` |
-| TypeScript | `readonly` is sugar for getter-only properties |
-| Shell | `ll` alias is sugar for `ls -la` |
-
----
-
-### 2. API Ergonomics
-
-Designing interfaces that are comfortable to use.
-
-**Characteristics of ergonomic APIs**:
-
-- Fewer variables to manage (one instead of two)
-- Consistent mental model (same function, different arity)
-- Reduced cognitive load
-
----
-
-### 3. DRY (Don't Repeat Yourself)
-
-Eliminating repetitive patterns by extracting common logic.
-
----
-
-### 4. Abstraction / Encapsulation
-
-Hiding implementation details behind a simpler interface.
-
----
-
-### 5. Classification Reference
-
-| Term                     | Applies?     | Why                                         |
-| ------------------------ | ------------ | ------------------------------------------- |
-| Syntactic sugar          | ✅ Yes       | Same behavior, sweeter syntax               |
-| API ergonomics           | ✅ Yes       | More comfortable to use                     |
-| Boilerplate reduction    | ✅ Yes       | Eliminates repetitive setup code            |
-| DRY                      | ✅ Yes       | Extract repeated patterns                   |
-| Abstraction              | ✅ Yes       | Hide complexity behind simple interface     |
-| Facade pattern           | ✅ Partially | Simplified interface over complex subsystem |
-| Utility function         | ✅ Yes       | Reusable helper for common task             |
-| Wrapper                  | ✅ Yes       | Wraps existing API with different interface |
-| Performance optimization | ❌ No        | No runtime improvement, just DX             |
-
----
-
-### 6. What These Patterns Are NOT
-
-- **Not performance optimizations** — same runtime behavior
-- **Not new capabilities** — underlying functionality already existed
-- **Not Gang of Four design patterns** — convenience utilities, not architectural patterns
-
----
-
-### 7. When to Apply
-
-**Extract when you see**:
-
-- Same pattern repeated 3+ times
-- Verbose setup code that obscures intent
-- Multiple variables that logically belong together
-- Complex APIs that could be simplified for common use cases
-
-**Don't extract when**:
-
-- One-off code that won't be reused
-- Trivial patterns (< 5 lines)
-- Abstraction would require many parameters (sign of over-abstraction)
-- Explicitness is more valuable than brevity
