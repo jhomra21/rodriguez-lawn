@@ -49,7 +49,7 @@ const FAQSection: React.FC = () => {
           </p>
         </div>
         
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto h-[26rem] md:h-[24rem] overflow-y-auto">
           <Accordion type="single" collapsible className="w-full">
             {faqItems.map((item) => (
               <AccordionItem key={item.value} value={item.value} className="!border-b border-zinc-300/50">
